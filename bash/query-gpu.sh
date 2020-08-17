@@ -86,6 +86,8 @@ retired_pages.single_bit_ecc.count
 printf -v var "%s," "${flags[@]}"
 result=$(nvidia-smi --format=csv --query-gpu=$var)
 filename="gpu-query.csv"
+source "${BASH_SOURCE%/*}/helpers.sh"
+filename=$(join $1 $filename)
 
 tail_length=1
 if [ -f "$filename" ]; then

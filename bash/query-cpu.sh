@@ -2,6 +2,8 @@
 eol=$'\n'
 cpu_values_raw="$(mpstat -P ALL)"
 filename="cpu-query.csv"
+source "${BASH_SOURCE%/*}/helpers.sh"
+filename=$(join $1 $filename)
 
 tail_length=3
 if [ -f "$filename" ]; then

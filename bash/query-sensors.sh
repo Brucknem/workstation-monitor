@@ -2,6 +2,7 @@
 eol=$'\n'
 raw_sensors="$(sensors)"
 declare -A adapters
+source "${BASH_SOURCE%/*}/helpers.sh"
 
 name=""
 while IFS= read -r line
@@ -18,12 +19,10 @@ do
     fi
 done < <(printf '%s\n' "$raw_sensors")
 
-output_folder="sensors/"
-[ -d $output_folder ] || mkdir -p $output_folder
-
 for i in "${!adapters[@]}"
 do 
     filename="$output_folder$i.csv"
+    filename=$(join $1 $filename)
     sensors="${adapters[$i]}"
     # printf "%s\n%s\n" "$filename" "$sensors"
 
