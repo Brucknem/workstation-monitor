@@ -10,6 +10,16 @@
             "name": "Bash-Debug (simplest configuration)",
             "program": "${file}",
             "args": ["logs", "test"]
-        }
+        },
+        {
+            "name": "Python: python/tests/load_logs_test",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/python/tests/load_logs_test.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/bazel-bin/python/tests/load_logs_test.runfiles/:${workspaceFolder}/bazel-bin/python/tests/load_logs_test.runfiles/python/:"
+            }
+        },
     ]
 }
