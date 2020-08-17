@@ -82,15 +82,24 @@ ecc.errors.uncorrected.aggregate.total
 retired_pages.single_bit_ecc.count
 )
 
-printf -v var "%s," "${flags[@]}"
 
-command_string="nvidia-smi --format=csv --query-gpu=$var"
+printf -v var "%s," "${flags[@]}"
+result=$(nvidia-smi --format=csv --query-gpu=$var)
 filename="gpu-query.csv"
 
-if [ ! -f "$filename" ]; then
-    command_string=$command_string" > $filename"
-    eval $command_string
-else
-    readarray -t values <<<"$(eval $command_string)"
-    echo ${values[1]} >> $filename
+tail_length=1
+if [ -f "$filename" ]; then
+    tail_length=2
 fi
+
+result=$(echo "$result" | tail -n +$tail_length)
+
+while IFS= read -r line
+do
+    # echo "$line"
+    fixed_line=$(echo "$line" | sed 's/,\s/;/g')
+
+    # echo "$fixed_line"
+    raw_values="$fixed_line$eol"
+    echo $raw_values >> $filename
+done < <(printf '%s\n' "$result")
