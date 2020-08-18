@@ -23,11 +23,19 @@ sudo modprobe asus-wmi-sensors
 
 ***
 
-## Setup
+# Setup
 ```
 bash install_venv.sh
 bash source_venv.sh
 ```
+
+## Setup service
+Edit `src/backend/workstation-monitor.service` and adjust 
+```
+ExecStart=/bin/bash /home/brucknem/Repositories/workstation-monitor/src/backend/workstation-monitor-service.sh
+```
+to point at your local clone of the `workstation-monitor-service.sh` script.
+
 
 ***
 
