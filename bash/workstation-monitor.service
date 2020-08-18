@@ -1,0 +1,12 @@
+[Unit]
+Description=Workstation Monitor
+After=syslog.target
+
+[Service]
+PIDFile=/var/run/wsmon.pid
+ExecStartPre=/bin/rm -f /var/run/wsmon.pid
+ExecStart=/bin/bash /home/brucknem/Repositories/workstation-monitor/bash/workstation-monitor-service.sh
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
