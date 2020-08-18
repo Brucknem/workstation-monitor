@@ -23,6 +23,8 @@ RUN apt-get update && apt-get install -y -qq --no-install-recommends bazel
 RUN rm -rf /var/lib/apt/lists/*
 
 # Python install
+RUN ln -s /usr/bin/python3 /usr/bin/python & \
+    ln -s /usr/bin/pip3 /usr/bin/pip
 COPY requirements.txt .
-RUN pip3 install --no-cache-dir --upgrade -r requirements.txt 
+RUN pip install --no-cache-dir --upgrade -r requirements.txt 
 
