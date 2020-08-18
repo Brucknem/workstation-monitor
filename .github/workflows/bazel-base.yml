@@ -27,3 +27,7 @@ jobs:
     # Runs a single command using the runners shell
     - name: Get cwd
       run: pwd
+
+    # Runs a single command using the runners shell
+    - name: ls
+      run: ls
