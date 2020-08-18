@@ -26,4 +26,4 @@ jobs:
 
     # Runs the bazel tests
     - name: Bazel tests
-      run: bazel test //...
+      run: bazel test //... --test_output=all
