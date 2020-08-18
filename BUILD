@@ -1,4 +1,4 @@
 alias (
     name = "display",
-    actual = "//python:run"
+    actual = "//src/frontend:run"
 )

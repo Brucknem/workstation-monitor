@@ -8,7 +8,7 @@ py_test (
     name = "load_logs_test",
     srcs = ["load_logs_test.py"],
     deps = [
-        "//python/src:load_logs",
+        "//src/frontend:load_logs",
     ],
     data = [
         ":logs"

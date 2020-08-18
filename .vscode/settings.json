@@ -4,5 +4,5 @@
         "titleBar.activeBackground": "#2C434B",
         "titleBar.activeForeground": "#F9FBFB"
     },
-    "python.pythonPath": "python/venv/bin/python"
+    "python.pythonPath": "venv/bin/python"
 }

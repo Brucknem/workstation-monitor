@@ -10,8 +10,16 @@ py_binary(
     srcs = ["run.py"],
     data = [":notebooks_folder"],
     deps = [
-        "//python/src:load_logs",
+        ":load_logs",
     ],
-    imports = ["venv"],
+    imports = ["../venv"],
+    visibility = ["//visibility:public"],
+)
+
+py_binary(
+    name = "load_logs",
+    srcs = ["load_logs.py"],
+    imports = ["../venv"],
+    deps = [],
     visibility = ["//visibility:public"],
 )
