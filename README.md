@@ -39,7 +39,7 @@ to point at your local clone of the `workstation-monitor-service.sh` script.
 
 ***
 
-## Running tests
+# Running tests
 ```
 bash source_venv.sh
 bazel test //... --test_output=all
