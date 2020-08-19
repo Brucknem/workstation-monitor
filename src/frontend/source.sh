@@ -1,3 +1,4 @@
 #!/bin/bash
 
-source ${BASH_SOURCE%/*}/venv/bin/activate
+MY_PATH="`dirname \"$0\"`"
+source $MY_PATH/venv/bin/activate
