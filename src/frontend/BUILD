@@ -23,3 +23,17 @@ py_binary(
     deps = [],
     visibility = ["//visibility:public"],
 )
+
+py_binary(
+    name = "app",
+    srcs = ["app.py"],
+    imports = ["venv"],
+    data = [
+        "//src/frontend/templates:templates",
+        "//src/frontend/static:static",
+    ],
+    deps = [
+        ":load_logs"
+    ],
+    visibility = ["//visibility:public"],
+)
