@@ -1,4 +1,4 @@
-![CI](https://github.com/Brucknem/workstation-monitor/workflows/CI/badge.svg)
+![CI - Bazel](https://github.com/Brucknem/workstation-monitor/workflows/CI%20-%20Bazel/badge.svg)
 ![Docker Image CI](https://github.com/Brucknem/workstation-monitor/workflows/Docker%20Image%20CI/badge.svg)
 
 # workstation-monitor
