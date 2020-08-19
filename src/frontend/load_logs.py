@@ -3,6 +3,7 @@ import pandas as pd
 from pandas import DataFrame
 from pathlib import Path
 
+
 def load_log(path: str):
     """Loads one given log file.
 
@@ -17,9 +18,13 @@ def load_log(path: str):
     """
     if not path.endswith('.csv'):
         raise ValueError(f'Cannot load file {path}. Must be a .csv file.')
-    return pd.read_csv(Path(path), delimiter=';')
+    try:
+        return pd.read_csv(Path(path), delimiter=';')
+    except FileNotFoundError:
+        return None
 
-def load_logs(path: str):
+
+def list_logs(path: str):
     """Loads all logs in the given directory.
 
     Args:
@@ -29,6 +34,10 @@ def load_logs(path: str):
         list: A list of pandas data frames, one for each log
     """
     fs_path = Path(path)
-    log_files = [str(p) for p in fs_path.iterdir() if p.is_file()]
-    logs = {log_file: load_log(log_file) for log_file in log_files}
-    return logs
+    try:
+        log_files = [
+            str(p) for p in fs_path.iterdir()
+            if p.is_file() and str(p).endswith('.csv')]
+        return log_files
+    except FileNotFoundError:
+        return None

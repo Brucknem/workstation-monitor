@@ -4,5 +4,14 @@
         "titleBar.activeBackground": "#2C434B",
         "titleBar.activeForeground": "#F9FBFB"
     },
-    "python.pythonPath": "src/frontend/venv/bin/python"
+    "python.pythonPath": "src/frontend/venv/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.formatting.autopep8Args": [
+        "--experimental",
+        "--ignore",
+        "E121",
+        "--indent-size",
+        "4"
+    ],
 }
