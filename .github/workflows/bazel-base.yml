@@ -25,9 +25,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install frontend
-      run: |
-          /bin/bash src/frontend/install.sh
-          /bin/bash src/frontend/source.sh
+      run: pip install --no-cache-dir --upgrade -r src/frontend/requirements.txt 
 
     # Runs the bazel tests
     - name: Bazel tests
