@@ -24,6 +24,11 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
+    - name: Install frontend
+      run: |
+          /bin/bash src/frontend/install.sh
+          /bin/bash src/frontend/source.sh
+
     # Runs the bazel tests
     - name: Bazel tests
       run: bazel test //... --test_output=all
