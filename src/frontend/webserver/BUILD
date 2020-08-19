@@ -11,6 +11,7 @@ py_binary (
         "database"
     ],
     deps = [
-        "//src/frontend/webserver/webserver:webserver_internal"
+        "//src/frontend/webserver/webserver:webserver_internal",
+        "//src/frontend/webserver/main:main"
     ],
 )
