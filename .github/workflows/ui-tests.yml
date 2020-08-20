@@ -1,4 +1,4 @@
-name: CI - UI
+name: UI
 on:
   push:
     branches: [master]
@@ -10,19 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: docker://brucknem/bazel-base:latest
-      options: --network-alias testHost
-    env:
-      NODE_ENV: test
-      SELENIUM_HUB_HOST: hub
-      TEST_HOST: testHost
-    services:
-      hub:
-        image: selenium/hub:3.141.59-gold
-      firefox:
-        image: selenium/node-firefox:3.141.59-gold
-        env:
-          HUB_HOST: hub
-          HUB_PORT: 4444
+      
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
