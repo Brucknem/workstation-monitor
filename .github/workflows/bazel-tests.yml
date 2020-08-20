@@ -6,9 +6,9 @@ name: CI - Bazel
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -18,15 +18,15 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: docker://brucknem/bazel-base:latest
-      
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-    - name: Install frontend
-      run: pip install --no-cache-dir --upgrade -r src/frontend/requirements.txt 
+      - name: Install frontend
+        run: pip install --no-cache-dir --upgrade -r src/frontend/requirements.txt
 
-    # Runs the bazel tests
-    - name: Bazel tests
-      run: bazel test //... --test_output=all
+      # Runs the bazel tests
+      - name: Bazel tests
+        run: bazel test //... --test_output=all
