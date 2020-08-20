@@ -6,7 +6,9 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
-class BrowserTest(unittest.TestCase):
+class UiTests(unittest.TestCase):
+    """UI tests.
+    """
 
     def setUp(self):
         """Setup
@@ -27,9 +29,9 @@ class BrowserTest(unittest.TestCase):
         """Tests opening the index page
         """
         self.driver.get("http://127.0.0.1:5000/")
-        self.assertIn("Workstation Monitor", self.driver.title)
+        self.assertEqual("Workstation Monitor", self.driver.title)
 
-        element = self.driver.find_element_by_id("brand")
+        element = self.driver.find_element_by_id("navbar-brand")
         inner_html = element.get_attribute('innerHTML')
         self.assertEqual("Workstation", inner_html)
 
@@ -38,8 +40,20 @@ class BrowserTest(unittest.TestCase):
         """Tests opening the about page
         """
         self.driver.get("http://127.0.0.1:5000/about")
-        self.assertIn("Workstation Monitor - About", self.driver.title)
+        self.assertEqual("Workstation Monitor - About", self.driver.title)
 
+    def test_index_about_transition(self):
+        """Tests transitioning from index to about and back
+        """
+        self.driver.get("http://127.0.0.1:5000/")
+
+        self.assertEqual("Workstation Monitor", self.driver.title)        
+        self.driver.find_element_by_link_text('About').click()
+
+        self.assertEqual("Workstation Monitor - About", self.driver.title)
+        self.driver.find_element_by_link_text('Workstation').click()
+
+        self.assertEqual("Workstation Monitor", self.driver.title)        
 
 if __name__ == "__main__":
     unittest.main()

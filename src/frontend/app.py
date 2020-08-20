@@ -1,62 +1,61 @@
-from src.frontend.load_logs import load_log, list_logs
-from flask import Flask, render_template, request, url_for, flash, redirect, session
+from src.frontend.load_logs import load_log, list_logs, extract_names, list_dirs
+from flask import Flask, render_template, request, url_for, flash, redirect, session, jsonify
 from markupsafe import escape
 import os
-from flask import request
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yeet'
 
+def render_nav_item_log_files(log_paths):
+    """Renders the nav bar items displaying the log paths
+    """
+    items = ""
+    if log_paths:
+        for i, log_path in enumerate(log_paths):
+            items += render_template('nav_item_log_file.html', is_active=i==0, log_path=log_path, id=i)
+    else:
+        items = render_template('nav_item_log_file.html', id=0)
+    return bool(log_paths), items
 
-@app.route('/logs', methods=('GET', ))
-def logs():
-    log_path = request.args.get('log_path')
-    log_files = list_logs(log_path)
+def generate_search_result(search_string):
+    """Generates the search result for the given search string
+    """
+    session['search_string'] = search_string
+    log_paths = list_logs(search_string)
+    found_logs, items = render_nav_item_log_files(log_paths)
 
-    if not log_files:
-        flash('Log path is invalid!')
-        return redirect(url_for('index'))
+    directories = []
+    if not found_logs:
+        directories = list_dirs(search_string)
 
-    return render_template(
-        'logs.html', log_path=log_path, log_files=log_files)
+    result = {
+        'found_logs': found_logs,
+        'items': items,
+        'directories': directories
+    }
+    return jsonify(result)
 
-
-@app.route('/log', methods=('GET', ))
-def log():
-    log_file = request.args.get('log_file')
-    log = load_log(log_file)
-
-    if log is None:
-        flash('Log is invalid!')
-        return redirect(url_for('index'))
-
-    return render_template(
-        'log.html', log_file=log_file)
-
-
-@app.route('/dashboard')
-def dashboard():
-    return render_template('dashboard.html')
-
+def get_default_item_and_search_string():
+    """Generates the default item from the session.
+    """
+    search_string = session['search_string']
+    _, default_item = render_nav_item_log_files(list_logs(search_string))
+    return {
+        'default_item': default_item,
+        'search_string': search_string
+    }
 
 @app.route('/', methods=('GET', 'POST'))
 def index():
-    if request.method == 'POST':
-        if 'log_path' in request.form:
-            log_path = request.form['log_path']
-            if log_path:
-                session['log_path'] = log_path
-                return redirect(url_for('logs', log_path=escape(log_path)))
-            else:
-                flash('Log path is required!')
-    if 'log_path' in session:
-        return render_template('index.html', log_path=session['log_path'])
-    return render_template('index.html')
-
+    search_string = request.args.get('search_string')
+    if search_string:
+        return generate_search_result(search_string)
+    
+    return render_template('index.html', **get_default_item_and_search_string())
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    return render_template('about.html', **get_default_item_and_search_string())
 
 
 def shutdown_server():

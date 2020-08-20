@@ -1,6 +1,6 @@
 filegroup (
     name = "logs",
-    srcs = glob(["logs/*.csv", "geckodriver-v0.27.0-linux64"]),
+    srcs = glob(["logs/*.csv",]),
     visibility = ["//visibility:public"],
 )
 
@@ -25,5 +25,6 @@ py_binary (
     ],
     data = [
         ":logs"
-    ]
+    ],
+    visibility = ["//visibility:public"],
 )
