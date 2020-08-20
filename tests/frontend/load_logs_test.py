@@ -8,7 +8,7 @@ class LoadLogsTests(unittest.TestCase):
     def setUp(self):
         """Setup
         """
-        self.log_files = list_logs("tests/frontend/logs/")
+        self.log_files = list_logs("tests/frontend/logs/", extract=False)
         self.assertIsNotNone(self.log_files)
 
         expected = ['tests/frontend/logs/gpu-query.csv', 'tests/frontend/logs/k10temp-pci-00cb.csv', 'tests/frontend/logs/ath10k_hwmon-pci-0300.csv', 'tests/frontend/logs/asuswmisensors-isa-0000.csv', 'tests/frontend/logs/ram-query.csv', 'tests/frontend/logs/k10temp-pci-00c3.csv', 'tests/frontend/logs/cpu-query.csv']

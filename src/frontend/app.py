@@ -38,7 +38,9 @@ def generate_search_result(search_string):
 def get_default_item_and_search_string():
     """Generates the default item from the session.
     """
-    search_string = session['search_string']
+    search_string=""
+    if 'search_string' in session:
+        search_string = session['search_string']
     _, default_item = render_nav_item_log_files(list_logs(search_string))
     return {
         'default_item': default_item,
