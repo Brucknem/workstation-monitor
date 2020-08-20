@@ -1,5 +1,5 @@
-![CI - Bazel](https://github.com/Brucknem/workstation-monitor/workflows/CI%20-%20Bazel/badge.svg)
-![Docker Image CI](https://github.com/Brucknem/workstation-monitor/workflows/Docker%20Image%20CI/badge.svg)
+![Bazel](https://github.com/Brucknem/workstation-monitor/workflows/Bazel/badge.svg)
+![Docker Image](https://github.com/Brucknem/workstation-monitor/workflows/Docker%20Image/badge.svg)
 
 # workstation-monitor
 These scripts monitor the most common sensor interfaces of a **Ubuntu** system.
