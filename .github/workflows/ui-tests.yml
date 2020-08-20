@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: docker://brucknem/bazel-base:latest
+      options: --network-alias testHost
     env:
       NODE_ENV: test
       SELENIUM_HUB_HOST: hub
@@ -26,3 +27,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+
+      - name: Install frontend
+        run: pip install --no-cache-dir --upgrade -r src/frontend/requirements.txt
+
+      # Runs the bazel tests
+      - name: Bazel tests
+        run: bazel run //tests/frontend:ui_tests
+
