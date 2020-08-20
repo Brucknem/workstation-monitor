@@ -1,5 +1,5 @@
 filegroup (
     name = "static",
-    srcs = glob(["js/**", "css/**"]),
+    srcs = glob(["js/**", "css/**", "img/**"]),
     visibility = ["//visibility:public"],
 )

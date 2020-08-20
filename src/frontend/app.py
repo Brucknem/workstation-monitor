@@ -31,6 +31,10 @@ def log():
     return render_template(
         'log.html', log_file=log_file)
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
 @app.route('/', methods=('GET', 'POST'))
 def index():
     if request.method == 'POST':

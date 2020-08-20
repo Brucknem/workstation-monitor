@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Welcome to Workstation Monitor {% endblock %}</h1>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 
     <form method="post">
         <div class="form-group">
-            <input type="text" name="log_path" id="log_path" 
-                placeholder="Insert log path" class="form-control"
+            <input type="text" name="log_path" id="log_path" placeholder="Insert log path" class="form-control"
                 value="{{ request.form['log_path'] or log_path}}"></input>
         </div>
 
@@ -14,4 +13,6 @@
             <button type="submit" class="btn btn-primary">Find logs</button>
         </div>
     </form>
+</div>
+
 {% endblock %}
