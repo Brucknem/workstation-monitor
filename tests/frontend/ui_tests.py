@@ -18,7 +18,7 @@ class BrowserTest(unittest.TestCase):
     def tearDown(self):
         """Teardown
         """
-        self.driver.get("http://testHub/shutdown")
+        self.driver.get("http://127.0.0.1:5000/shutdown")
         self.driver.close()
         self.server.terminate()
         self.server.join()
@@ -26,7 +26,7 @@ class BrowserTest(unittest.TestCase):
     def test_index(self):
         """Tests opening the index page
         """
-        self.driver.get("http://testHub/")
+        self.driver.get("http://127.0.0.1:5000/")
         self.assertIn("Workstation Monitor", self.driver.title)
 
         element = self.driver.find_element_by_id("brand")
@@ -37,7 +37,7 @@ class BrowserTest(unittest.TestCase):
     def test_about(self):
         """Tests opening the about page
         """
-        self.driver.get("http://testHub/about")
+        self.driver.get("http://127.0.0.1:5000/about")
         self.assertIn("Workstation Monitor - About", self.driver.title)
 
 
