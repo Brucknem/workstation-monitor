@@ -2,6 +2,7 @@ from src.frontend.load_logs import load_log, list_logs
 from flask import Flask, render_template, request, url_for, flash, redirect, session
 from markupsafe import escape
 import os
+from flask import request
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yeet'
@@ -15,9 +16,10 @@ def logs():
     if not log_files:
         flash('Log path is invalid!')
         return redirect(url_for('index'))
-            
+
     return render_template(
         'logs.html', log_path=log_path, log_files=log_files)
+
 
 @app.route('/log', methods=('GET', ))
 def log():
@@ -26,14 +28,16 @@ def log():
 
     if log is None:
         flash('Log is invalid!')
-        return redirect(url_for('index'))        
+        return redirect(url_for('index'))
 
     return render_template(
         'log.html', log_file=log_file)
 
+
 @app.route('/dashboard')
 def dashboard():
     return render_template('dashboard.html')
+
 
 @app.route('/', methods=('GET', 'POST'))
 def index():
@@ -53,6 +57,19 @@ def index():
 @app.route('/about')
 def about():
     return render_template('about.html')
+
+
+def shutdown_server():
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        raise RuntimeError('Not running with the Werkzeug Server')
+    func()
+
+
+@app.route('/shutdown')
+def shutdown():
+    shutdown_server()
+    return 'Server shutting down...'
 
 
 if __name__ == "__main__":

@@ -12,7 +12,9 @@ class LoadLogsTests(unittest.TestCase):
         self.assertIsNotNone(self.log_files)
 
         expected = ['tests/frontend/logs/gpu-query.csv', 'tests/frontend/logs/k10temp-pci-00cb.csv', 'tests/frontend/logs/ath10k_hwmon-pci-0300.csv', 'tests/frontend/logs/asuswmisensors-isa-0000.csv', 'tests/frontend/logs/ram-query.csv', 'tests/frontend/logs/k10temp-pci-00c3.csv', 'tests/frontend/logs/cpu-query.csv']
-        self.assertEquals(expected, self.log_files)
+        self.assertEqual(len(expected), len(self.log_files))
+        for name in expected:
+            self.assertIn(name, self.log_files)
 
     def test_load_all(self):
         """Sanity checks that loading runs without error.

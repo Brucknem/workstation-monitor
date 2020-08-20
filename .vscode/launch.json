@@ -21,5 +21,15 @@
                 "PYTHONPATH": "${workspaceFolder}/bazel-bin/python/tests/load_logs_test.runfiles/:${workspaceFolder}/bazel-bin/python/tests/load_logs_test.runfiles/python/:"
             }
         },
+        {
+            "name": "Python: tests/frontend/ui_tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tests/frontend/ui_tests.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/frontend/ui_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/frontend/ui_tests.runfiles/python/:"
+            }
+        },
     ]
 }

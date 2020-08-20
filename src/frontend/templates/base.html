@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <link rel="icon" href="../static/img/workstation.svg">
 
-  <title>Workstation Monitor</title>
+  <title>Workstation Monitor{% block title %}{% endblock %}</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.1/examples/dashboard/">
 
@@ -91,7 +91,7 @@
 
 <body>
   <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ url_for('index') }}">Workstation</a>
+    <a id="brand" class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ url_for('index') }}">Workstation</a>
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search logs" aria-label="Search">
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
@@ -134,10 +134,8 @@
             {% for message in get_flashed_messages() %}
                 <div class="alert alert-danger">{{ message }}</div>
             {% endfor %}
-          <h1 class="h2">{% block title %} Dashboard {% endblock %}</h1>
-          
         </div>
-        <div class="">
+        <div>
           {% block content %} {% endblock %}
         </div>
       </main>
