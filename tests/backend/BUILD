@@ -1,7 +1,8 @@
 py_test (
-    name = "query_gpu_tests",
-    srcs = ["query_gpu_tests.py"],
+    name = "hardware_query_tests",
+    srcs = ["hardware_query_tests.py"],
     deps = [
-        "//src/backend:query_gpu",
+        "//src/backend:gpu_query",
+        "//src/backend:cpu_query",
     ],
 )

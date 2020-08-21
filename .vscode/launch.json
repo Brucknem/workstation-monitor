@@ -30,15 +30,15 @@
             "env": {
                 "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/frontend/ui_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/frontend/ui_tests.runfiles/python/:"
             }
-        },
+        },   
         {
-            "name": "Python: src/backend/query_gpu",
+            "name": "Python: tests/backend/hardware_query_tests",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/src/backend/query_gpu.py",
+            "program": "${workspaceFolder}/tests/backend/hardware_query_tests.py",
             "console": "integratedTerminal",
             "env": {
-                "PYTHONPATH": "${workspaceFolder}/bazel-bin/src/backend/query_gpu.runfiles/:${workspaceFolder}/bazel-bin/src/backend/query_gpu.runfiles/python/:"
+                "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/backend/hardware_query_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_tests.runfiles/python/:"
             }
         },
     ]
