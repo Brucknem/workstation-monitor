@@ -89,19 +89,24 @@ import sys
 import subprocess
 import numpy as np
 import pandas as pd
+from datetime import datetime
 
-def query_gpu():
+def query_gpu() -> pd.DataFrame:
     """Queries the GPU stats and creates a dataframe from it
     """
+
+    timestamp = datetime.now().strftime(f'%Y/%m/%d %H:%M:%S.%f')
+    df = pd.DataFrame(data={'timestamp': [timestamp]})
+
     try:
         process = subprocess.Popen(bash_command.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
     except:
-        return None
+        return df
 
     if error: 
         print(error)
-        return None
+        return df
 
     output = output.decode()
     lines = output.splitlines()
