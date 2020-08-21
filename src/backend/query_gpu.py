@@ -102,18 +102,16 @@ def query_gpu() -> pd.DataFrame:
         process = subprocess.Popen(bash_command.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
     except:
-        return df
+        pass
 
-    if error: 
-        print(error)
-        return df
+    if not error: 
+        output = output.decode()
+        lines = output.splitlines()
+        lines = np.array([np.array(line.split(', ')) for line in lines])
+        lines = lines.transpose()
+        data = {line[0]: [line[1]] for line in lines}
+        df = pd.DataFrame(data=data)
 
-    output = output.decode()
-    lines = output.splitlines()
-    lines = np.array([np.array(line.split(', ')) for line in lines])
-    lines = lines.transpose()
-    data = {line[0]: [line[1]] for line in lines}
-    df = pd.DataFrame(data=data)
     df = df.set_index('timestamp')
     return df
 
