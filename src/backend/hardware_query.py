@@ -58,9 +58,9 @@ class HardwareQuery:
                 stdout=subprocess.PIPE)
             output, error = process.communicate()
             if error:
-                raise ValueError(error)
+                raise FileNotFoundError(error)
             df = self.parse_query_result(output.decode())
-        except ValueError as e:
+        except FileNotFoundError as e:
             print(e)
         df = df.set_index(self.get_index())
         return df
