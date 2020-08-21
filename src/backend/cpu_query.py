@@ -12,19 +12,10 @@ class CPUQuery(HardwareQuery):
         """
         return "mpstat -P ALL"
 
-    def get_default_dataframe(self) -> pd.DataFrame:
-        """Get an empty default dataframe.
-        """
-        df = pd.DataFrame(data={
-            'timestamp': [self.get_timestamp()],
-            'CPU': [None]
-        })
-        return df
-
-    def get_index(self) -> list:
+    def get_custom_index(self) -> list:
         """Gets the index for the resulting dataframe.
         """
-        return ['timestamp', 'CPU']
+        return ['CPU']
 
     def parse_query_result(self, result) -> pd.DataFrame:
         """inherited

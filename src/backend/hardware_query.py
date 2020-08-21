@@ -24,14 +24,24 @@ class HardwareQuery:
     def get_default_dataframe(self) -> pd.DataFrame:
         """Get an empty default dataframe.
         """
-        df = pd.DataFrame(data={'timestamp': [self.get_timestamp()]})
-        df = df.set_index('timestamp')
+        data = {'timestamp': [self.get_timestamp()]}
+        for key in self.get_custom_index():
+            data[key] = [None]
+        df = pd.DataFrame(data=data)
+        df = df.set_index(self.get_index())
         return df
 
     def get_index(self) -> list:
         """Gets the index for the resulting dataframe.
         """
-        return ['timestamp']
+        complete_index = ['timestamp']
+        complete_index.extend(self.get_custom_index())
+        return complete_index
+
+    def get_custom_index(self) -> list:
+        """Gets the hardware specific indices that are added to the index.
+        """
+        return []
 
     def parse_query_result(self, result: str) -> pd.DataFrame:
         """Parse the query result.
