@@ -62,6 +62,9 @@ class HardwareQuery:
             df = self.parse_query_result(output.decode())
         except FileNotFoundError as e:
             print(e)
+        except subprocess.CalledProcessError as e:
+            print(e.output)
+        
         df = df.set_index(self.get_index())
         return df
 
