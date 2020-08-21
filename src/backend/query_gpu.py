@@ -93,8 +93,11 @@ import pandas as pd
 def query_gpu():
     """Queries the GPU stats and creates a dataframe from it
     """
-    process = subprocess.Popen(bash_command.split(), stdout=subprocess.PIPE)
-    output, error = process.communicate()
+    try:
+        process = subprocess.Popen(bash_command.split(), stdout=subprocess.PIPE)
+        output, error = process.communicate()
+    except:
+        return None
 
     if error: 
         print(error)
