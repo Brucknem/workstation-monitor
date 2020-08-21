@@ -53,10 +53,9 @@ class HardwareQuery:
         """
         df = self.get_default_dataframe()
         try:
-            process = subprocess.Popen(
-                shlex.split(self.get_bash_command()),
-                stdout=subprocess.PIPE)
-            output, error = process.communicate()
+            process = subprocess.run(
+                shlex.split(self.get_bash_command()), capture_output=True ,check=True)
+            output, error = process.stdout, process.stderr
             if error:
                 raise FileNotFoundError(error)
             df = self.parse_query_result(output.decode())
