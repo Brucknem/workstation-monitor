@@ -3,6 +3,6 @@ py_test(
     srcs = ["query_gpu.py"],
     deps = [
     ],
-    imports = ["venv"],
+    imports = ["../../venv"],
     visibility = ["//visibility:public"],
 )

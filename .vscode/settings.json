@@ -4,7 +4,7 @@
         "titleBar.activeBackground": "#2C434B",
         "titleBar.activeForeground": "#F9FBFB"
     },
-    "python.pythonPath": "src/frontend/venv/bin/python",
+    "python.pythonPath": "/home/brucknem/Repositories/workstation-monitor/venv/bin/python3.8",
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
     "python.formatting.autopep8Args": [

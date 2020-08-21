@@ -19,7 +19,7 @@ py_binary(
 py_binary(
     name = "load_logs",
     srcs = ["load_logs.py"],
-    imports = ["venv"],
+    imports = ["../../venv"],
     deps = [],
     visibility = ["//visibility:public"],
 )
@@ -27,7 +27,7 @@ py_binary(
 py_binary(
     name = "app",
     srcs = ["app.py"],
-    imports = ["venv"],
+    imports = ["../../venv"],
     data = [
         "//src/frontend/templates:templates",
         "//src/frontend/static:static",
