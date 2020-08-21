@@ -156,7 +156,7 @@
       var text = $(this).val();
 
       $.ajax({
-        url: "/",
+        url: "/search",
         type: "get",
         data: { search_string: text },
         success: function (response) {

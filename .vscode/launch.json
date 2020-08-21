@@ -31,5 +31,15 @@
                 "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/frontend/ui_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/frontend/ui_tests.runfiles/python/:"
             }
         },
+        {
+            "name": "Python: src/backend/query_gpu",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/backend/query_gpu.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/bazel-bin/src/backend/query_gpu.runfiles/:${workspaceFolder}/bazel-bin/src/backend/query_gpu.runfiles/python/:"
+            }
+        },
     ]
 }
