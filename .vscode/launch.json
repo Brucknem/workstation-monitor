@@ -40,6 +40,16 @@
             "env": {
                 "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/backend/hardware_query_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_tests.runfiles/python/:"
             }
+        },    
+        {
+            "name": "Python: src/backend/monitor",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/backend/monitor.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/bazel-bin/src/backend/monitor.runfiles/:${workspaceFolder}/bazel-bin/src/backend/monitor.runfiles/python/:"
+            }
         },
     ]
 }

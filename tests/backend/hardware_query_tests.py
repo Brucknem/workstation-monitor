@@ -32,7 +32,6 @@ class HardwareQueryTests(unittest.TestCase):
         for index in indices:
             datetime.fromisoformat(index[0].replace('Z', '+00:00'))
 
-
     def assert_index(self, names: list, df: pd.DataFrame):
         """Asserts that the index of the dataframe is the given list.
         """

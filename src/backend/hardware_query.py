@@ -1,3 +1,4 @@
+import os
 import shlex
 import subprocess
 import numpy as np
@@ -10,6 +11,7 @@ timestamp_format = f'%Y/%m/%d %H:%M:%S.%f'
 class HardwareQuery:
     """Base class for hardware queries.
     """
+
     def __init__(self):
         """Constructor
         """
@@ -69,11 +71,18 @@ class HardwareQuery:
             print(e)
         except subprocess.CalledProcessError as e:
             print(e.output)
-        
+
         for key, frame in dfs.items():
             dfs[key] = frame.set_index(self.get_index())
         return dfs
 
-
-if __name__ == "__main__":
-    query_gpu()
+    def query_and_update(self, output_path):
+        """Queries the hardware, loads previous logs and appends the new values.
+        """
+        dataframes = self.query()
+        for name, df in dataframes.items():
+            full_path = os.path.join(str(output_path), name + '.csv') 
+            if os.path.exists(full_path):
+                previous_df = pd.read_csv(full_path, index_col=self.get_index())
+                df = pd.concat([previous_df, df])
+            df.to_csv(full_path)

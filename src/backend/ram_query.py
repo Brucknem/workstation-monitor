@@ -34,4 +34,4 @@ class RAMQuery(HardwareQuery):
 
 
 if __name__ == "__main__":
-    CPUQuery().query()
+    RAMQuery().query()

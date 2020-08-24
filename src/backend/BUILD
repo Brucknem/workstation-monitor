@@ -12,3 +12,11 @@ py_library(
     imports = ["../../venv"],
     visibility = ["//visibility:public"],
 )
+
+py_binary(
+    name = "monitor",
+    srcs = ["monitor.py"],
+    deps = [":queries"],
+    imports = ["../../venv"],
+    visibility = ["//visibility:public"],
+)

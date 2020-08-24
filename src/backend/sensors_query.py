@@ -22,7 +22,7 @@ class SensorsQuery(HardwareQuery):
         """
         if '(' not in raw_value:
             return {raw_key.strip(): raw_value.strip()}
-            
+
         values = raw_value.split('(')
         original = values[0].strip()
         others = values[-1].replace(')', '').split(',')
@@ -51,7 +51,7 @@ class SensorsQuery(HardwareQuery):
 
             values = self.parse_values(key, value)
             for key, value in values.items():
-                adapters[name][key] = [value] 
+                adapters[name][key] = [value]
 
         dfs = {}
         for adapter, values in adapters.items():
@@ -60,4 +60,4 @@ class SensorsQuery(HardwareQuery):
 
 
 if __name__ == "__main__":
-    CPUQuery().query()
+    SensorsQuery().query()
