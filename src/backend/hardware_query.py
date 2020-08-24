@@ -10,11 +10,15 @@ timestamp_format = f'%Y/%m/%d %H:%M:%S.%f'
 class HardwareQuery:
     """Base class for hardware queries.
     """
+    def __init__(self):
+        """Constructor
+        """
+        self.timestamp = self.get_timestamp()
 
     def get_timestamp(self):
         """Get the current timestamp.
         """
-        return datetime.now().strftime(timestamp_format)
+        return datetime.now().isoformat()
 
     def get_bash_command(self) -> str:
         """The bash command used to query the hardware.
@@ -52,6 +56,7 @@ class HardwareQuery:
         """Queries the hardware and creates a dataframe from it.
         """
         df = self.get_default_dataframe()
+        self.timestamp = self.get_timestamp()
         try:
             process = subprocess.Popen(
                 shlex.split(self.get_bash_command()),

@@ -102,6 +102,7 @@ class GPUQuery(HardwareQuery):
         lines = np.array([np.array(line.split(', ')) for line in lines])
         lines = lines.transpose()
         data = {line[0]: [line[1]] for line in lines}
+        data['timestamp'] = self.timestamp
         df = pd.DataFrame(data=data)
 
         return df
