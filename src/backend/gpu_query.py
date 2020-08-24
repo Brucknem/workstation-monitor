@@ -105,7 +105,7 @@ class GPUQuery(HardwareQuery):
         data['timestamp'] = self.timestamp
         df = pd.DataFrame(data=data)
 
-        return df
+        return {'gpu': df}
 
 
 if __name__ == "__main__":

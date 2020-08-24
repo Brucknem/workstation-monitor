@@ -17,7 +17,7 @@ class CPUQuery(HardwareQuery):
         """
         return ['CPU']
 
-    def parse_query_result(self, result) -> pd.DataFrame:
+    def parse_query_result(self, result) -> dict:
         """inherited
         """
         lines = result.splitlines()[2:]
@@ -29,7 +29,7 @@ class CPUQuery(HardwareQuery):
         data = {line[0]: line[1:] for line in lines}
         df = pd.DataFrame(data=data)
 
-        return df
+        return {'cpu': df}
 
 
 if __name__ == "__main__":

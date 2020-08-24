@@ -17,7 +17,7 @@ class RAMQuery(HardwareQuery):
         """
         return ['type']
 
-    def parse_query_result(self, result) -> pd.DataFrame:
+    def parse_query_result(self, result) -> dict:
         """inherited
         """
         lines = result.splitlines()
@@ -30,7 +30,7 @@ class RAMQuery(HardwareQuery):
         data['timestamp'] = [self.timestamp for _ in range(len(data[list(data.keys())[0]]))]
         df = pd.DataFrame(data=data)
 
-        return df
+        return {'ram': df}
 
 
 if __name__ == "__main__":

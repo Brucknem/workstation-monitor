@@ -5,6 +5,7 @@ py_library(
         "cpu_query.py",
         "gpu_query.py",
         "ram_query.py",
+        "sensors_query.py",
         ],
     deps = [
     ],

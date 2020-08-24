@@ -52,7 +52,7 @@ class HardwareQuery:
         """
         raise NotImplementedError('Implement the parsing')
 
-    def query(self) -> pd.DataFrame:
+    def query(self) -> dict:
         """Queries the hardware and creates a dataframe from it.
         """
         df = self.get_default_dataframe()
@@ -64,14 +64,15 @@ class HardwareQuery:
             output, error = process.communicate()
             if error:
                 raise FileNotFoundError(error)
-            df = self.parse_query_result(output.decode())
+            dfs = self.parse_query_result(output.decode())
         except FileNotFoundError as e:
             print(e)
         except subprocess.CalledProcessError as e:
             print(e.output)
         
-        df = df.set_index(self.get_index())
-        return df
+        for key, frame in dfs.items():
+            dfs[key] = frame.set_index(self.get_index())
+        return dfs
 
 
 if __name__ == "__main__":
