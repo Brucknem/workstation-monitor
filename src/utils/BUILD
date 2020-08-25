@@ -1,6 +1,9 @@
-py_binary(
-    name = "load_logs",
-    srcs = ["load_logs.py"],
+py_library(
+    name = "utils",
+    srcs = [
+        "search_utils.py",
+        "log_utils.py",
+        ],
     imports = ["../../venv"],
     deps = [],
     visibility = ["//visibility:public"],

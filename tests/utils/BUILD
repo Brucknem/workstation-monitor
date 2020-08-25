@@ -5,11 +5,11 @@ filegroup (
 )
 
 py_test (
-    name = "load_logs_test",
-    srcs = ["load_logs_test.py"],
+    name = "log_utils_test",
+    srcs = ["log_utils_test.py"],
     deps = [
         "//src/backend:queries",
-        "//src/utils:load_logs",
+        "//src/utils",
     ],
     imports = [
         "tests/utils/logs",

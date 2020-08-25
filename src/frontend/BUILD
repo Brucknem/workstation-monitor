@@ -10,7 +10,7 @@ py_binary(
     srcs = ["run.py"],
     data = [":notebooks_folder"],
     deps = [
-        "//src/utils:load_logs",
+        "//src/utils",
     ],
     imports = ["venv"],
     visibility = ["//visibility:public"],
@@ -25,7 +25,7 @@ py_binary(
         "//src/frontend/static:static",
     ],
     deps = [
-        "//src/utils:load_logs"
+        "//src/utils"
     ],
     visibility = ["//visibility:public"],
 )

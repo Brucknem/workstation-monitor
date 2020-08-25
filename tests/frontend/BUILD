@@ -8,7 +8,7 @@ py_binary (
     name = "ui_tests",
     srcs = ["ui_tests.py"],
     deps = [
-        "//src/utils:load_logs",
+        "//src/utils",
         "//src/frontend:app"
     ],
     data = [

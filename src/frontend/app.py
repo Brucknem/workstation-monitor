@@ -1,4 +1,4 @@
-from src.utils.load_logs import load_log, list_logs, extract_names, list_dirs
+from src.utils.log_utils import load_log, list_logs, extract_names, list_dirs
 from flask import Flask, render_template, request, url_for, flash, redirect, session, jsonify
 from markupsafe import escape
 import os
