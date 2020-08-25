@@ -11,7 +11,10 @@ RUN apt-get update \
     wget \
     xauth \
     python3 \
-    python3-pip
+    python3-pip \
+    python3-dev \
+    build-essential \
+    libsystemd-dev
 
 # Bazel install
 RUN echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | \
@@ -26,4 +29,5 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN ln -s /usr/bin/python3 /usr/bin/python & \
     ln -s /usr/bin/pip3 /usr/bin/pip
 
-COPY utils/geckodriver /usr/bin/geckodriver
+# COPY utils/geckodriver /usr/bin/geckodriver
+# COPY requirements.txt .
