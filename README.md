@@ -11,6 +11,7 @@ These scripts monitor the most common sensor interfaces of a **Ubuntu** system.
 - python3 - Has to be accessible as `python`
 - pip3 - Has to be accessible as `pip`
 - [virtualenv](https://wiki.ubuntuusers.de/virtualenv/)
+- [systemd](https://pypi.org/project/systemd/)
 
 ## For additional ASUS specific sensors
 https://github.com/electrified/asus-wmi-sensors

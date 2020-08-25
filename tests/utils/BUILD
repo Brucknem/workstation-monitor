@@ -18,3 +18,18 @@ py_test (
         ":logs"
     ]
 )
+
+py_test (
+    name = "search_utils_tests",
+    srcs = ["search_utils_tests.py"],
+    deps = [
+        "//src/backend:queries",
+        "//src/utils",
+    ],
+    imports = [
+        "tests/utils/logs",
+    ],
+    data = [
+        ":logs"
+    ]
+)
