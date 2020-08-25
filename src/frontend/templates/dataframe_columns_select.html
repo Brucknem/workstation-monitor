@@ -1,10 +1,9 @@
 <hr>
 <div id="{{type}}-select" class="list-group">
     {% for value in values %}
-    <li class="nav-item nav-item-{{type}}">
-        <a class="nav-link nav-item-{{type}}-link" href="#">
+    <li class="nav-item">
+        <a class="nav-link nav-item-logs nav-item-{{type}}" href="#">
             {{ icon|safe }}
-
             <span>
                 {{value}}
             </span>
@@ -13,11 +12,28 @@
     {% endfor %}
 </div>
 <script>
-    $(".nav-item-{{type}}-link").click(function () {
+    $(".nav-item-{{type}}").click(function () {
         if ($(this).hasClass('active')) {
             $(this).removeClass('active')
         } else {
             $(this).addClass('active')
         }
+
+        selected_columns = []
+        $(".nav-item-logs.active").each(function () {
+            selected_columns.push($(this).find('span').html().trim())
+        })
+
+        $.ajax({
+            url: "/show_log",
+            type: "get",
+            data: { selected_columns: JSON.stringify(selected_columns) },
+            success: function (response) {
+                console.log(response)
+            },
+            error: function (xhr) {
+                console.log(response)
+            }
+        });
     })
 </script>

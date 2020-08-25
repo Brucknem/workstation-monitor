@@ -163,10 +163,10 @@
         type: "get",
         data: { search_string: text },
         success: function (response) {
-          console.log(response)
           $('.nav-item-log-file').remove();
-          $('#ul-log-paths').html(response.log_paths);
-          $('.indices-select').remove();
+          $('#indices-select').remove();
+          $('#values-select').remove();
+          $('#ul-log-paths').html(response.items);
         },
         error: function (xhr) {
           console.log(response)

@@ -1,7 +1,7 @@
 {% if log_paths %}
 {% for log_path in log_paths %}
 <li class="nav-item nav-item-log-file">
-  <a class="nav-link nav-item-log-file-link" href="#">
+  <a class="nav-link nav-item-logs nav-item-log-file-link" href="#">
     {{icon|safe}}
     <span>
       {{ log_path }}
@@ -12,7 +12,7 @@
 
 {% else %}
 <li class="nav-item nav-item-log-file">
-  <a class="nav-link nav-item-log-file-link" href="#">
+  <a class="nav-link nav-item-logs nav-item-log-file-link" href="#">
     {{icon|safe}}
     <span>
       No logs found
@@ -28,7 +28,6 @@
       $(this).removeClass('active');
     })
     $(this).addClass('active');
-    console.log($(this));
 
     $.ajax({
       url: "/load_log",

@@ -8,6 +8,7 @@ from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
 from bokeh.plotting import figure, output_file, show
 from pathlib import Path
+import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yeet'
@@ -79,9 +80,14 @@ def request_log():
     values = list(filter(lambda i: i not in indices, values))
     indices.remove('timestamp')
 
+    hardware = set()
+    for index, row in log[indices].iterrows():
+        value = ' - '.join([row[index] for index in indices])
+        hardware.add(value)
+
     result = {}
     result['indices-select'] = render_template(
-        'dataframe_columns_select.html', type='indices', values=[' - '.join(indices)],
+        'dataframe_columns_select.html', type='indices', values=list(hardware),
         icon=svgs['command'])
     result['values-select'] = render_template(
             'dataframe_columns_select.html', type='values', values=values,
@@ -89,6 +95,12 @@ def request_log():
 
     return jsonify(result)
 
+
+@app.route('/show_log')
+def show_log():
+    selected_columns = json.loads(request.args.get('selected_columns'))
+    print(selected_columns)
+    return 'Lol'
 
 @app.route('/')
 def index():

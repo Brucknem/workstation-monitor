@@ -98,7 +98,7 @@ class GPUQuery(HardwareQuery):
     def get_custom_index(self) -> list:
         """Gets the index for the resulting dataframe.
         """
-        return ['name', 'serial']
+        return ['name', 'count']
 
     def parse_query_result(self, result) -> pd.DataFrame:
         """inherited
