@@ -19,6 +19,7 @@ class HardwareQuery:
         """
         self.timestamp = self.get_timestamp()
         self.subclass_name = self.__class__.__name__
+        self.index_series = pd.Series(self.get_index())
 
         if logger:
             self.logger = logger
@@ -31,6 +32,7 @@ class HardwareQuery:
         ))
         self.logger.setLevel(logging.DEBUG)
         self.logger.addHandler(journald_handler)
+
 
     def get_timestamp(self):
         """Get the current timestamp.
@@ -98,17 +100,18 @@ class HardwareQuery:
             dfs[key] = frame.set_index(self.get_index())
         return dfs
 
-    def query_and_update(self, output_path):
+    def query_and_update(self, output_path) -> list:
         """Queries the hardware, loads previous logs and appends the new values.
         """
         dataframes = self.query()
+        filenames = []
         for name, df in dataframes.items():
-            full_path = os.path.join(str(output_path), name + '.csv')
-            if os.path.exists(full_path):
-                previous_df = pd.read_csv(
-                    full_path, index_col=self.get_index())
-                df = pd.concat([previous_df, df])
-            df.to_csv(full_path)
+            full_path = os.path.join(str(output_path), name + '.h5')
+            filenames.append(full_path)
 
-            with open(full_path, "a") as f:
-                f.write(f"\n{self.get_index()}")
+            if os.path.exists(full_path):
+                previous_df = pd.read_hdf(full_path, key='df')
+                df = pd.concat([previous_df, df])
+            df.to_hdf(full_path, key='df')
+            self.index_series.to_hdf(full_path, key='id')
+        return filenames

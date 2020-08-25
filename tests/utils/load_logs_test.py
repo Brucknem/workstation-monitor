@@ -1,5 +1,8 @@
+import shutil
 import unittest
+from pathlib import Path
 from src.utils.load_logs import load_log, list_logs
+from src.backend.sensors_query import SensorsQuery
 
 class LoadLogsTests(unittest.TestCase):
     """Test cases for the load logs functions.
@@ -8,19 +11,35 @@ class LoadLogsTests(unittest.TestCase):
     def setUp(self):
         """Setup
         """
-        self.log_files = list_logs("tests/utils/logs/", extract=False)
-        self.assertIsNotNone(self.log_files)
+        self.output_path = 'tests/utils/logs'
+        Path(self.output_path).mkdir(parents=True, exist_ok=True)
+        filenames = SensorsQuery().query_and_update(self.output_path)
+        
+        self.log_files = list_logs(self.output_path, extract=False)
+        self.assertCountEqual(self.log_files, filenames)
 
-        expected = ['tests/utils/logs/gpu-query.csv', 'tests/utils/logs/k10temp-pci-00cb.csv', 'tests/utils/logs/ath10k_hwmon-pci-0300.csv', 'tests/utils/logs/asuswmisensors-isa-0000.csv', 'tests/utils/logs/ram-query.csv', 'tests/utils/logs/k10temp-pci-00c3.csv', 'tests/utils/logs/cpu-query.csv']
-        self.assertEqual(len(expected), len(self.log_files))
-        for name in expected:
-            self.assertIn(name, self.log_files)
+    def tearDown(self):
+        """Teardown
+        """
+        shutil.rmtree(self.output_path, ignore_errors=True)
+
+    def test_extract_names(self):
+        """Tests that listing logs with extracting the names works as expected.
+        """
+        log_names = list_logs(self.output_path, extract=True)
+        for log_name in log_names:
+            found = False
+            for log_file in self.log_files:
+                if log_file.endswith(log_name):
+                    found = True
+                    break
+            self.assertTrue(found)
+        
 
     def test_load_all(self):
         """Sanity checks that loading runs without error.
         """
-        for log_file in self.log_files:
-            self.assertIsNotNone(load_log(log_file))
+        print('yeeet')
 
 if __name__ == "__main__":
     unittest.main()

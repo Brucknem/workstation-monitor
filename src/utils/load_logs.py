@@ -2,6 +2,7 @@ import os
 import pandas as pd
 from pandas import DataFrame
 from pathlib import Path
+from io import StringIO
 
 
 def load_log(path: str):
@@ -16,12 +17,15 @@ def load_log(path: str):
     Returns:
         DataFrame: A pandas data frame.
     """
-    if not path.endswith('.csv'):
-        raise ValueError(f'Cannot load file {path}. Must be a .csv file.')
+    if not path.endswith('.h5'):
+        raise ValueError(f'Cannot load file {path}. Must be a .h5 file.')
     try:
-        return pd.read_csv(Path(path), delimiter=';')
+        absolute = str(Path(os.path.expanduser(path)))
+        df = pd.read_hdf(file, key='df')
+        indices = list(pd.read_hdf(file, key='id'))
+        return df, indices
     except FileNotFoundError:
-        return None
+        return None, []
 
 def extract_names(log_files: list):
     """Returns the filename of the given log files.
@@ -42,7 +46,7 @@ def list_logs(path: str, extract=True):
     try:
         log_files = [
             str(p) for p in fs_path.iterdir()
-            if p.is_file() and str(p).endswith('.csv')]
+            if p.is_file() and str(p).endswith('.h5')]
         if extract:
             return extract_names(log_files)
         else:

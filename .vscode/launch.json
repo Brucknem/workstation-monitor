@@ -12,16 +12,6 @@
             "args": ["logs", "test"]
         },
         {
-            "name": "Python: python/tests/load_logs_test",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/python/tests/load_logs_test.py",
-            "console": "integratedTerminal",
-            "env": {
-                "PYTHONPATH": "${workspaceFolder}/bazel-bin/python/tests/load_logs_test.runfiles/:${workspaceFolder}/bazel-bin/python/tests/load_logs_test.runfiles/python/:"
-            }
-        },
-        {
             "name": "Python: tests/frontend/ui_tests",
             "type": "python",
             "request": "launch",
@@ -42,6 +32,16 @@
             }
         },    
         {
+            "name": "Python: tests/backend/hardware_query_write_to_file_tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tests/backend/hardware_query_write_to_file_tests.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/workspace_monitor/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/workspace_monitor/src/frontend/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/workspace_monitor/src/backend/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/workspace_monitor/src/backend/templates:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/workspace_monitor/src/backend/static/css:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/workspace_monitor/src/backend/static/js:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/workspace_monitor/src/backend/static/img:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/workspace_monitor/src/utils:"
+            }
+        },
+        {
             "name": "Python: src/backend/monitor",
             "type": "python",
             "request": "launch",
@@ -59,6 +59,16 @@
             "console": "integratedTerminal",
             "env": {
                 "PYTHONPATH": "${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/:${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/workspace_monitor/:${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/workspace_monitor/src/frontend/:${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/workspace_monitor/src/backend/:${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/workspace_monitor/src/backend/templates:${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/workspace_monitor/src/backend/static/css:${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/workspace_monitor/src/backend/static/js:${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/workspace_monitor/src/backend/static/img:${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/workspace_monitor/src/utils:"
+            }
+        },
+        {
+            "name": "Python: tests/utils/load_logs_test",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tests/utils/load_logs_test.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/:${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/workspace_monitor/:${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/workspace_monitor/src/frontend/:${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/workspace_monitor/src/backend/:${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/workspace_monitor/src/backend/templates:${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/workspace_monitor/src/backend/static/css:${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/workspace_monitor/src/backend/static/js:${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/workspace_monitor/src/backend/static/img:${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/workspace_monitor/src/utils:"
             }
         },
     ]

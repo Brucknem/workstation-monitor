@@ -5,7 +5,7 @@ from src.backend.cpu_query import CPUQuery
 from src.backend.ram_query import RAMQuery
 from src.backend.sensors_query import SensorsQuery
 from datetime import datetime
-
+import shutil
 
 class HardwareQueryTests(unittest.TestCase):
     """Test cases for the query GPU functions.
@@ -63,7 +63,6 @@ class HardwareQueryTests(unittest.TestCase):
         """
         self.dfs = SensorsQuery().query()
         self.assert_dataframe(['Adapter'])
-
 
 if __name__ == "__main__":
     unittest.main()
