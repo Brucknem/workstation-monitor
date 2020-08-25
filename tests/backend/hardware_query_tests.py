@@ -3,6 +3,7 @@ import pandas as pd
 from src.backend.gpu_query import GPUQuery
 from src.backend.cpu_query import CPUQuery
 from src.backend.ram_query import RAMQuery
+from src.backend.mock_query import MockQuery
 from src.backend.sensors_query import SensorsQuery
 from datetime import datetime
 import shutil
@@ -63,6 +64,12 @@ class HardwareQueryTests(unittest.TestCase):
         """
         self.dfs = SensorsQuery().query()
         self.assert_dataframe(['Adapter'])
+
+    def test_query_mock(self):
+        """Sanity checks that the mock query produces a dataframe.
+        """
+        self.dfs = MockQuery().query()
+        self.assert_dataframe(['test'])
 
 if __name__ == "__main__":
     unittest.main()

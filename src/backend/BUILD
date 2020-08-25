@@ -7,8 +7,16 @@ py_library(
         "ram_query.py",
         "sensors_query.py",
         ],
-    deps = [
-    ],
+    imports = ["../../venv"],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "mock_query",
+    srcs = [
+        "hardware_query.py",
+        "mock_query.py",
+        ],
     imports = ["../../venv"],
     visibility = ["//visibility:public"],
 )

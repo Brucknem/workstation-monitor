@@ -44,16 +44,6 @@ class HardwareQuery:
         """
         raise NotImplementedError('Implement the bash command')
 
-    def get_default_dataframe(self) -> pd.DataFrame:
-        """Get an empty default dataframe.
-        """
-        data = {'timestamp': [self.get_timestamp()]}
-        for key in self.get_custom_index():
-            data[key] = [None]
-        df = pd.DataFrame(data=data)
-        df = df.set_index(self.get_index())
-        return df
-
     def get_index(self) -> list:
         """Gets the index for the resulting dataframe.
         """
@@ -79,7 +69,6 @@ class HardwareQuery:
     def query(self) -> dict:
         """Queries the hardware and creates a dataframe from it.
         """
-        df = self.get_default_dataframe()
         self.timestamp = self.get_timestamp()
         try:
             self.logger.info(f'Preforming a {self.subclass_name}')

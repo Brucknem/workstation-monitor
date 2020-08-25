@@ -13,7 +13,7 @@ class SearchUtilsTests(unittest.TestCase):
     def setUp(self):
         """Setup
         """
-        self.search_path = str(Path('tests/utils/test_dirs').absolute())
+        self.search_path = 'tests/utils/test_dir'
 
     def assert_listed(self, path: str, expected: list):
         found_dirs = search_dirs(path)
@@ -24,8 +24,8 @@ class SearchUtilsTests(unittest.TestCase):
         """
         path = self.search_path
         expected = [
-             '/home/brucknem/Repositories/workstation-monitor/tests/utils/test_dirs/inner_test_dir',
-             '/home/brucknem/Repositories/workstation-monitor/tests/utils/test_dirs/other_inner_test_dir']
+             'tests/utils/test_dir/inner_test_dir',
+             'tests/utils/test_dir/other_inner_test_dir']
         self.assert_listed(path, expected)
 
         path = os.path.join(self.search_path, '')

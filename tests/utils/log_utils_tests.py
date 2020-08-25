@@ -2,7 +2,7 @@ import shutil
 import unittest
 from pathlib import Path
 from src.utils.log_utils import load_log, list_logs
-from src.backend.sensors_query import SensorsQuery
+from src.backend.mock_query import MockQuery
 
 class LogUtilsTests(unittest.TestCase):
     """Test cases for the load logs functions.
@@ -14,7 +14,7 @@ class LogUtilsTests(unittest.TestCase):
         self.output_path = str(Path('tests/utils/logs').absolute())
         Path(self.output_path).mkdir(parents=True, exist_ok=True)
 
-        self.query = SensorsQuery()
+        self.query = MockQuery()
         filenames = self.query.query_and_update(self.output_path)
         
         self.log_files = list_logs(self.output_path, extract=False)

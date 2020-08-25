@@ -29,4 +29,6 @@ jobs:
 
       # Runs the bazel tests
       - name: Bazel tests
-        run: bazel test //tests/frontend:load_logs_test --test_output=all
+        run: |
+              bazel test //tests/utils:log_utils_tests --test_output=errors
+              bazel test //tests/utils:search_utils_tests --test_output=errors
