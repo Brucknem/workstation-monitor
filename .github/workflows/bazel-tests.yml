@@ -30,5 +30,4 @@ jobs:
       # Runs the bazel tests
       - name: Bazel tests
         run: |
-              bazel test //tests/utils:log_utils_tests --test_output=errors
-              bazel test //tests/utils:search_utils_tests --test_output=errors
+              bazel test :github_action_tests --test_output=errors
