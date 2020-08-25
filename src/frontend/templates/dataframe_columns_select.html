@@ -1,0 +1,23 @@
+<hr>
+<div id="{{type}}-select" class="list-group">
+    {% for value in values %}
+    <li class="nav-item nav-item-{{type}}">
+        <a class="nav-link nav-item-{{type}}-link" href="#">
+            {{ icon|safe }}
+
+            <span>
+                {{value}}
+            </span>
+        </a>
+    </li>
+    {% endfor %}
+</div>
+<script>
+    $(".nav-item-{{type}}-link").click(function () {
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('active')
+        } else {
+            $(this).addClass('active')
+        }
+    })
+</script>

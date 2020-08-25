@@ -110,6 +110,9 @@
           <ul id="ul-log-paths" class="nav flex-column">
             {{ default_item|safe }}
           </ul>
+          <ul id="indices-select-wrapper" class="nav flex-column"></ul>
+          <ul id="values-select-wrapper" class="nav flex-column"></ul>
+        </div>
         </div>
       </nav>
       {% endblock %}
@@ -162,7 +165,8 @@
         success: function (response) {
           console.log(response)
           $('.nav-item-log-file').remove();
-          $('#ul-log-paths').html(response.items);
+          $('#ul-log-paths').html(response.log_paths);
+          $('.indices-select').remove();
         },
         error: function (xhr) {
           console.log(response)

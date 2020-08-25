@@ -39,7 +39,7 @@ class HardwareQueryTests(unittest.TestCase):
         """Sanity checks that the GPU query produces a dataframe.
         """
         self.dfs = GPUQuery().query()
-        self.assert_dataframe()
+        self.assert_dataframe(['name', 'serial'])
 
     def test_query_cpu(self):
         """Sanity checks that the CPU query produces a dataframe.

@@ -95,6 +95,11 @@ class GPUQuery(HardwareQuery):
         """
         return "nvidia-smi --format=csv --query-gpu=" + joined_flags
 
+    def get_custom_index(self) -> list:
+        """Gets the index for the resulting dataframe.
+        """
+        return ['name', 'serial']
+
     def parse_query_result(self, result) -> pd.DataFrame:
         """inherited
         """

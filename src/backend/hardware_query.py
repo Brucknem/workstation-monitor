@@ -4,6 +4,7 @@ import subprocess
 import numpy as np
 import pandas as pd
 import logging
+from pathlib import Path
 from datetime import datetime
 from systemd.journal import JournaldLogHandler
 
@@ -96,12 +97,13 @@ class HardwareQuery:
         dataframes = self.query()
         filenames = []
         for name, df in dataframes.items():
+            Path(str(output_path)).mkdir(parents=True, exist_ok=True) 
             full_path = os.path.join(str(output_path), name + '.h5')
             filenames.append(full_path)
 
             if os.path.exists(full_path):
                 previous_df = pd.read_hdf(full_path, key='df')
                 df = pd.concat([previous_df, df])
-            df.to_hdf(full_path, key='df')
+            df.to_hdf(full_path, key='df', mode='w')
             self.index_series.to_hdf(full_path, key='id')
         return filenames

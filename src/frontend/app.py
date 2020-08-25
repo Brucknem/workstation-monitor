@@ -7,23 +7,27 @@ import os
 from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
 from bokeh.plotting import figure, output_file, show
+from pathlib import Path
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yeet'
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 
+svgs = {}
+svg_paths = Path('src/frontend/static/img/')
+svg_files = [
+    str(svg_path) for svg_path in svg_paths.iterdir()
+    if svg_path.is_file() and str(svg_path).endswith('.svg')]
+for svg_file in svg_files:
+    with open(svg_file) as svg:
+        svgs[Path(svg.name).stem] = svg.read()
+
 
 def render_nav_item_log_files(log_paths):
     """Renders the nav bar items displaying the log paths
     """
-    items = ""
-    if log_paths:
-        for i, log_path in enumerate(log_paths):
-            items += render_template('nav_item_log_file.html',log_path=log_path, id=i)
-    else:
-        items = render_template('nav_item_log_file.html', id=0)
-    return bool(log_paths), items
+    return render_template('nav_item_log_file.html', log_paths=log_paths, icon=svgs['file'])
 
 
 def generate_search_result(search_string):
@@ -31,7 +35,8 @@ def generate_search_result(search_string):
     """
     session['search_string'] = search_string.strip()
     log_paths = list_logs(session['search_string'])
-    found_logs, items = render_nav_item_log_files(log_paths)
+    found_logs = bool(log_paths)
+    items = render_nav_item_log_files(log_paths)
 
     directories = []
     if not found_logs:
@@ -51,7 +56,7 @@ def get_items_and_search_string():
     search_string = ""
     if 'search_string' in session:
         search_string = session['search_string']
-    _, default_item = render_nav_item_log_files(list_logs(search_string))
+        default_item = render_nav_item_log_files(list_logs(search_string))
     return {
         'default_item': default_item,
         'search_string': search_string
@@ -68,8 +73,21 @@ def search():
 def request_log():
     selected_log = str(request.args.get('selected_log')).strip()
     full_path = os.path.join(session["search_string"], selected_log)
+    log, indices = load_log(full_path)
 
-    return 'Log'
+    values = list(log.columns)
+    values = list(filter(lambda i: i not in indices, values))
+    indices.remove('timestamp')
+
+    result = {}
+    result['indices-select'] = render_template(
+        'dataframe_columns_select.html', type='indices', values=[' - '.join(indices)],
+        icon=svgs['command'])
+    result['values-select'] = render_template(
+            'dataframe_columns_select.html', type='values', values=values,
+            icon=svgs['crosshair'])
+
+    return jsonify(result)
 
 
 @app.route('/')
@@ -96,4 +114,4 @@ def shutdown():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, use_reloader=False, use_debugger=True, threaded=False)
+    app.run(debug=True, use_reloader=True, use_debugger=True, threaded=True)
