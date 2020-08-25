@@ -5,8 +5,8 @@ filegroup (
 )
 
 py_test (
-    name = "log_utils_test",
-    srcs = ["log_utils_test.py"],
+    name = "log_utils_tests",
+    srcs = ["log_utils_tests.py"],
     deps = [
         "//src/backend:queries",
         "//src/utils",

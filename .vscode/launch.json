@@ -62,23 +62,23 @@
             }
         },
         {
-            "name": "Python: tests/utils/load_logs_test",
+            "name": "Python: tests/utils/log_utils_tests",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/tests/utils/load_logs_test.py",
+            "program": "${workspaceFolder}/tests/utils/log_utils_tests.py",
             "console": "integratedTerminal",
             "env": {
-                "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/:${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/workspace_monitor/:${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/workspace_monitor/src/frontend/:${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/workspace_monitor/src/backend/:${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/workspace_monitor/src/backend/templates:${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/workspace_monitor/src/backend/static/css:${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/workspace_monitor/src/backend/static/js:${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/workspace_monitor/src/backend/static/img:${workspaceFolder}/bazel-bin/tests/utils/load_logs_test.runfiles/workspace_monitor/src/utils:"
+                "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/utils/log_utils_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/utils/log_utils_tests.runfiles/workspace_monitor/:${workspaceFolder}/bazel-bin/tests/utils/log_utils_tests.runfiles/workspace_monitor/src/frontend/:${workspaceFolder}/bazel-bin/tests/utils/log_utils_tests.runfiles/workspace_monitor/src/backend/:${workspaceFolder}/bazel-bin/tests/utils/log_utils_tests.runfiles/workspace_monitor/src/backend/templates:${workspaceFolder}/bazel-bin/tests/utils/log_utils_tests.runfiles/workspace_monitor/src/backend/static/css:${workspaceFolder}/bazel-bin/tests/utils/log_utils_tests.runfiles/workspace_monitor/src/backend/static/js:${workspaceFolder}/bazel-bin/tests/utils/log_utils_tests.runfiles/workspace_monitor/src/backend/static/img:${workspaceFolder}/bazel-bin/tests/utils/log_utils_tests.runfiles/workspace_monitor/src/utils:"
             }
         },
         {
-            "name": "Python: tests/utils/search_utils_test",
+            "name": "Python: tests/utils/search_utils_tests",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/tests/utils/search_utils_test.py",
+            "program": "${workspaceFolder}/tests/utils/search_utils_tests.py",
             "console": "integratedTerminal",
             "env": {
-                "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/utils/search_utils_test.runfiles/:${workspaceFolder}/bazel-bin/tests/utils/search_utils_test.runfiles/workspace_monitor/:${workspaceFolder}/bazel-bin/tests/utils/search_utils_test.runfiles/workspace_monitor/src/frontend/:${workspaceFolder}/bazel-bin/tests/utils/search_utils_test.runfiles/workspace_monitor/src/backend/:${workspaceFolder}/bazel-bin/tests/utils/search_utils_test.runfiles/workspace_monitor/src/backend/templates:${workspaceFolder}/bazel-bin/tests/utils/search_utils_test.runfiles/workspace_monitor/src/backend/static/css:${workspaceFolder}/bazel-bin/tests/utils/search_utils_test.runfiles/workspace_monitor/src/backend/static/js:${workspaceFolder}/bazel-bin/tests/utils/search_utils_test.runfiles/workspace_monitor/src/backend/static/img:${workspaceFolder}/bazel-bin/tests/utils/search_utils_test.runfiles/workspace_monitor/src/utils:"
+                "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/workspace_monitor/:${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/workspace_monitor/src/frontend/:${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/workspace_monitor/src/backend/:${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/workspace_monitor/src/backend/templates:${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/workspace_monitor/src/backend/static/css:${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/workspace_monitor/src/backend/static/js:${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/workspace_monitor/src/backend/static/img:${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/workspace_monitor/src/utils:"
             }
         },
     ]
