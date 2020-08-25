@@ -1,5 +1,5 @@
 import unittest
-from src.frontend.load_logs import load_log, list_logs
+from src.utils.load_logs import load_log, list_logs
 
 class LoadLogsTests(unittest.TestCase):
     """Test cases for the load logs functions.
@@ -8,10 +8,10 @@ class LoadLogsTests(unittest.TestCase):
     def setUp(self):
         """Setup
         """
-        self.log_files = list_logs("tests/frontend/logs/", extract=False)
+        self.log_files = list_logs("tests/utils/logs/", extract=False)
         self.assertIsNotNone(self.log_files)
 
-        expected = ['tests/frontend/logs/gpu-query.csv', 'tests/frontend/logs/k10temp-pci-00cb.csv', 'tests/frontend/logs/ath10k_hwmon-pci-0300.csv', 'tests/frontend/logs/asuswmisensors-isa-0000.csv', 'tests/frontend/logs/ram-query.csv', 'tests/frontend/logs/k10temp-pci-00c3.csv', 'tests/frontend/logs/cpu-query.csv']
+        expected = ['tests/utils/logs/gpu-query.csv', 'tests/utils/logs/k10temp-pci-00cb.csv', 'tests/utils/logs/ath10k_hwmon-pci-0300.csv', 'tests/utils/logs/asuswmisensors-isa-0000.csv', 'tests/utils/logs/ram-query.csv', 'tests/utils/logs/k10temp-pci-00c3.csv', 'tests/utils/logs/cpu-query.csv']
         self.assertEqual(len(expected), len(self.log_files))
         for name in expected:
             self.assertIn(name, self.log_files)

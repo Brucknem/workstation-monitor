@@ -23,6 +23,7 @@
     $(this).addClass('active');
     console.log($(this));
 
+    {%- if log_path -%}
     $.ajax({
       url: "/load_log",
       type: "get",
@@ -34,5 +35,6 @@
         console.log(response)
       }
     });
+    {%- endif -%}
   })
 </script>

@@ -38,7 +38,7 @@ def list_logs(path: str, extract=True):
     Returns:
         list: A list of pandas data frames, one for each log
     """
-    fs_path = Path(path)
+    fs_path = Path(os.path.expanduser(path))
     try:
         log_files = [
             str(p) for p in fs_path.iterdir()

@@ -51,5 +51,15 @@
                 "PYTHONPATH": "${workspaceFolder}/bazel-bin/src/backend/monitor.runfiles/:${workspaceFolder}/bazel-bin/src/backend/monitor.runfiles/python/:"
             }
         },
+        {
+            "name": "Python: src/frontend/app",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/frontend/app.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/:${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/workspace_monitor/:${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/workspace_monitor/src/frontend/:${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/workspace_monitor/src/backend/:${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/workspace_monitor/src/backend/templates:${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/workspace_monitor/src/backend/static/css:${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/workspace_monitor/src/backend/static/js:${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/workspace_monitor/src/backend/static/img:${workspaceFolder}/bazel-bin/src/frontend/app.runfiles/workspace_monitor/src/utils:"
+            }
+        },
     ]
 }

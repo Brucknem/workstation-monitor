@@ -109,3 +109,6 @@ class HardwareQuery:
                     full_path, index_col=self.get_index())
                 df = pd.concat([previous_df, df])
             df.to_csv(full_path)
+
+            with open(full_path, "a") as f:
+                f.write(f"\n{self.get_index()}")

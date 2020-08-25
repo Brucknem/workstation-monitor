@@ -1,4 +1,4 @@
-from src.frontend.load_logs import load_log, list_logs, extract_names, list_dirs
+from src.utils.load_logs import load_log, list_logs, extract_names, list_dirs
 from flask import Flask, render_template, request, url_for, flash, redirect, session, jsonify
 from markupsafe import escape
 import os
@@ -70,6 +70,7 @@ def request_log():
     log = load_log(full_path)
 
     keys = list(log.keys())
+    indices = log.index.names
     print('*\n'*3)
     print(keys)
 

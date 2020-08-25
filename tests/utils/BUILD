@@ -4,15 +4,13 @@ filegroup (
     visibility = ["//visibility:public"],
 )
 
-py_binary (
-    name = "ui_tests",
-    srcs = ["ui_tests.py"],
+py_test (
+    name = "load_logs_test",
+    srcs = ["load_logs_test.py"],
     deps = [
         "//src/utils:load_logs",
-        "//src/frontend:app"
     ],
     data = [
         ":logs"
-    ],
-    visibility = ["//visibility:public"],
+    ]
 )

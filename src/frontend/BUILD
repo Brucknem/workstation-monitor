@@ -10,17 +10,9 @@ py_binary(
     srcs = ["run.py"],
     data = [":notebooks_folder"],
     deps = [
-        ":load_logs",
+        "//src/utils:load_logs",
     ],
     imports = ["venv"],
-    visibility = ["//visibility:public"],
-)
-
-py_binary(
-    name = "load_logs",
-    srcs = ["load_logs.py"],
-    imports = ["../../venv"],
-    deps = [],
     visibility = ["//visibility:public"],
 )
 
@@ -33,7 +25,7 @@ py_binary(
         "//src/frontend/static:static",
     ],
     deps = [
-        ":load_logs"
+        "//src/utils:load_logs"
     ],
     visibility = ["//visibility:public"],
 )

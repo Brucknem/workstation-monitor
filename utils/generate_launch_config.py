@@ -24,7 +24,14 @@ def generate(script_path=None):
         "env": {
             "PYTHONPATH": \"""" \
             f"${{workspaceFolder}}/bazel-bin/{path_without_py}.runfiles/:" \
-            f"${{workspaceFolder}}/bazel-bin/{path_without_py}.runfiles/python/:"
+            f"${{workspaceFolder}}/bazel-bin/{path_without_py}.runfiles/workspace_monitor/:"\
+            f"${{workspaceFolder}}/bazel-bin/{path_without_py}.runfiles/workspace_monitor/src/frontend/:"\
+            f"${{workspaceFolder}}/bazel-bin/{path_without_py}.runfiles/workspace_monitor/src/backend/:"\
+            f"${{workspaceFolder}}/bazel-bin/{path_without_py}.runfiles/workspace_monitor/src/backend/templates:"\
+            f"${{workspaceFolder}}/bazel-bin/{path_without_py}.runfiles/workspace_monitor/src/backend/static/css:"\
+            f"${{workspaceFolder}}/bazel-bin/{path_without_py}.runfiles/workspace_monitor/src/backend/static/js:"\
+            f"${{workspaceFolder}}/bazel-bin/{path_without_py}.runfiles/workspace_monitor/src/backend/static/img:"\
+            f"${{workspaceFolder}}/bazel-bin/{path_without_py}.runfiles/workspace_monitor/src/utils:"
     config += """"
         }
     },"""
