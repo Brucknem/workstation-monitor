@@ -57,7 +57,7 @@ def get_items_and_search_string():
     search_string = ""
     if 'search_string' in session:
         search_string = session['search_string']
-        default_item = render_nav_item_log_files(list_logs(search_string))
+    default_item = render_nav_item_log_files(list_logs(search_string))
     return {
         'default_item': default_item,
         'search_string': search_string
