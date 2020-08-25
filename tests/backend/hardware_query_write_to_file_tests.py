@@ -23,9 +23,9 @@ class HardwareQueryWriteToFileTests(unittest.TestCase):
             df = pd.read_hdf(file, key='df')
             indices = list(pd.read_hdf(file, key='id'))
             self.assertCountEqual(indices, self.query.get_index())
-            
-            df_indices = df.index.names
-            self.assertCountEqual(indices, df_indices)
+
+            for index in indices:
+                self.assertIn(index, df.columns)
         shutil.rmtree(output_path, ignore_errors=True)
 
     def test_query_gpu(self):

@@ -11,6 +11,22 @@ filegroup (
 )
 
 py_test (
+    name = "dataframe_to_bokeh_utils_tests",
+    srcs = ["dataframe_to_bokeh_utils_tests.py"],
+    deps = [
+        "//src/backend:queries",
+        "//src/backend:mock_query",
+        "//src/utils",
+    ],
+    imports = [
+        "tests/utils/logs",
+    ],
+    data = [
+        ":logs"
+    ]
+)
+
+py_test (
     name = "log_utils_tests",
     srcs = ["log_utils_tests.py"],
     deps = [

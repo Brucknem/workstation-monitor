@@ -21,7 +21,9 @@ def search_dirs(path: str):
     Returns:
         list: A list of pandas data frames, one for each log
     """
-    fs_path = Path(os.path.expanduser(path))
+    cleaned_path = path.strip()
+    cleaned_path = os.path.expanduser(cleaned_path)
+    fs_path = Path(cleaned_path)
     if fs_path.exists():
         return list_dirs(fs_path)
 

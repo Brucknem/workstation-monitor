@@ -81,5 +81,15 @@
                 "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/workspace_monitor/:${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/workspace_monitor/src/frontend/:${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/workspace_monitor/src/backend/:${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/workspace_monitor/src/backend/templates:${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/workspace_monitor/src/backend/static/css:${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/workspace_monitor/src/backend/static/js:${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/workspace_monitor/src/backend/static/img:${workspaceFolder}/bazel-bin/tests/utils/search_utils_tests.runfiles/workspace_monitor/src/utils:"
             }
         },
+        {
+            "name": "Python: tests/utils/dataframe_to_bokeh_utils_tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tests/utils/dataframe_to_bokeh_utils_tests.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/workspace_monitor/:${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/workspace_monitor/src/frontend/:${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/workspace_monitor/src/backend/:${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/workspace_monitor/src/backend/templates:${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/workspace_monitor/src/backend/static/css:${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/workspace_monitor/src/backend/static/js:${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/workspace_monitor/src/backend/static/img:${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/workspace_monitor/src/utils:"
+            }
+        },
     ]
 }

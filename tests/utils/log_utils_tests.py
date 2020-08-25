@@ -44,7 +44,8 @@ class LogUtilsTests(unittest.TestCase):
         for log_file in self.log_files:
             df, indices = load_log(log_file)
             self.assertCountEqual(indices, self.query.get_index())
-            self.assertCountEqual(indices, df.index.names)
+            for index in indices:
+                self.assertIn(index, df.columns)
 
 
 

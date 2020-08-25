@@ -37,7 +37,7 @@ class HardwareQuery:
     def get_timestamp(self):
         """Get the current timestamp.
         """
-        return datetime.now().isoformat()
+        return datetime.now()
 
     def get_bash_command(self) -> str:
         """The bash command used to query the hardware.
@@ -85,8 +85,9 @@ class HardwareQuery:
         except subprocess.CalledProcessError as e:
             self.logger.info(f'Error performing a {self.subclass_name}\n{e}')
 
-        for key, frame in dfs.items():
-            dfs[key] = frame.set_index(self.get_index())
+        # for key, frame in dfs.items():
+        #     dfs[key] = frame.set_index(self.get_index())
+
         return dfs
 
     def query_and_update(self, output_path) -> list:

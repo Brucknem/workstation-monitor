@@ -26,20 +26,14 @@ class HardwareQueryTests(unittest.TestCase):
     def assert_timestamp_format(self, df: pd.DataFrame):
         """Asserts that the timestamps are all in the same format
         """
-        indices = df.index.values
-        if type(indices[0]) is not tuple:
-            indices = [indices]
-
-        for index in indices:
-            datetime.fromisoformat(index[0].replace('Z', '+00:00'))
+        timestamps = df['timestamp'].values
+        self.assertEqual(timestamps.dtype, 'datetime64[ns]')
 
     def assert_index(self, names: list, df: pd.DataFrame):
         """Asserts that the index of the dataframe is the given list.
         """
-        index_names = df.index.names
-        self.assertEqual(len(names), len(index_names))
         for name in names:
-            self.assertIn(name, index_names)
+            self.assertIn(name, df.columns)
 
     def test_query_gpu(self):
         """Sanity checks that the GPU query produces a dataframe.
