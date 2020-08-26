@@ -3,10 +3,7 @@ import shutil
 import unittest
 import pandas as pd
 from pathlib import Path
-from src.backend.gpu_query import GPUQuery
-from src.backend.cpu_query import CPUQuery
-from src.backend.ram_query import RAMQuery
-from src.backend.sensors_query import SensorsQuery
+from src.backend import SensorsQuery, CPUQuery, GPUQuery, RAMQuery, MockQuery
 from datetime import datetime
 
 class HardwareQueryWriteToFileTests(unittest.TestCase):

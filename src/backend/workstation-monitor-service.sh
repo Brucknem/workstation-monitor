@@ -1,6 +1,5 @@
 #!/bin/bash
 
-modprobe asus-wmi-sensors || echo "No asus sensors found" 
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 log_dir=${HOME}"/workstation-monitor/"$timestamp
 [ -d $log_dir ] || mkdir $log_dir -p

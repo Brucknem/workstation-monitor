@@ -15,7 +15,6 @@ py_test (
     srcs = ["dataframe_to_bokeh_utils_tests.py"],
     deps = [
         "//src/backend:queries",
-        "//src/backend:mock_query",
         "//src/utils",
     ],
     imports = [
@@ -31,7 +30,6 @@ py_test (
     srcs = ["log_utils_tests.py"],
     deps = [
         "//src/backend:queries",
-        "//src/backend:mock_query",
         "//src/utils",
     ],
     imports = [
@@ -46,7 +44,6 @@ py_test (
     name = "search_utils_tests",
     srcs = ["search_utils_tests.py"],
     deps = [
-        "//src/backend:queries",
         "//src/utils",
     ],
     imports = [

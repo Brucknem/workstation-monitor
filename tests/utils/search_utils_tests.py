@@ -3,8 +3,6 @@ import shutil
 import unittest
 from pathlib import Path
 from src.utils.search_utils import search_dirs
-from src.backend.sensors_query import SensorsQuery
-
 
 class SearchUtilsTests(unittest.TestCase):
     """Test cases for the load logs functions.

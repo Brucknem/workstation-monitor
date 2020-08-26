@@ -4,11 +4,8 @@ from time import sleep
 from pathlib import Path
 import logging
 from systemd.journal import JournaldLogHandler
-from src.backend.sensors_query import SensorsQuery
-from src.backend.gpu_query import GPUQuery
-from src.backend.ram_query import RAMQuery
-from src.backend.cpu_query import CPUQuery
-from src.backend.hardware_query import HardwareQuery
+from src.backend import SensorsQuery, CPUQuery, GPUQuery, RAMQuery, MockQuery
+
 
 # Initiate the parser
 parser = argparse.ArgumentParser()

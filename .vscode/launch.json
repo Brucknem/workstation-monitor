@@ -12,16 +12,6 @@
             "args": ["logs", "test"]
         },
         {
-            "name": "Python: tests/frontend/ui_tests",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/tests/frontend/ui_tests.py",
-            "console": "integratedTerminal",
-            "env": {
-                "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/frontend/ui_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/frontend/ui_tests.runfiles/python/:"
-            }
-        },   
-        {
             "name": "Python: tests/backend/hardware_query_tests",
             "type": "python",
             "request": "launch",
@@ -89,6 +79,26 @@
             "console": "integratedTerminal",
             "env": {
                 "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/workspace_monitor/:${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/workspace_monitor/src/frontend/:${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/workspace_monitor/src/backend/:${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/workspace_monitor/src/backend/templates:${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/workspace_monitor/src/backend/static/css:${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/workspace_monitor/src/backend/static/js:${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/workspace_monitor/src/backend/static/img:${workspaceFolder}/bazel-bin/tests/utils/dataframe_to_bokeh_utils_tests.runfiles/workspace_monitor/src/utils:"
+            }
+        },
+        {
+            "name": "Python: tests/frontend/basic_ui_tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tests/frontend/basic_ui_tests.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/frontend/basic_ui_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/frontend/basic_ui_tests.runfiles/workspace_monitor/:${workspaceFolder}/bazel-bin/tests/frontend/basic_ui_tests.runfiles/workspace_monitor/src/frontend/:${workspaceFolder}/bazel-bin/tests/frontend/basic_ui_tests.runfiles/workspace_monitor/src/backend/:${workspaceFolder}/bazel-bin/tests/frontend/basic_ui_tests.runfiles/workspace_monitor/src/backend/templates:${workspaceFolder}/bazel-bin/tests/frontend/basic_ui_tests.runfiles/workspace_monitor/src/backend/static/css:${workspaceFolder}/bazel-bin/tests/frontend/basic_ui_tests.runfiles/workspace_monitor/src/backend/static/js:${workspaceFolder}/bazel-bin/tests/frontend/basic_ui_tests.runfiles/workspace_monitor/src/backend/static/img:${workspaceFolder}/bazel-bin/tests/frontend/basic_ui_tests.runfiles/workspace_monitor/src/utils:"
+            }
+        },
+        {
+            "name": "Python: tests/frontend/search_ui_tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tests/frontend/search_ui_tests.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/frontend/search_ui_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/frontend/search_ui_tests.runfiles/workspace_monitor/:${workspaceFolder}/bazel-bin/tests/frontend/search_ui_tests.runfiles/workspace_monitor/src/frontend/:${workspaceFolder}/bazel-bin/tests/frontend/search_ui_tests.runfiles/workspace_monitor/src/backend/:${workspaceFolder}/bazel-bin/tests/frontend/search_ui_tests.runfiles/workspace_monitor/src/backend/templates:${workspaceFolder}/bazel-bin/tests/frontend/search_ui_tests.runfiles/workspace_monitor/src/backend/static/css:${workspaceFolder}/bazel-bin/tests/frontend/search_ui_tests.runfiles/workspace_monitor/src/backend/static/js:${workspaceFolder}/bazel-bin/tests/frontend/search_ui_tests.runfiles/workspace_monitor/src/backend/static/img:${workspaceFolder}/bazel-bin/tests/frontend/search_ui_tests.runfiles/workspace_monitor/src/utils:"
             }
         },
     ]

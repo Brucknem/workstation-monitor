@@ -9,6 +9,11 @@ alias(
 )
 
 alias(
+    name = "search_ui_tests",
+    actual = "//tests/frontend:search_ui_tests",
+)
+
+alias(
     name = "launch_config",
     actual = "//utils:generate_launch_config",
 )

@@ -3,8 +3,7 @@ import shutil
 import unittest
 from pathlib import Path
 from src.utils.log_utils import list_logs, load_log
-from src.backend.mock_query import MockQuery
-from src.backend.sensors_query import SensorsQuery
+from src.backend import MockQuery
 from src.utils.dataframe_to_bokeh_utils import convert_dataframe_to_column_data_source, render_bokeh
 
 class ConvertDataFrameToColumnDataSourceTests(unittest.TestCase):

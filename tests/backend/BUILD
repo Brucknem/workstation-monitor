@@ -3,7 +3,6 @@ py_test (
     srcs = ["hardware_query_tests.py"],
     deps = [
         "//src/backend:queries",
-        "//src/backend:mock_query",
     ],
 )
 

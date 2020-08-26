@@ -2,7 +2,7 @@ import shutil
 import unittest
 from pathlib import Path
 from src.utils.log_utils import load_log, list_logs
-from src.backend.mock_query import MockQuery
+from src.backend import MockQuery
 
 class LogUtilsTests(unittest.TestCase):
     """Test cases for the load logs functions.

@@ -74,7 +74,7 @@ class HardwareQuery:
         delta = end - start
         seconds = delta.seconds
         microseconds = delta.microseconds
-        self.logger.info(f'{message} [{seconds}.{microseconds} s]')
+        self.logger.info(f'{message} [{seconds}.{microseconds}s]')
 
     def query(self) -> dict:
         """Queries the hardware and creates a dataframe from it.
