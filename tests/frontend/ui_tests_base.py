@@ -2,8 +2,13 @@ import sys
 import unittest
 from src.frontend.app import app
 from multiprocessing import Process
+from contextlib import contextmanager
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.wait import WebDriverWait
+import selenium.webdriver.support.expected_conditions as EC
+from selenium.webdriver.support.expected_conditions import staleness_of
 
 
 class UITestsBase(unittest.TestCase):
@@ -13,9 +18,14 @@ class UITestsBase(unittest.TestCase):
     def setUp(self):
         """Setup
         """
-        self.server = Process(target=app.run, kwargs={'debug':True, 'use_debugger':True, 'threaded':False, 'use_reloader': False})
+        self.server = Process(
+            target=app.run,
+            kwargs={'debug': True, 'use_debugger': True, 'threaded': False,
+                    'use_reloader': False})
         self.server.start()
         self.driver = webdriver.Firefox()
+        self.driver.get("http://127.0.0.1:5000/")
+        self.assertEqual("Workstation Monitor", self.driver.title)
 
     def tearDown(self):
         """Teardown
@@ -24,3 +34,52 @@ class UITestsBase(unittest.TestCase):
         self.driver.close()
         self.server.terminate()
         self.server.join()
+
+    def wait_for_element(
+            self, by: By, selector: str, timeout=2,
+            condition=EC.visibility_of_element_located):
+        """Waits for an element to be visible.
+        """
+        return WebDriverWait(
+            self.driver, timeout=timeout).until(
+            condition((by, selector)))
+
+    def click_element(self, by: By, selector: str, timeout=2):
+        """Waits for the element to be clickable, clicks and checks that there are no JS errors.
+        """
+        element = self.wait_for_element(by, selector, timeout=timeout, condition=EC.element_to_be_clickable).click()
+        self.assert_no_javascript_error()
+
+    def ajax_complete(self, driver):
+        """Check if there are outstanding ajax calls.
+        """
+        try:
+            return 0 == driver.execute_script("return jQuery.active")
+        except:
+            pass
+
+    def wait_for_ajax_to_complete(self):
+        """Waits until all ajax calls are completed.
+        """
+        WebDriverWait(self.driver, 10).until(self.ajax_complete, "")
+
+    @contextmanager
+    def wait_for_page_load(self, timeout=30):
+        """Waits until page is loaded.
+        """
+        old_page = self.driver.find_element_by_tag_name('html')
+        yield
+        WebDriverWait(self.driver, timeout).until(
+            staleness_of(old_page)
+        )
+
+    def get_javascript_errors(self):
+        """Checks if the javascript has created an error.
+        """
+        return self.wait_for_element(
+            By.TAG_NAME, 'body').get_attribute('JSError')
+
+    def assert_no_javascript_error(self):
+        """Asserts that the there are no javascript errors.
+        """
+        self.assertIsNone(self.get_javascript_errors())

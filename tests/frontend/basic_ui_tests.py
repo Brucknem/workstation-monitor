@@ -5,7 +5,7 @@ from src.frontend.app import app
 from multiprocessing import Process
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-
+from selenium.webdriver.common.by import By
 
 class BasicUITests(UITestsBase):
     """Basic UI tests.
@@ -15,10 +15,7 @@ class BasicUITests(UITestsBase):
     def test_index(self):
         """Tests opening the index page
         """
-        self.driver.get("http://127.0.0.1:5000/")
-        self.assertEqual("Workstation Monitor", self.driver.title)
-
-        element = self.driver.find_element_by_id("navbar-brand")
+        element = self.driver.find_element(By.ID, "navbar-brand")
         inner_html = element.get_attribute('innerHTML')
         self.assertEqual("Workstation", inner_html)
 
@@ -35,11 +32,14 @@ class BasicUITests(UITestsBase):
         self.driver.get("http://127.0.0.1:5000/")
 
         self.assertEqual("Workstation Monitor", self.driver.title)        
-        self.driver.find_element_by_link_text('About').click()
 
+        with self.wait_for_page_load(timeout=2):
+            self.click_element(By.LINK_TEXT, 'About')
         self.assertEqual("Workstation Monitor - About", self.driver.title)
-        self.driver.find_element_by_link_text('Workstation').click()
 
+        with self.wait_for_page_load(timeout=2):
+            self.click_element(By.LINK_TEXT, 'Workstation')
+        self.wait_for_element(By.CLASS_NAME, 'h2')
         self.assertEqual("Workstation Monitor", self.driver.title)        
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@
 <li class="nav-item nav-item-log-file">
   <a class="nav-link nav-item-logs nav-item-log-file-link" href="#">
     {{icon|safe}}
-    <span>
+    <span id="{{ log_path }}">
       {{ log_path }}
     </span>
   </a>
@@ -32,7 +32,7 @@
     $.ajax({
       url: "/load_log",
       type: "get",
-      data: { selected_log: $(this).find('span').text() },
+      data: { selected_log: $(this).find('span').attr('id') },
       success: function (response) {
         $('#indices-select-wrapper').html(response['indices-select'])
         $('#values-select-wrapper').html(response['values-select'])

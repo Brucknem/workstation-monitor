@@ -113,23 +113,23 @@
           <ul id="indices-select-wrapper" class="nav flex-column"></ul>
           <ul id="values-select-wrapper" class="nav flex-column"></ul>
         </div>
-        </div>
-      </nav>
-      {% endblock %}
-
-      <!-- Content -->
-      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        {% for message in get_flashed_messages() %}
-        <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <div class="alert alert-danger">{{ message }}</div>
-        </div>
-        {% endfor %}
-        <div>
-          {% block content %} {% endblock %}
-        </div>
-      </main>
     </div>
+    </nav>
+    {% endblock %}
+
+    <!-- Content -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      {% for message in get_flashed_messages() %}
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <div class="alert alert-danger">{{ message }}</div>
+      </div>
+      {% endfor %}
+      <div>
+        {% block content %} {% endblock %}
+      </div>
+    </main>
+  </div>
   </div>
 
   <!-- Bootstrap core JavaScript
@@ -176,6 +176,11 @@
   </script>
 
   {% endblock %}
+  <script type="text/javascript">
+    window.onerror = function (msg) {
+      $("body").attr("JSError", msg);
+    }
+  </script>
 </body>
 
 </html>
