@@ -93,7 +93,7 @@ class GPUQuery(HardwareQuery):
     def get_bash_command(self):
         """inherited
         """
-        return "nvidia-smi --format=csv --query-gpu=" + joined_flags
+        return "nvidia-smi --format=csv,nounits --query-gpu=" + joined_flags
 
     def get_custom_index(self) -> list:
         """Gets the index for the resulting dataframe.

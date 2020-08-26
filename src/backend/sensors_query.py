@@ -1,6 +1,7 @@
 from src.backend.hardware_query import HardwareQuery
 import pandas as pd
 import numpy as np
+import re
 
 
 class SensorsQuery(HardwareQuery):
@@ -35,6 +36,22 @@ class SensorsQuery(HardwareQuery):
 
         return values
 
+    def clean_numeric_values(self, values: dict):
+        """Extracts the numeric value from the given values and appends the unit to the key.
+        """
+        cleaned_values = {}
+        for key, value in values.items():
+            value_is_numeric = bool(re.search(r'[-+]?\d*\.\d+|\d+', value))
+            if not value_is_numeric:
+                cleaned_values[key] = value
+                continue
+            cleaned_value = re.findall(r'[-]?\d*\.\d+|\d+', value)[0]
+            cleaned_key = f"{key} [{value.split(cleaned_value)[-1].strip()}]"
+            cleaned_values[cleaned_key] = cleaned_value
+        
+        print(cleaned_values)
+        return cleaned_values
+
     def parse_query_result(self, result) -> pd.DataFrame:
         """inherited
         """
@@ -50,7 +67,8 @@ class SensorsQuery(HardwareQuery):
             key, value = line.split(':')
 
             values = self.parse_values(key, value)
-            for key, value in values.items():
+            cleaned_values = self.clean_numeric_values(values)
+            for key, value in cleaned_values.items():
                 adapters[name][key] = [value]
 
         dfs = {}
