@@ -4,6 +4,7 @@ import subprocess
 import numpy as np
 import pandas as pd
 import logging
+from time import sleep
 from pathlib import Path
 from datetime import datetime
 from systemd.journal import JournaldLogHandler
@@ -65,7 +66,7 @@ class HardwareQuery:
     def get_subclass_name(self) -> str:
         """Returns the name of the calling subclass.
         """
-        return 
+        return self.__class__.__name__
 
     def query(self) -> dict:
         """Queries the hardware and creates a dataframe from it.
