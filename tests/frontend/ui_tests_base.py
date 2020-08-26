@@ -92,3 +92,25 @@ class UITestsBase(unittest.TestCase):
         """Asserts that the there are no javascript errors.
         """
         self.assertIsNone(self.get_javascript_errors())
+
+    def get_class_list(self, element) -> str:
+        """
+        Extracts the class list from the given element
+        Args:
+            element: The element to extract the class list from
+
+        Returns:
+            str: A string representing the class list concatenated with one whitespace
+        """
+        return element.get_attribute('class')
+
+    def is_active(self, element) -> bool:
+        """
+        Checks if the given element has the class active
+        Args:
+            element: The element to check if it is active
+
+        Returns:
+            bool: True if active in class list, False else
+        """
+        return 'active' in self.get_class_list(element)
