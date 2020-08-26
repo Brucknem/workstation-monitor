@@ -102,11 +102,16 @@ class HardwareQuery:
             filenames.append(full_path)
 
             if os.path.exists(full_path):
-                previous_df = pd.read_hdf(full_path, key='df')
-                df = pd.concat([previous_df, df])
-            df.to_hdf(full_path, key='df', mode='w')
+                with pd.HDFStore(full_path) as store:
+                    store.append('df', df)
+                continue
+
+            df.to_hdf(full_path, key='df', mode='w', format='table')
             self.index_series.to_hdf(full_path, key='id')
-            columns = pd.Series(df.columns)
-            columns.to_hdf(full_path, key='col')
+            columns = list(df.columns)
+            for index in self.get_index():
+                columns.remove(index)
+            columns = pd.Series(columns)
+            columns.to_hdf(full_path, key='val')
 
         return filenames

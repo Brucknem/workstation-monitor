@@ -17,15 +17,22 @@ class HardwareQueryWriteToFileTests(unittest.TestCase):
         """Teardown
         """
         output_path = 'tests/backend/logs'
+        shutil.rmtree(output_path, ignore_errors=True)
+
         Path(output_path).mkdir(parents=True, exist_ok=True)
-        filenames = self.query.query_and_update(output_path)
+        for _ in range(10):
+            filenames = self.query.query_and_update(output_path)
+
         for file in filenames:
             df = pd.read_hdf(file, key='df')
             indices = list(pd.read_hdf(file, key='id'))
+            values = list(pd.read_hdf(file, key='val'))
             self.assertCountEqual(indices, self.query.get_index())
 
-            for index in indices:
-                self.assertIn(index, df.columns)
+            columns = indices
+            columns.extend(values)
+            self.assertCountEqual(columns, list(df.columns))
+
         shutil.rmtree(output_path, ignore_errors=True)
 
     def test_query_gpu(self):
