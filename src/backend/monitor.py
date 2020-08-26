@@ -9,6 +9,7 @@ from src.backend.gpu_query import GPUQuery
 from src.backend.ram_query import RAMQuery
 from src.backend.cpu_query import CPUQuery
 from src.backend.hardware_query import HardwareQuery
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Initiate the parser
 parser = argparse.ArgumentParser()
@@ -35,11 +36,20 @@ queries = [
     CPUQuery(logger)
 ]
 
-while True:
-    try:
-        for query in queries:
-            query.query_and_update(output_path)
+with ThreadPoolExecutor(max_workers=len(queries)) as executor:
+    while True:
+        try:
+            futures = {executor.submit(query.query_and_update, output_path): query.get_subclass_name() for query in queries}
+            for future in as_completed(futures):
+                query = futures[future]
+                try:
+                    filenames = future.result()
+                except Exception as exc:
+                    logging.error(f'{query} generated an exception: {exc}')
+                else:
+                    for filename in filenames:
+                        logging.info(f'Updated: {filename}')
+        except KeyboardInterrupt:
+            logger.info('Exiting monitor')
+            break
         sleep(1)
-    except KeyboardInterrupt:
-        logger.info('Exiting monitor')
-        break
