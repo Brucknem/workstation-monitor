@@ -49,7 +49,6 @@ class SensorsQuery(HardwareQuery):
             cleaned_key = f"{key} [{value.split(cleaned_value)[-1].strip()}]"
             cleaned_values[cleaned_key] = cleaned_value
         
-        print(cleaned_values)
         return cleaned_values
 
     def parse_query_result(self, result) -> pd.DataFrame:

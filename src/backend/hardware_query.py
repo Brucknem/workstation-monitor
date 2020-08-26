@@ -106,4 +106,7 @@ class HardwareQuery:
                 df = pd.concat([previous_df, df])
             df.to_hdf(full_path, key='df', mode='w')
             self.index_series.to_hdf(full_path, key='id')
+            columns = pd.Series(df.columns)
+            columns.to_hdf(full_path, key='col')
+
         return filenames
