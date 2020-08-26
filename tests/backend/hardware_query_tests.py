@@ -1,8 +1,9 @@
 import unittest
+
 import pandas as pd
+
 from src.backend import SensorsQuery, CPUQuery, GPUQuery, RAMQuery, MockQuery
-from datetime import datetime
-import shutil
+
 
 class HardwareQueryTests(unittest.TestCase):
     """Test cases for the query GPU functions.
@@ -60,6 +61,7 @@ class HardwareQueryTests(unittest.TestCase):
         """
         self.dfs = MockQuery().query()
         self.assert_dataframe(['test'])
+
 
 if __name__ == "__main__":
     unittest.main()

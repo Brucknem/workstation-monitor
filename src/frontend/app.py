@@ -84,13 +84,11 @@ def request_log():
         identifier.pop(0)
         identifiers.append(", ".join(identifier))
 
-    result = {}
-    result['indices-select'] = render_template(
-        'dataframe_columns_select.html', type='indices', values=list(identifiers),
-        icon=svgs['command'])
-    result['values-select'] = render_template(
-        'dataframe_columns_select.html', type='values', values=values,
-        icon=svgs['crosshair'])
+    result = {
+        'indices-select': render_template('dataframe_columns_select.html', type='indices', values=list(identifiers),
+                                          icon=svgs['command']),
+        'values-select': render_template('dataframe_columns_select.html', type='values', values=values,
+                                         icon=svgs['crosshair'])}
 
     return jsonify(result)
 
