@@ -68,6 +68,14 @@ class HardwareQuery:
         """
         return self.__class__.__name__
 
+    def log(self, message: str, start: datetime, end: datetime):
+        """Logs the message and appends the delta od the given timestamps.
+        """
+        delta = end - start
+        seconds = delta.seconds
+        microseconds = delta.microseconds
+        self.logger.info(f'{message} [{seconds}.{microseconds} s]')
+
     def query(self) -> dict:
         """Queries the hardware and creates a dataframe from it.
         """
@@ -81,14 +89,13 @@ class HardwareQuery:
             if error:
                 raise FileNotFoundError(error)
             dfs = self.parse_query_result(output.decode())
-            self.logger.info(f'Successfully performed a {self.subclass_name}')
+            message = 'Successfully performed'
         except FileNotFoundError as e:
-            self.logger.info(f'Error performing a {self.subclass_name}\n{e}')
+            message = 'Error performing'
         except subprocess.CalledProcessError as e:
-            self.logger.info(f'Error performing a {self.subclass_name}\n{e}')
+            message = 'Error performing'
 
-        # for key, frame in dfs.items():
-        #     dfs[key] = frame.set_index(self.get_index())
+        self.log(f'{message} a {self.subclass_name}', self.timestamp, self.get_timestamp())
 
         return dfs
 
@@ -96,6 +103,7 @@ class HardwareQuery:
         """Queries the hardware, loads previous logs and appends the new values.
         """
         dataframes = self.query()
+        start = self.get_timestamp()
         filenames = []
         for name, df in dataframes.items():
             Path(str(output_path)).mkdir(parents=True, exist_ok=True) 
@@ -114,5 +122,8 @@ class HardwareQuery:
                 columns.remove(index)
             columns = pd.Series(columns)
             columns.to_hdf(full_path, key='val')
+
+        message = ", ".join(filenames)
+        self.log(f'Written to {message}', start, self.get_timestamp())
 
         return filenames
