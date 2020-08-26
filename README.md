@@ -27,7 +27,7 @@ sudo modprobe asus-wmi-sensors
 # Setup
 ```
 bash install_venv.sh
-bash source_venv.sh
+source source_venv.sh
 ```
 
 ## Setup service
@@ -42,6 +42,6 @@ to point at your local clone of the `workstation-monitor-service.sh` script.
 
 # Running tests
 ```
-bash source_venv.sh
+source source_venv.sh
 bazel test //... --test_output=all
 ```
