@@ -1,8 +1,10 @@
 import shutil
 import unittest
 from pathlib import Path
-from src.utils.log_utils import load_log, list_logs
+
 from src.backend import MockQuery
+from src.utils.log_utils import list_logs, read_from_hdf5
+
 
 class LogUtilsTests(unittest.TestCase):
     """Test cases for the load logs functions.
@@ -16,7 +18,7 @@ class LogUtilsTests(unittest.TestCase):
 
         self.query = MockQuery()
         filenames = self.query.query_and_update(self.output_path)
-        
+
         self.log_files = list_logs(self.output_path, extract=False)
         self.assertCountEqual(self.log_files, filenames)
 
@@ -36,18 +38,18 @@ class LogUtilsTests(unittest.TestCase):
                     found = True
                     break
             self.assertTrue(found)
-        
 
     def test_load_all(self):
         """Sanity checks that loading runs without error.
         """
         for log_file in self.log_files:
-            df, indices = load_log(log_file)
+            df, indices, values = read_from_hdf5(log_file, 'df'), read_from_hdf5(log_file, 'id'), read_from_hdf5(
+                log_file, 'val')
             self.assertCountEqual(indices, self.query.get_index())
-            for index in indices:
-                self.assertIn(index, df.columns)
-
-
+            columns = list(indices)
+            columns.extend(list(values))
+            self.assertCountEqual(list(df.columns), columns)
+            
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,14 +1,14 @@
 <hr>
-<div id="{{type}}-select" class="list-group">
+<div id="{{ type }}-select" class="list-group">
     {% for value in values %}
-    <li class="nav-item">
-        <a class="nav-link nav-item-logs nav-item-{{type}}" href="#">
-            {{ icon|safe }}
-            <span>
-                {{value}}
+        <li class="nav-item">
+            <a id="nav-item-{{ type }}-{{ value }}" class="nav-link nav-item-logs nav-item-{{ type }}" href="#">
+                {{ icon|safe }}
+                <span>
+                {{ value }}
             </span>
-        </a>
-    </li>
+            </a>
+        </li>
     {% endfor %}
 </div>
 <script>
@@ -27,12 +27,12 @@
         $.ajax({
             url: "/show_log",
             type: "get",
-            data: { selected_columns: JSON.stringify(selected_columns) },
+            data: {selected_columns: JSON.stringify(selected_columns)},
             success: function (response) {
                 console.log(response)
             },
             error: function (xhr) {
-                console.log(response)
+                console.log(xhr)
             }
         });
     })

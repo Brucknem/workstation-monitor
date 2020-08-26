@@ -1,14 +1,16 @@
-import sys
 import unittest
-from src.frontend.app import app
-from multiprocessing import Process
 from contextlib import contextmanager
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.wait import WebDriverWait
+from multiprocessing import Process
+from time import sleep
+
 import selenium.webdriver.support.expected_conditions as EC
+from selenium import webdriver
+from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.expected_conditions import staleness_of
+from selenium.webdriver.support.wait import WebDriverWait
+
+from src.frontend.app import app
 
 
 class UITestsBase(unittest.TestCase):
@@ -18,13 +20,18 @@ class UITestsBase(unittest.TestCase):
     def setUp(self):
         """Setup
         """
-        self.server = Process(
-            target=app.run,
-            kwargs={'debug': True, 'use_debugger': True, 'threaded': False,
-                    'use_reloader': False})
-        self.server.start()
-        self.driver = webdriver.Firefox()
-        self.driver.get("http://127.0.0.1:5000/")
+        self.server = None
+        try:
+            self.driver = webdriver.Firefox()
+            self.driver.get("http://127.0.0.1:5000/")
+        except WebDriverException:
+            self.server = Process(
+                target=app.run,
+                kwargs={'debug': True, 'use_debugger': True, 'threaded': False,
+                        'use_reloader': False})
+            self.server.start()
+            sleep(1)
+            self.driver.get("http://127.0.0.1:5000/")
         self.assertEqual("Workstation Monitor", self.driver.title)
 
     def tearDown(self):
@@ -32,12 +39,14 @@ class UITestsBase(unittest.TestCase):
         """
         self.driver.get("http://127.0.0.1:5000/shutdown")
         self.driver.close()
-        self.server.terminate()
-        self.server.join()
+
+        if self.server:
+            self.server.terminate()
+            self.server.join()
 
     def wait_for_element(
-            self, by: By, selector: str, timeout=2,
-            condition=EC.visibility_of_element_located):
+            self, by: By, selector: str, timeout=5,
+            condition: EC = EC.visibility_of_element_located):
         """Waits for an element to be visible.
         """
         return WebDriverWait(
@@ -47,7 +56,7 @@ class UITestsBase(unittest.TestCase):
     def click_element(self, by: By, selector: str, timeout=2):
         """Waits for the element to be clickable, clicks and checks that there are no JS errors.
         """
-        element = self.wait_for_element(by, selector, timeout=timeout, condition=EC.element_to_be_clickable).click()
+        self.wait_for_element(by, selector, timeout=timeout, condition=EC.element_to_be_clickable).click()
         self.assert_no_javascript_error()
 
     def ajax_complete(self, driver):

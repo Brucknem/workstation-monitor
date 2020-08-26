@@ -1,45 +1,45 @@
 {% if log_paths %}
-{% for log_path in log_paths %}
-<li class="nav-item nav-item-log-file">
-  <a class="nav-link nav-item-logs nav-item-log-file-link" href="#">
-    {{icon|safe}}
-    <span id="{{ log_path }}">
+    {% for log_path in log_paths %}
+        <li class="nav-item nav-item-log-file">
+            <a class="nav-link nav-item-logs nav-item-log-file-link" href="#">
+                {{ icon|safe }}
+                <span id="{{ log_path }}">
       {{ log_path }}
     </span>
-  </a>
-</li>
-{% endfor %}
+            </a>
+        </li>
+    {% endfor %}
 
 {% else %}
-<li class="nav-item nav-item-log-file">
-  <a class="nav-link nav-item-logs nav-item-log-file-link" href="#">
-    {{icon|safe}}
-    <span>
+    <li class="nav-item nav-item-log-file">
+        <a class="nav-link nav-item-logs nav-item-log-file-link" href="#">
+            {{ icon|safe }}
+            <span>
       No logs found
     </span>
-  </a>
-</li>
+        </a>
+    </li>
 {% endif %}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
-  $('.nav-item-log-file-link').click(function () {
-    $('.nav-item-log-file-link').each(function () {
-      $(this).removeClass('active');
-    })
-    $(this).addClass('active');
+    $('.nav-item-log-file-link').click(function () {
+        $('.nav-item-log-file-link').each(function () {
+            $(this).removeClass('active');
+        })
+        $(this).addClass('active');
 
-    $.ajax({
-      url: "/load_log",
-      type: "get",
-      data: { selected_log: $(this).find('span').attr('id') },
-      success: function (response) {
-        $('#indices-select-wrapper').html(response['indices-select'])
-        $('#values-select-wrapper').html(response['values-select'])
-      },
-      error: function (xhr) {
-        console.log(response)
-      }
-    });
-  })
+        $.ajax({
+            url: "/load_log",
+            type: "get",
+            data: {selected_log: $(this).find('span').attr('id')},
+            success: function (response) {
+                $('#indices-select-wrapper').html(response['indices-select'])
+                $('#values-select-wrapper').html(response['values-select'])
+            },
+            error: function (xhr) {
+                console.log(xhr)
+            }
+        });
+    })
 </script>

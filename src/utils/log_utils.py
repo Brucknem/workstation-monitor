@@ -1,31 +1,29 @@
 import os
-import pandas as pd
-from pandas import DataFrame
 from pathlib import Path
-from io import StringIO
+
+import pandas as pd
 
 
-def load_log(path: str):
-    """Loads one given log file.
+def read_from_hdf5(path: str, key: str):
+    """
+    Reads the given key from the hdf5 file.
 
     Args:
-        path (str): The path to the log file
-
-    Raises:
-        ValueError: Raised if path is not a .csv file
+        path: The path to the hdf5 file
+        key: The key to read
 
     Returns:
-        DataFrame: A pandas data frame.
+        The object that is written in the hdf5 file
     """
     if not path.endswith('.h5'):
         raise ValueError(f'Cannot load file {path}. Must be a .h5 file.')
     try:
         absolute = str(Path(os.path.expanduser(path)))
-        df = pd.read_hdf(absolute, key='df')
-        indices = list(pd.read_hdf(absolute, key='id'))
-        return df, indices
+        value = pd.read_hdf(absolute, key=key, index=False)
+        return value
     except FileNotFoundError:
-        return None, []
+        return None
+
 
 def extract_names(log_files: list):
     """Returns the filename of the given log files.
@@ -37,6 +35,7 @@ def list_logs(path: str, extract=True):
     """Loads all logs in the given directory.
 
     Args:
+        extract: Extract the filenames of the full paths and return these instead
         path (str): The path to the directory
 
     Returns:

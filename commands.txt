@@ -1,4 +1,0 @@
-mpstat -P ALL
-ps -Ao user,uid,comm,pid,pcpu,pmem,tty --sort=-pcpu | head -n 30
-ps -Ao user,uid,comm,pid,pcpu,pmem,tty --sort=-pmem | head -n 6
-sensors

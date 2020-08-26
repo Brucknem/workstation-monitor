@@ -2,15 +2,13 @@ import os
 import shutil
 import unittest
 from pathlib import Path
-from src.frontend.app import app
-from multiprocessing import Process
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from tests.frontend.ui_tests_base import UITestsBase
-from src.backend import MockQuery
-from selenium.webdriver.common.by import By
+
 import selenium.webdriver.support.expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+
+from src.backend import MockQuery
+from tests.frontend.ui_tests_base import UITestsBase
 
 
 class SearchUITests(UITestsBase):
@@ -70,8 +68,17 @@ class SearchUITests(UITestsBase):
         """
         self.search(self.output_path)
         self.click_element(By.ID, self.filename)
+        nav_items_indices = self.wait_for_element(By.CLASS_NAME, 'nav-item-indices',
+                                                  condition=EC.visibility_of_all_elements_located)
+
+        expected_nav_item_ids = [f'nav-item-indices-{i}' for i in range(10)]
+        for nav_item in nav_items_indices:
+            element_id = nav_item.get_attribute('id')
+            self.assertIn(element_id, expected_nav_item_ids)
+
+        nav_item_values = self.wait_for_element(By.CLASS_NAME, 'nav-item-values')
+        self.assertEqual(nav_item_values.get_attribute('id'), 'nav-item-values-values')
 
 
 if __name__ == "__main__":
     unittest.main()
-    sys.exit(0)

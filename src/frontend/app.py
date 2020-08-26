@@ -1,14 +1,11 @@
-from src.utils.log_utils import list_logs, load_log
-from src.utils.search_utils import search_dirs
-from src.utils.dataframe_to_bokeh_utils import convert_dataframe_to_column_data_source
-from flask import Flask, render_template, request, url_for, flash, redirect, session, jsonify
-from markupsafe import escape
-import os
-from bokeh.plotting import figure
-from bokeh.models import ColumnDataSource
-from bokeh.plotting import figure, output_file, show
-from pathlib import Path
 import json
+import os
+from pathlib import Path
+
+from flask import Flask, render_template, request, session, jsonify
+
+from src.utils.log_utils import list_logs, read_from_hdf5
+from src.utils.search_utils import search_dirs
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yeet'
@@ -74,24 +71,26 @@ def search():
 def request_log():
     selected_log = str(request.args.get('selected_log')).strip()
     full_path = os.path.join(session["search_string"], selected_log)
-    log, indices = load_log(full_path)
 
-    values = list(log.columns)
-    values = list(filter(lambda i: i not in indices, values))
+    df = read_from_hdf5(full_path, 'df')
+    indices = list(read_from_hdf5(full_path, 'id'))
+    values = list(read_from_hdf5(full_path, 'val'))
     indices.remove('timestamp')
 
-    hardware = set()
-    for index, row in log[indices].iterrows():
-        value = ' - '.join([row[index] for index in indices])
-        hardware.add(value)
+    uniques = df[indices].drop_duplicates()
+    identifiers = []
+    for row in uniques.itertuples():
+        identifier = [str(item) for item in row]
+        identifier.pop(0)
+        identifiers.append(", ".join(identifier))
 
     result = {}
     result['indices-select'] = render_template(
-        'dataframe_columns_select.html', type='indices', values=list(hardware),
+        'dataframe_columns_select.html', type='indices', values=list(identifiers),
         icon=svgs['command'])
     result['values-select'] = render_template(
-            'dataframe_columns_select.html', type='values', values=values,
-            icon=svgs['crosshair'])
+        'dataframe_columns_select.html', type='values', values=values,
+        icon=svgs['crosshair'])
 
     return jsonify(result)
 
@@ -101,6 +100,7 @@ def show_log():
     selected_columns = json.loads(request.args.get('selected_columns'))
     print(selected_columns)
     return 'Lol'
+
 
 @app.route('/')
 def index():

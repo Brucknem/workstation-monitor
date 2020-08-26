@@ -4,4 +4,3 @@ from tests.frontend.search_ui_tests import SearchUITests
 
 if __name__ == "__main__":
     unittest.main()
-    sys.exit(0)
