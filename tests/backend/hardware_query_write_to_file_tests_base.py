@@ -6,31 +6,24 @@ from pathlib import Path
 from src.backend import SensorsQuery, CPUQuery, GPUQuery, RAMQuery, MockQuery
 from datetime import datetime
 
-class HardwareQueryWriteToFileTests(unittest.TestCase):
+class HardwareQueryWriteToFileTestsBase(unittest.TestCase):
     """Test cases for the query GPU functions.
     """
-    
+
+    def assert_files(self):
+        pass
+
     def tearDown(self):
         """Teardown
         """
-        output_path = 'tests/backend/logs'
-        shutil.rmtree(output_path, ignore_errors=True)
+        self.output_path = 'tests/backend/logs'
+        shutil.rmtree(self.output_path, ignore_errors=True)
 
-        Path(output_path).mkdir(parents=True, exist_ok=True)
-        for _ in range(10):
-            filenames = self.query.query_and_update(output_path)
+        Path(self.output_path).mkdir(parents=True, exist_ok=True)
 
-        for file in filenames:
-            df = pd.read_hdf(file, key='df')
-            indices = list(pd.read_hdf(file, key='id'))
-            values = list(pd.read_hdf(file, key='val'))
-            self.assertCountEqual(indices, self.query.get_index())
+        self.assert_files()
 
-            columns = indices
-            columns.extend(values)
-            self.assertCountEqual(columns, list(df.columns))
-
-        shutil.rmtree(output_path, ignore_errors=True)
+        shutil.rmtree(self.output_path, ignore_errors=True)
 
     def test_query_gpu(self):
         """Sanity checks that the GPU query produces a dataframe.

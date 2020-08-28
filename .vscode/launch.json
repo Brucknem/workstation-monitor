@@ -20,15 +20,25 @@
             "env": {
                 "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/backend/hardware_query_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_tests.runfiles/python/:"
             }
-        },    
+        },  
         {
-            "name": "Python: tests/backend/hardware_query_write_to_file_tests",
+            "name": "Python: tests/backend/hardware_query_write_to_h5_file_tests",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/tests/backend/hardware_query_write_to_file_tests.py",
+            "program": "${workspaceFolder}/tests/backend/hardware_query_write_to_h5_file_tests.py",
             "console": "integratedTerminal",
             "env": {
-                "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/workspace_monitor/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/workspace_monitor/src/frontend/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/workspace_monitor/src/backend/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/workspace_monitor/src/backend/templates:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/workspace_monitor/src/backend/static/css:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/workspace_monitor/src/backend/static/js:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/workspace_monitor/src/backend/static/img:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_file_tests.runfiles/workspace_monitor/src/utils:"
+                "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_h5_file_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_h5_file_tests.runfiles/workspace_monitor/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_h5_file_tests.runfiles/workspace_monitor/src/frontend/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_h5_file_tests.runfiles/workspace_monitor/src/backend/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_h5_file_tests.runfiles/workspace_monitor/src/backend/templates:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_h5_file_tests.runfiles/workspace_monitor/src/backend/static/css:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_h5_file_tests.runfiles/workspace_monitor/src/backend/static/js:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_h5_file_tests.runfiles/workspace_monitor/src/backend/static/img:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_h5_file_tests.runfiles/workspace_monitor/src/utils:"
+            }
+        },
+        {
+            "name": "Python: tests/backend/hardware_query_write_to_json_file_tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tests/backend/hardware_query_write_to_json_file_tests.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_json_file_tests.runfiles/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_json_file_tests.runfiles/workspace_monitor/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_json_file_tests.runfiles/workspace_monitor/src/frontend/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_json_file_tests.runfiles/workspace_monitor/src/backend/:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_json_file_tests.runfiles/workspace_monitor/src/backend/templates:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_json_file_tests.runfiles/workspace_monitor/src/backend/static/css:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_json_file_tests.runfiles/workspace_monitor/src/backend/static/js:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_json_file_tests.runfiles/workspace_monitor/src/backend/static/img:${workspaceFolder}/bazel-bin/tests/backend/hardware_query_write_to_json_file_tests.runfiles/workspace_monitor/src/utils:"
             }
         },
         {
