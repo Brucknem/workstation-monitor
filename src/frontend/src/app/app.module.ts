@@ -22,6 +22,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [AppComponent, TopBarComponent, IndexSelectorComponent],
@@ -44,6 +46,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatSelectModule,
     ReactiveFormsModule,
     MatSidenavModule,
+    MatCheckboxModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

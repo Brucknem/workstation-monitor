@@ -14,6 +14,9 @@ export class IndexSelectorComponent implements OnInit {
   selectedIndices = new FormControl();
   selectedColumns = new FormControl();
 
+  favoriteSeason = new FormControl();
+  seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
+
   constructor(private logService: LogsService) {}
 
   ngOnInit(): void {

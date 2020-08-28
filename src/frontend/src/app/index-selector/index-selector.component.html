@@ -1,17 +1,13 @@
-<mat-form-field appearance="fill">
-  <mat-label>Indices</mat-label>
-  <mat-select [formControl]="selectedIndices" multiple>
-    <mat-option *ngFor="let index of indices" [value]="index">{{
-      index
-    }}</mat-option>
-  </mat-select>
-</mat-form-field>
-<br />
-<mat-form-field appearance="fill">
-  <mat-label>Columns</mat-label>
-  <mat-select [formControl]="selectedColumns" multiple>
-    <mat-option *ngFor="let column of columns" [value]="column">{{
-      column
-    }}</mat-option>
-  </mat-select>
-</mat-form-field>
+<mat-selection-list #indicesSelection>
+  <mat-list-item><h2 class="mat-h2">Indices</h2></mat-list-item>
+  <mat-list-option *ngFor="let index of indices">
+    {{ index }}
+  </mat-list-option>
+</mat-selection-list>
+<mat-divider></mat-divider>
+<mat-selection-list #columnsSelection>
+  <mat-list-item><h2 class="mat-h2">Columns</h2></mat-list-item>
+  <mat-list-option *ngFor="let column of columns">
+    {{ column }}
+  </mat-list-option>
+</mat-selection-list>
