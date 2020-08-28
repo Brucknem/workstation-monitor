@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { LogsService } from '../service/logs.service';
 import { FormControl } from '@angular/forms';
+import { MatSelectionListChange } from '@angular/material/list';
 
 @Component({
   selector: 'app-index-selector',
@@ -11,11 +12,6 @@ export class IndexSelectorComponent implements OnInit {
   log: object;
   columns: string[];
   indices: string[];
-  selectedIndices = new FormControl();
-  selectedColumns = new FormControl();
-
-  favoriteSeason = new FormControl();
-  seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
 
   constructor(private logService: LogsService) {}
 
@@ -39,5 +35,13 @@ export class IndexSelectorComponent implements OnInit {
     this.logService
       .getIndices()
       .subscribe((indices) => (this.indices = indices));
+  }
+
+  selectIndices($event: string[]): void {
+    this.logService.selectIndices($event);
+  }
+
+  selectColumns($event: string[]): void {
+    this.logService.selectColumns($event);
   }
 }

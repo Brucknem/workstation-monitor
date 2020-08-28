@@ -1,13 +1,11 @@
-<mat-selection-list #indicesSelection>
-  <mat-list-item><h2 class="mat-h2">Indices</h2></mat-list-item>
-  <mat-list-option *ngFor="let index of indices">
-    {{ index }}
-  </mat-list-option>
-</mat-selection-list>
+<app-selection-list
+  [values]="indices"
+  title="Indices"
+  (selectionChanged)="selectIndices($event)"
+></app-selection-list>
 <mat-divider></mat-divider>
-<mat-selection-list #columnsSelection>
-  <mat-list-item><h2 class="mat-h2">Columns</h2></mat-list-item>
-  <mat-list-option *ngFor="let column of columns">
-    {{ column }}
-  </mat-list-option>
-</mat-selection-list>
+<app-selection-list
+  [values]="indices"
+  title="Columns"
+  (selectionChanged)="selectColumns($event)"
+></app-selection-list>
