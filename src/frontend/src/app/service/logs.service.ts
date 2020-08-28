@@ -28,10 +28,8 @@ export class LogsService {
 
   selectIndices(indices: string[]): void {
     this.selectedIndices = indices;
-    console.log(this.selectedIndices);
   }
   selectColumns(columns: string[]): void {
     this.selectedColumns = columns;
-    console.log(this.selectedColumns);
   }
 }
