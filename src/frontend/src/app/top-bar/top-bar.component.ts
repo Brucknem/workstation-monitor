@@ -1,22 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FilePickerDirective, ReadFile, ReadMode } from 'ngx-file-helpers';
 
 @Component({
   selector: 'app-top-bar',
   templateUrl: './top-bar.component.html',
-  styleUrls: ['./top-bar.component.css']
+  styleUrls: ['./top-bar.component.css'],
 })
 export class TopBarComponent implements OnInit {
+  public readMode = ReadMode.dataURL;
+  public picked: ReadFile;
+  public status: string;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
+  @ViewChild('myFilePicker')
+  private filePicker: FilePickerDirective;
+
+  onReadStart(fileCount: number) {
+    this.status = `Reading ${fileCount} file(s)...`;
   }
 
+  onFilePicked(file: ReadFile) {
+    this.picked = file;
+    console.log(this.picked);
+  }
+
+  onReadEnd(fileCount: number) {
+    this.status = `Read ${fileCount} file(s) on ${new Date().toLocaleTimeString()}.`;
+    this.filePicker.reset();
+  }
+
+  ngOnInit(): void {}
 }
-
-
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/

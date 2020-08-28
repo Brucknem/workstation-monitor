@@ -1,11 +1,35 @@
-<a [routerLink]="['/']">
-  <h1>My Store</h1>
-</a>
+<mat-toolbar class="mat-primary">
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>multiline_chart</mat-icon>
+  </button>
+  <span class="hide-small">Workstation Monitor</span>
 
-<a class="button fancy-button" [routerLink]="['/cart']"><i class="material-icons">shopping_cart</i>Checkout</a>
+  <button
+    #searchButton
+    mat-raised-button
+    color="accent"
+    type="button"
+    ngxFilePicker
+    accept=".h5"
+    #myFilePicker="ngxFilePicker"
+    (readStart)="onReadStart($event)"
+    (filePick)="onFilePicked($event)"
+    (readEnd)="onReadEnd($event)"
+  >
+    Choose Log File (HDF/H5)
+  </button>
 
-<!-- 
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
--->
+  <span class="example-spacer"></span>
+  <a
+    href="https://github.com/Brucknem/workstation-monitor"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with github branch icon"
+  >
+    <mat-icon>code</mat-icon>
+  </a>
+</mat-toolbar>
