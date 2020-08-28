@@ -11,15 +11,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 import { NgxFileHelpersModule } from 'ngx-file-helpers';
+import { IndexSelectorComponent } from './index-selector/index-selector.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
-  declarations: [AppComponent, TopBarComponent],
+  declarations: [AppComponent, TopBarComponent, IndexSelectorComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,6 +39,11 @@ import { NgxFileHelpersModule } from 'ngx-file-helpers';
     MatDividerModule,
     MatGridListModule,
     NgxFileHelpersModule,
+    MatCardModule,
+    MatRadioModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatSidenavModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
