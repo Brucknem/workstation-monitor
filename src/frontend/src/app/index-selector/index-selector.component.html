@@ -1,11 +1,12 @@
 <app-selection-list
+  *ngIf="indices"
   [values]="indices"
   title="Indices"
   (selectionChanged)="selectIndices($event)"
 ></app-selection-list>
 <mat-divider></mat-divider>
 <app-selection-list
-  [values]="indices"
+  [values]="columns"
   title="Columns"
   (selectionChanged)="selectColumns($event)"
 ></app-selection-list>
