@@ -7,17 +7,26 @@ import { LogsService } from '../service/logs.service';
   styleUrls: ['./index-dropdown.component.css'],
 })
 export class IndexDropdownComponent implements OnInit {
+  selectedDeviceType;
+
   @Input()
   values: { [p: string]: any[] };
 
   @Output()
-  selectionChanged = new EventEmitter<{ key: string; value: string }>();
+  deviceTypeSelectionChanged = new EventEmitter<string>();
+
+  @Output()
+  deviceSelectionChanged = new EventEmitter<string[]>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  onNgModelChange($event: any): void {
+  onSelectDeviceType($event: any): void {
+    this.deviceTypeSelectionChanged.emit($event.value);
+  }
+
+  onSelectDevice($event: any): void {
     const indices = {};
     const values = $event.value;
     for (const value of values) {
@@ -27,6 +36,6 @@ export class IndexDropdownComponent implements OnInit {
       }
       indices[split[0]].push(split[1]);
     }
-    this.selectionChanged.emit({ key: indices[0], value: indices[1] });
+    this.deviceSelectionChanged.emit([]);
   }
 }

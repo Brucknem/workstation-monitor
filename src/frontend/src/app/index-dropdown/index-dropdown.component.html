@@ -3,8 +3,8 @@
     <mat-label>Devices</mat-label>
     <mat-select
       #deviceSelect
-      multiple
-      (selectionChange)="onNgModelChange($event)"
+      (selectionChange)="onSelectDeviceType($event)"
+      [(value)]="selectedDeviceType"
     >
       <mat-option
         *ngFor="let value of values | keyvalue"
@@ -15,13 +15,16 @@
     </mat-select>
   </mat-form-field>
 </div>
-<div *ngFor="let value of deviceSelect.value">
+<div>
+  {{ deviceSelect.value }}
+</div>
+<div *ngIf="deviceSelect.value">
   <mat-form-field appearance="fill">
-    <mat-label>{{ value }}</mat-label>
-    <mat-select multiple (selectionChange)="onNgModelChange($event)">
+    <mat-label>{{ deviceSelect.value }}</mat-label>
+    <mat-select multiple (selectionChange)="onSelectDevice($event)">
       <mat-option
-        *ngFor="let name of values[value]"
-        value="{{ value.key }};{{ name }}"
+        *ngFor="let name of values[deviceSelect.value]"
+        value="{{ deviceSelect.value.key }};{{ name }}"
       >
         {{ name }}
       </mat-option>

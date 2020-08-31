@@ -5,15 +5,15 @@
     </mat-expansion-panel-header>
     <app-index-dropdown
       [values]="indices"
-      (selectionChanged)="selectIndices($event)"
+      (deviceTypeSelectionChanged)="onSelectDeviceType($event)"
     ></app-index-dropdown>
   </mat-expansion-panel>
-  <mat-expansion-panel>
+  <mat-expansion-panel *ngIf="valueColumns">
     <mat-expansion-panel-header>
-      <mat-panel-title>Column</mat-panel-title>
+      <mat-panel-title>Values</mat-panel-title>
     </mat-expansion-panel-header>
     <app-selection-list
-      [values]="columns"
+      [values]="valueColumns"
       (selectionChanged)="selectColumns($event)"
     ></app-selection-list>
   </mat-expansion-panel>
