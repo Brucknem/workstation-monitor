@@ -1,14 +1,30 @@
-<div *ngFor="let value of values | keyvalue">
+<div>
   <mat-form-field appearance="fill">
-    <mat-label>{{ value.key }}</mat-label>
-    <mat-select multiple (selectionChange)="onNgModelChange($event, value.key)">
+    <mat-label>Devices</mat-label>
+    <mat-select
+      #deviceSelect
+      multiple
+      (selectionChange)="onNgModelChange($event)"
+    >
       <mat-option
-        *ngFor="let name of value.value"
+        *ngFor="let value of values | keyvalue"
+        value="{{ value.key }}"
+      >
+        {{ value.key }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div *ngFor="let value of deviceSelect.value">
+  <mat-form-field appearance="fill">
+    <mat-label>{{ value }}</mat-label>
+    <mat-select multiple (selectionChange)="onNgModelChange($event)">
+      <mat-option
+        *ngFor="let name of values[value]"
         value="{{ value.key }};{{ name }}"
       >
         {{ name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  7
 </div>

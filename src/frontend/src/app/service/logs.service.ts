@@ -8,6 +8,7 @@ import { group } from '@angular/animations';
 })
 export class LogsService {
   private columns = Object.keys(MOCK_LOG);
+  private uniqueColumns = Object.keys(MOCK_LOG);
   private indices: { [column: string]: any[] } = {};
   private selectedIndices: string[];
   private selectedColumns: string[];
@@ -17,6 +18,7 @@ export class LogsService {
     if (timestampIndex > -1) {
       this.columns.splice(timestampIndex, 1);
     }
+    this.uniqueColumns = this.calculateUniqueColumns();
     this.calculateIndices();
   }
 
@@ -58,11 +60,10 @@ export class LogsService {
   }
 
   calculateIndices(): void {
-    const uniqueColumns = this.calculateUniqueColumns();
-    if (!uniqueColumns) {
+    if (!this.uniqueColumns) {
       return;
     }
-    for (const column of uniqueColumns) {
+    for (const column of this.uniqueColumns) {
       const uniqueElements = this.getRawLog()[column];
       this.indices[column] = [];
       for (const uniqueElement of Object.values(uniqueElements)) {

@@ -27,7 +27,6 @@ export class IndexDropdownComponent implements OnInit {
       }
       indices[split[0]].push(split[1]);
     }
-    console.log(indices);
-    // this.selectionChanged.emit({ key: raw[0], value: raw[1] });
+    this.selectionChanged.emit({ key: indices[0], value: indices[1] });
   }
 }
