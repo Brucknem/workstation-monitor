@@ -1,7 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LogsService } from '../service/logs.service';
-import { FormControl } from '@angular/forms';
-import { MatSelectionListChange } from '@angular/material/list';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-index-selector',
@@ -13,9 +12,12 @@ export class IndexSelectorComponent implements OnInit {
   columns: string[];
   valueColumns: string[];
   indices: { [p: string]: any[] };
-  selectedDevice: string;
 
-  constructor(private logService: LogsService) {}
+  selectedDeviceType: string;
+  selectedDevices: string[];
+  selectedValueColumns: string[];
+
+  constructor(private logService: LogsService, private router: Router) {}
 
   ngOnInit(): void {
     this.getLogs();
@@ -40,21 +42,22 @@ export class IndexSelectorComponent implements OnInit {
   }
 
   onSelectDeviceType($event: string): void {
-    this.selectedDevice = $event;
-    console.log(this.selectedDevice);
+    this.selectedDeviceType = $event;
     this.valueColumns = Object.assign([], this.columns);
-    const index = this.valueColumns.indexOf(this.selectedDevice, 0);
+    const index = this.valueColumns.indexOf(this.selectedDeviceType, 0);
     if (index > -1) {
       this.valueColumns.splice(index, 1);
     }
+    console.log(this.selectedDeviceType);
   }
 
-  selectIndices($event: any): void {
+  onSelectDevices($event: string[]): void {
+    this.selectedDevices = $event;
     console.log($event);
-    // this.logService.selectIndices($event);
   }
 
-  selectColumns($event: string[]): void {
-    this.logService.selectColumns($event);
+  onSelectValueColumns($event: string[]) {
+    this.selectedValueColumns = $event;
+    console.log($event);
   }
 }

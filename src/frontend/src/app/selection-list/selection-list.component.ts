@@ -11,14 +11,20 @@ export class SelectionListComponent implements OnInit {
   @Input()
   values: string[];
 
+  @Input()
+  selectedDeviceType: string;
+
+  @Input()
+  selectedDevices: string[];
+
   @Output()
-  selectionChanged = new EventEmitter<string[]>();
+  selectValueColumns = new EventEmitter<string[]>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  onNgModelChange($event: any): void {
-    this.selectionChanged.emit($event);
+  onSelectDevices($event: any): void {
+    this.selectValueColumns.emit(this.selectedOptions);
   }
 }

@@ -8,4 +8,12 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'frontend';
   showFiller = false;
+
+  componentAdded($event: any) {
+    console.log($event);
+  }
+
+  componentRemoved($event: any) {
+    console.log($event);
+  }
 }

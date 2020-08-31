@@ -4,10 +4,12 @@
     <app-index-selector></app-index-selector>
   </mat-drawer>
 
-  <button #drawerToggle type="button" mat-button (click)="drawer.toggle()">
+  <button type="button" mat-button (click)="drawer.toggle()">
     <mat-icon *ngIf="!drawer.opened">arrow_forward_icon</mat-icon>
     <mat-icon *ngIf="drawer.opened">arrow_backward_icon</mat-icon>
   </button>
 
+  <div class="example-sidenav-content">Test contents</div>
+  <router-outlet></router-outlet>
   <div class="example-sidenav-content">Test contents</div>
 </mat-drawer-container>

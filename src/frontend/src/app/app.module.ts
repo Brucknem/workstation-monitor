@@ -27,6 +27,8 @@ import { MatListModule } from '@angular/material/list';
 import { SelectionListComponent } from './selection-list/selection-list.component';
 import { IndexDropdownComponent } from './index-dropdown/index-dropdown.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { LineGraphComponent } from './line-graph/line-graph.component';
+import { BaseViewComponent } from './base-view/base-view.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     IndexSelectorComponent,
     SelectionListComponent,
     IndexDropdownComponent,
+    LineGraphComponent,
+    BaseViewComponent,
   ],
   imports: [
     BrowserModule,

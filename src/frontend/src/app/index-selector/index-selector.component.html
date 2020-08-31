@@ -6,6 +6,8 @@
     <app-index-dropdown
       [values]="indices"
       (deviceTypeSelectionChanged)="onSelectDeviceType($event)"
+      (devicesSelectionChanged)="onSelectDevices($event)"
+      [selectedValueColumns]="selectedValueColumns"
     ></app-index-dropdown>
   </mat-expansion-panel>
   <mat-expansion-panel *ngIf="valueColumns">
@@ -14,7 +16,9 @@
     </mat-expansion-panel-header>
     <app-selection-list
       [values]="valueColumns"
-      (selectionChanged)="selectColumns($event)"
+      (selectValueColumns)="onSelectValueColumns($event)"
+      [selectedDeviceType]="selectedDeviceType"
+      [selectedDevices]="selectedDevices"
     ></app-selection-list>
   </mat-expansion-panel>
 </mat-accordion>

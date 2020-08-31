@@ -8,10 +8,8 @@ import { group } from '@angular/animations';
 })
 export class LogsService {
   private columns = Object.keys(MOCK_LOG);
-  private uniqueColumns = Object.keys(MOCK_LOG);
+  private readonly uniqueColumns;
   private indices: { [column: string]: any[] } = {};
-  private selectedIndices: string[];
-  private selectedColumns: string[];
 
   constructor() {
     const timestampIndex = this.columns.indexOf('timestamp', 0);
@@ -124,14 +122,5 @@ export class LogsService {
 
   getIndices(): Observable<{ [column: string]: any[] }> {
     return of(this.indices);
-  }
-
-  selectIndices(indices: { key: string; value: string }): void {
-    // this.selectedIndices = indices;
-    console.log(indices);
-  }
-  selectColumns(columns: string[]): void {
-    this.selectedColumns = columns;
-    console.log(columns);
   }
 }

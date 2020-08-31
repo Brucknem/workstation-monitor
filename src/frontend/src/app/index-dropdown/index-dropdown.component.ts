@@ -7,35 +7,20 @@ import { LogsService } from '../service/logs.service';
   styleUrls: ['./index-dropdown.component.css'],
 })
 export class IndexDropdownComponent implements OnInit {
-  selectedDeviceType;
-
   @Input()
   values: { [p: string]: any[] };
+
+  @Input()
+  selectedValueColumns: string[];
 
   @Output()
   deviceTypeSelectionChanged = new EventEmitter<string>();
 
   @Output()
-  deviceSelectionChanged = new EventEmitter<string[]>();
+  devicesSelectionChanged = new EventEmitter<string[]>();
 
-  constructor() {}
+  selectedDeviceType;
+  selectedDevices;
 
   ngOnInit(): void {}
-
-  onSelectDeviceType($event: any): void {
-    this.deviceTypeSelectionChanged.emit($event.value);
-  }
-
-  onSelectDevice($event: any): void {
-    const indices = {};
-    const values = $event.value;
-    for (const value of values) {
-      const split = value.split(';');
-      if (!(split[0] in indices)) {
-        indices[split[0]] = [];
-      }
-      indices[split[0]].push(split[1]);
-    }
-    this.deviceSelectionChanged.emit([]);
-  }
 }
