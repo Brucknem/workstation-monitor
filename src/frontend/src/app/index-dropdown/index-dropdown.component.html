@@ -1,0 +1,14 @@
+<div *ngFor="let value of values | keyvalue">
+  <mat-form-field appearance="fill">
+    <mat-label>{{ value.key }}</mat-label>
+    <mat-select multiple (selectionChange)="onNgModelChange($event, value.key)">
+      <mat-option
+        *ngFor="let name of value.value"
+        value="{{ value.key }};{{ name }}"
+      >
+        {{ name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  7
+</div>

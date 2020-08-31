@@ -11,7 +11,7 @@ import { MatSelectionListChange } from '@angular/material/list';
 export class IndexSelectorComponent implements OnInit {
   log: object;
   columns: string[];
-  indices: string[];
+  indices: { [p: string]: any[] };
 
   constructor(private logService: LogsService) {}
 
@@ -37,7 +37,8 @@ export class IndexSelectorComponent implements OnInit {
       .subscribe((indices) => (this.indices = indices));
   }
 
-  selectIndices($event: string[]): void {
+  selectIndices($event: { key: string; value: string }): void {
+    console.log($event);
     this.logService.selectIndices($event);
   }
 

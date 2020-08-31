@@ -11,9 +11,6 @@ export class SelectionListComponent implements OnInit {
   @Input()
   values: string[];
 
-  @Input()
-  title: string;
-
   @Output()
   selectionChanged = new EventEmitter<string[]>();
 

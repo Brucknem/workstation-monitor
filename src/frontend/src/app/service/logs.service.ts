@@ -8,7 +8,7 @@ import { group } from '@angular/animations';
 })
 export class LogsService {
   private columns = Object.keys(MOCK_LOG);
-  private indices: string[];
+  private indices: { [column: string]: any[] } = {};
   private selectedIndices: string[];
   private selectedColumns: string[];
 
@@ -59,17 +59,16 @@ export class LogsService {
 
   calculateIndices(): void {
     const uniqueColumns = this.calculateUniqueColumns();
-    console.log(uniqueColumns);
     if (!uniqueColumns) {
       return;
     }
-    this.indices = [];
     for (const column of uniqueColumns) {
-      console.log(column);
       const uniqueElements = this.getRawLog()[column];
-      console.log(uniqueElements);
-      for (const uniqueElement of uniqueElements) {
-        this.indices.push(uniqueElement);
+      this.indices[column] = [];
+      for (const uniqueElement of Object.values(uniqueElements)) {
+        if (this.indices[column].indexOf(uniqueElement) < 0) {
+          this.indices[column].push(uniqueElement);
+        }
       }
     }
   }
@@ -122,14 +121,16 @@ export class LogsService {
     return of(this.columns);
   }
 
-  getIndices(): Observable<string[]> {
+  getIndices(): Observable<{ [column: string]: any[] }> {
     return of(this.indices);
   }
 
-  selectIndices(indices: string[]): void {
-    this.selectedIndices = indices;
+  selectIndices(indices: { key: string; value: string }): void {
+    // this.selectedIndices = indices;
+    console.log(indices);
   }
   selectColumns(columns: string[]): void {
     this.selectedColumns = columns;
+    console.log(columns);
   }
 }

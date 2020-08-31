@@ -25,9 +25,17 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
 import { SelectionListComponent } from './selection-list/selection-list.component';
+import { IndexDropdownComponent } from './index-dropdown/index-dropdown.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
-  declarations: [AppComponent, TopBarComponent, IndexSelectorComponent, SelectionListComponent],
+  declarations: [
+    AppComponent,
+    TopBarComponent,
+    IndexSelectorComponent,
+    SelectionListComponent,
+    IndexDropdownComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -49,6 +57,7 @@ import { SelectionListComponent } from './selection-list/selection-list.componen
     MatSidenavModule,
     MatCheckboxModule,
     MatListModule,
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,12 +1,22 @@
-<app-selection-list
-  *ngIf="indices"
-  [values]="indices"
-  title="Indices"
-  (selectionChanged)="selectIndices($event)"
-></app-selection-list>
-<mat-divider></mat-divider>
-<app-selection-list
-  [values]="columns"
-  title="Columns"
-  (selectionChanged)="selectColumns($event)"
-></app-selection-list>
+<mat-accordion multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Device</mat-panel-title>
+      <mat-icon>account_circle</mat-icon>
+    </mat-expansion-panel-header>
+    <app-index-dropdown
+      [values]="indices"
+      (selectionChanged)="selectIndices($event)"
+    ></app-index-dropdown>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Column</mat-panel-title>
+      <mat-icon>account_circle</mat-icon>
+    </mat-expansion-panel-header>
+    <app-selection-list
+      [values]="columns"
+      (selectionChanged)="selectColumns($event)"
+    ></app-selection-list>
+  </mat-expansion-panel>
+</mat-accordion>
