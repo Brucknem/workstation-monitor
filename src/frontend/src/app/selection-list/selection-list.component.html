@@ -3,13 +3,7 @@
   [(ngModel)]="selectedOptions"
   (ngModelChange)="onSelectDevices(selectionList.selectedOptions.selected)"
 >
-  <mat-list-option
-    *ngFor="let value of values"
-    [value]="value"
-    routerLink="/graph/{{ selectedDeviceType }}/{{ selectedDevices || '-' }}/{{
-      selectedOptions || '-'
-    }}"
-  >
+  <mat-list-option *ngFor="let value of values" [value]="value">
     {{ value }}
   </mat-list-option>
 </mat-selection-list>

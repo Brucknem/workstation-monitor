@@ -53,11 +53,23 @@ export class IndexSelectorComponent implements OnInit {
 
   onSelectDevices($event: string[]): void {
     this.selectedDevices = $event;
-    console.log($event);
+    this.navigate();
   }
 
-  onSelectValueColumns($event: string[]) {
+  onSelectValueColumns($event: string[]): void {
     this.selectedValueColumns = $event;
-    console.log($event);
+    this.navigate();
+  }
+
+  navigate(): void {
+    let uri = '/graph/';
+    uri += this.selectedDeviceType + '/';
+    uri += (this.selectedDevices || '-') + '/';
+    uri += this.selectedValueColumns || '-';
+    uri = encodeURI(uri);
+    this.router.navigateByUrl(uri).then(
+      (success: boolean) => {},
+      (err: boolean) => {}
+    );
   }
 }

@@ -25,9 +25,6 @@
     >
       <mat-option
         *ngFor="let name of values[deviceSelect.value]"
-        routerLink="/graph/{{ selectedDeviceType }}/{{
-          selectedDevices || '-'
-        }}/{{ selectedValueColumns || '-' }}"
         [value]="name"
       >
         {{ name }}
