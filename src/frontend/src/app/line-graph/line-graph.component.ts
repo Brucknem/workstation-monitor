@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RouteStateService } from '../service/route-state.service';
 import { LogsService } from '../service/logs.service';
+import { tryCatch } from 'rxjs/internal-compatibility';
 
 @Component({
   selector: 'app-line-graph',
@@ -13,7 +14,7 @@ export class LineGraphComponent implements OnInit {
   devices: string[];
   values: string[];
 
-  view = [0, 0];
+  view = [1000, 1000];
 
   // options
   showXAxis = true;
@@ -43,23 +44,27 @@ export class LineGraphComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      const finalParams = { deviceType: params.get('deviceType') };
+      const finalParams = {
+        deviceType: params.get('deviceType'),
+        values: undefined,
+        devices: undefined,
+      };
       let devices = params.get('devices').split(',');
       if (devices[0] === '-') {
         devices = [];
       }
-      finalParams['devices'] = devices;
+      finalParams.devices = devices;
       let values = params.get('values').split(',');
       if (values[0] === '-') {
         values = [];
       }
-      finalParams['values'] = values;
+      finalParams.values = values;
       this.routeStateService.updatePathParamState(finalParams);
     });
     this.routeStateService.pathParam.subscribe((pathParams) => {
-      this.deviceType = pathParams['deviceType'] as string;
-      this.devices = pathParams['devices'] as string[];
-      this.values = pathParams['values'] as string[];
+      this.deviceType = pathParams.deviceType as string;
+      this.devices = pathParams.devices as string[];
+      this.values = pathParams.values as string[];
 
       this.data = this.logsService.getValues(
         this.deviceType,
@@ -71,11 +76,15 @@ export class LineGraphComponent implements OnInit {
 
   dateTickFormatting(val: any): string {
     if (val instanceof Date) {
-      return (<Date>val).toLocaleString('de-DE');
+      try {
+        return (val as Date).toLocaleString('en-US');
+      } catch (e) {
+        return '';
+      }
     }
   }
 
-  onSelect(event) {
+  onSelect(event): void {
     console.log(event);
   }
 }

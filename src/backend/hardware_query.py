@@ -1,3 +1,4 @@
+import re
 import os
 import shlex
 import subprocess
@@ -76,6 +77,23 @@ class HardwareQuery:
         microseconds = delta.microseconds
         self.logger.info(f'{message} [{seconds}.{microseconds}s]')
 
+    def convert_to_numeric(self, dfs):
+        """
+        Converts the columns of the given dataframes to have as many numeric values as possible.
+
+        :param dfs:
+        :return:
+        """
+        converted = {}
+        for name, df in dfs.items():
+            for column in df.columns:
+                if column == 'timestamp':
+                    continue
+                df[column] = df[column].apply(lambda x: str(x).replace(',', '.') if bool(re.search(r'[-+]?\d*\,\d+|\d+', x)) else x)
+                df[column] = pd.to_numeric(df[column], errors='ignore', downcast='float')
+            converted[name] = df
+        return converted
+
     def query(self) -> dict:
         """Queries the hardware and creates a dataframe from it.
         """
@@ -88,7 +106,7 @@ class HardwareQuery:
             output, error = process.communicate()
             if error:
                 raise FileNotFoundError(error)
-            dfs = self.parse_query_result(output.decode())
+            dfs = self.convert_to_numeric(self.parse_query_result(output.decode()))
             message = 'Successfully performed'
         except FileNotFoundError as e:
             message = 'Error performing'
@@ -99,7 +117,7 @@ class HardwareQuery:
 
         return dfs
 
-    def query_and_update(self, output_path) -> list:
+    def query_and_update(self, output_path, file_type='json') -> list:
         """Queries the hardware, loads previous logs and appends the new values.
         """
         dataframes = self.query()
@@ -107,23 +125,39 @@ class HardwareQuery:
         filenames = []
         for name, df in dataframes.items():
             Path(str(output_path)).mkdir(parents=True, exist_ok=True) 
-            full_path = os.path.join(str(output_path), name + '.h5')
+            full_path = os.path.join(str(output_path), name + '.' + file_type)
             filenames.append(full_path)
 
-            if os.path.exists(full_path):
-                with pd.HDFStore(full_path) as store:
-                    store.append('df', df)
-                continue
-
-            df.to_hdf(full_path, key='df', mode='w', format='table')
-            self.index_series.to_hdf(full_path, key='id')
-            columns = list(df.columns)
-            for index in self.get_index():
-                columns.remove(index)
-            columns = pd.Series(columns)
-            columns.to_hdf(full_path, key='val')
+            if file_type == 'h5':
+                self.update_h5(df, full_path)
+            else:
+                self.update_json(df, full_path)
 
         message = ", ".join(filenames)
         self.log(f'Written to {message}', start, self.get_timestamp())
 
         return filenames
+
+    def update_h5(self, df: pd.DataFrame, full_path: str) -> None:
+        if os.path.exists(full_path):
+            with pd.HDFStore(full_path) as store:
+                store.append('df', df)
+            return
+
+        df.to_hdf(full_path, key='df', mode='w', format='table')
+        self.index_series.to_hdf(full_path, key='id')
+        columns = list(df.columns)
+        for index in self.get_index():
+            columns.remove(index)
+        columns = pd.Series(columns)
+        columns.to_hdf(full_path, key='val')
+
+    def update_json(self, df: pd.DataFrame, full_path) -> None:
+        final_data = df
+        if os.path.exists(full_path):
+            previous_data = pd.read_json(full_path)
+            final_data = pd.concat([previous_data, final_data])
+            final_data.index = pd.RangeIndex(len(final_data.index))
+
+        final_data.to_json(full_path)
+

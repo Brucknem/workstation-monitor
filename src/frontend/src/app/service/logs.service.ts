@@ -21,9 +21,7 @@ export class LogsService {
     this.calculateIndices();
   }
 
-  getRawLog(): object {
-    return MOCK_LOG;
-  }
+  getRawLog = () => MOCK_LOG;
 
   /**
    * Calculates all groups of indices within the given column
@@ -85,10 +83,11 @@ export class LogsService {
       const values = this.getRawLog()[column];
       let indices = null;
       let validIndex = true;
+      // tslint:disable-next-line:forin
       for (const name in groups) {
-        const group = groups[name];
+        const currentGroup = groups[name];
         const groupValues = [];
-        for (const index of group) {
+        for (const index of currentGroup) {
           groupValues.push(values[index]);
         }
         if (new Set(groupValues).size !== groupValues.length) {
@@ -123,28 +122,44 @@ export class LogsService {
     return of(this.indices);
   }
 
-  getValues(deviceType: string, devices: string[], valueColumn: string[]) {
+  getValues(
+    deviceType: string,
+    devices: string[],
+    valueColumns: string[]
+  ): any[] {
     const values = [];
-    // if (devices.length === 0 || valueColumn === '') {
-    //   return values;
-    // }
-    //
-    // const groups = this.groupBy(deviceType, devices);
-    // for (const groupName in groups) {
-    //   const currentValues = { name: groupName, series: [] };
-    //   const timestamps = this.getRawLog()['timestamp'];
-    //   const series = this.getRawLog()[valueColumn];
-    //   const indices = groups[groupName];
-    //   for (const index of indices) {
-    //     const name = new Date(timestamps[index]);
-    //     const value = series[index];
-    //     currentValues['series'].push({
-    //       name,
-    //       value,
-    //     });
-    //   }
-    //   values.push(currentValues);
-    // }
+    if (devices.length === 0 || valueColumns.length === 0) {
+      return values;
+    }
+
+    const groups = this.groupBy(deviceType, devices);
+    // @ts-ignore
+    const timestamps = this.getRawLog().timestamp;
+
+    // tslint:disable-next-line:forin
+    for (const groupName in groups) {
+      for (const column of valueColumns) {
+        const series = this.getRawLog()[column];
+        const legendLabel = `${groupName} [${column}]`;
+        const currentValues = { name: legendLabel, series: [] };
+        const indices = groups[groupName];
+        for (const index of indices) {
+          const name = new Date(timestamps[index]);
+          const value = series[index];
+          if (isNaN(value)) {
+            console.log(value);
+            continue;
+          }
+          currentValues.series.push({
+            name,
+            value,
+          });
+        }
+        if (currentValues.series.length > 0) {
+          values.push(currentValues);
+        }
+      }
+    }
 
     return values;
   }

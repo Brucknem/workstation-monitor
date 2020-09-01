@@ -12,11 +12,11 @@ export class IndexSelectorComponent implements OnInit {
   log: object;
   columns: string[];
   valueColumns: string[];
-  indices: { [p: string]: any[] };
+  indices: { [p: string]: any[] } = {};
 
   selectedDeviceType: string;
-  selectedDevices: string[] = [];
-  selectedValueColumns: string[] = [];
+  selectedDevices: string[];
+  selectedValueColumns: string[];
 
   constructor(
     private logService: LogsService,
@@ -26,12 +26,17 @@ export class IndexSelectorComponent implements OnInit {
 
   ngOnInit(): void {
     this.routeStateService.pathParam.subscribe((pathParams) => {
-      if (!('deviceType' in pathParams)) {
+      const deviceType = (pathParams.deviceType || '') as string;
+      if (
+        'deviceType' in Object.keys(pathParams) &&
+        !(deviceType in Object.keys(this.indices))
+      ) {
+        this.router.navigateByUrl('/');
         return;
       }
-      this.onSelectDeviceType(pathParams['deviceType'] as string);
-      this.selectedDevices = pathParams['devices'] as string[];
-      this.selectedValueColumns = pathParams['values'] as string[];
+      this.onSelectDeviceType(deviceType);
+      this.selectedDevices = (pathParams.devices || []) as string[];
+      this.selectedValueColumns = (pathParams.values || []) as string[];
     });
     this.getLogs();
     this.getColumns();
@@ -76,13 +81,13 @@ export class IndexSelectorComponent implements OnInit {
   navigate(): void {
     let uri = '/graph/';
     uri += this.selectedDeviceType + '/';
-    if (this.selectedDevices.length <= 0) {
+    if (!this.selectedDevices || this.selectedDevices.length <= 0) {
       uri += '-';
     } else {
       uri += this.selectedDevices;
     }
     uri += '/';
-    if (this.selectedValueColumns.length <= 0) {
+    if (!this.selectedValueColumns || this.selectedValueColumns.length <= 0) {
       uri += '-';
     } else {
       uri += this.selectedValueColumns;
