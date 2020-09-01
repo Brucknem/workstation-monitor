@@ -24,13 +24,65 @@ export class IndexSelectorComponent implements OnInit {
     private routeStateService: RouteStateService
   ) {}
 
+  arraysEqual(a, b): boolean {
+    for (let i = 0; i < a.length; ++i) {
+      if (i >= b.length) {
+        break;
+      }
+      if (a[i] !== b[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  devicesValid(selectedDevices: any[]): boolean {
+    const deviceGroups = Object.values(this.indices);
+    for (const deviceGroup of deviceGroups) {
+      if (this.arraysEqual(deviceGroup, selectedDevices)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isValidLink(pathParams): boolean {
+    const pathParamKeys = Object.keys(pathParams);
+    if (pathParamKeys.length <= 0) {
+      return true;
+    }
+
+    const deviceType = (pathParams.deviceType || '') as string;
+    const selectedDevices = (pathParams.devices || []) as string[];
+    const selectedValueColumns = (pathParams.values || []) as string[];
+
+    if (pathParamKeys.includes('deviceType')) {
+      if (!Object.keys(this.indices).includes(deviceType)) {
+        return false;
+      }
+    }
+
+    if (pathParamKeys.includes('devices')) {
+      if (!this.devicesValid(selectedDevices)) {
+        return false;
+      }
+    }
+
+    if (pathParamKeys.includes('values')) {
+      for (const column of selectedValueColumns) {
+        if (!this.columns.includes(column)) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
   ngOnInit(): void {
     this.routeStateService.pathParam.subscribe((pathParams) => {
       const deviceType = (pathParams.deviceType || '') as string;
-      if (
-        'deviceType' in Object.keys(pathParams) &&
-        !(deviceType in Object.keys(this.indices))
-      ) {
+      if (!this.isValidLink(pathParams)) {
         this.router.navigateByUrl('/');
         return;
       }
