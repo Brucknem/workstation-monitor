@@ -4,8 +4,9 @@
       <mat-panel-title>Device</mat-panel-title>
     </mat-expansion-panel-header>
     <app-index-dropdown
-      #indexDropdown
       [values]="indices"
+      [selectedDeviceType]="selectedDeviceType"
+      [selectedDevices]="selectedDevices"
       (deviceTypeSelectionChanged)="onSelectDeviceType($event)"
       (devicesSelectionChanged)="onSelectDevices($event)"
     ></app-index-dropdown>
@@ -16,8 +17,7 @@
     </mat-expansion-panel-header>
     <app-selection-list
       [values]="valueColumns"
-      [selectedDeviceType]="indexDropdown.selectedDeviceType"
-      [selectedDevices]="indexDropdown.selectedDevices"
+      [selectedOptions]="selectedValueColumns"
       (selectValueColumns)="onSelectValueColumns($event)"
     ></app-selection-list>
   </mat-expansion-panel>

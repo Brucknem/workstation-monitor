@@ -9,7 +9,6 @@
       <mat-option
         *ngFor="let value of values | keyvalue"
         value="{{ value.key }}"
-        routerLink="/"
       >
         {{ value.key }}
       </mat-option>
@@ -21,6 +20,7 @@
     <mat-label>{{ deviceSelect.value }}</mat-label>
     <mat-select
       multiple
+      [ngModel]="selectedDevices"
       (selectionChange)="devicesSelectionChanged.emit($event.value)"
     >
       <mat-option

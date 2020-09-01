@@ -6,16 +6,11 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./selection-list.component.css'],
 })
 export class SelectionListComponent implements OnInit {
+  @Input()
   selectedOptions: string[];
 
   @Input()
   values: string[];
-
-  @Input()
-  selectedDeviceType: string;
-
-  @Input()
-  selectedDevices: string[];
 
   @Output()
   selectValueColumns = new EventEmitter<string[]>();

@@ -4,8 +4,8 @@ import { LineGraphComponent } from './line-graph/line-graph.component';
 import { BaseViewComponent } from './base-view/base-view.component';
 
 const routes: Routes = [
-  { path: '', component: BaseViewComponent, pathMatch: 'full' },
   { path: 'graph/:deviceType/:devices/:values', component: LineGraphComponent },
+  { path: '', component: BaseViewComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LogsService } from '../service/logs.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RouteStateService } from '../service/route-state.service';
 
 @Component({
   selector: 'app-index-selector',
@@ -17,9 +18,21 @@ export class IndexSelectorComponent implements OnInit {
   selectedDevices: string[];
   selectedValueColumns: string[];
 
-  constructor(private logService: LogsService, private router: Router) {}
+  constructor(
+    private logService: LogsService,
+    private router: Router,
+    private routeStateService: RouteStateService
+  ) {}
 
   ngOnInit(): void {
+    this.routeStateService.pathParam.subscribe((pathParams) => {
+      if (!('deviceType' in pathParams)) {
+        return;
+      }
+      this.onSelectDeviceType(pathParams['deviceType'] as string);
+      this.selectedDevices = pathParams['devices'] as string[];
+      this.selectedValueColumns = pathParams['values'] as string[];
+    });
     this.getLogs();
     this.getColumns();
     this.getIndices();
@@ -64,12 +77,18 @@ export class IndexSelectorComponent implements OnInit {
   navigate(): void {
     let uri = '/graph/';
     uri += this.selectedDeviceType + '/';
-    uri += (this.selectedDevices || '-') + '/';
-    uri += this.selectedValueColumns || '-';
+    if (this.selectedDevices.length <= 0) {
+      uri += '-';
+    } else {
+      uri += this.selectedDevices;
+    }
+    uri += '/';
+    if (this.selectedValueColumns.length <= 0) {
+      uri += '-';
+    } else {
+      uri += this.selectedValueColumns;
+    }
     uri = encodeURI(uri);
-    this.router.navigateByUrl(uri).then(
-      (success: boolean) => {},
-      (err: boolean) => {}
-    );
+    this.router.navigateByUrl(uri).then();
   }
 }
