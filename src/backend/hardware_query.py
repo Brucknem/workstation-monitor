@@ -1,3 +1,4 @@
+import re
 import os
 import shlex
 import subprocess
@@ -76,6 +77,23 @@ class HardwareQuery:
         microseconds = delta.microseconds
         self.logger.info(f'{message} [{seconds}.{microseconds}s]')
 
+    def convert_to_numeric(self, dfs):
+        """
+        Converts the columns of the given dataframes to have as many numeric values as possible.
+
+        :param dfs:
+        :return:
+        """
+        converted = {}
+        for name, df in dfs.items():
+            for column in df.columns:
+                if column == 'timestamp':
+                    continue
+                df[column] = df[column].apply(lambda x: str(x).replace(',', '.') if bool(re.search(r'[-+]?\d*\,\d+|\d+', x)) else x)
+                df[column] = pd.to_numeric(df[column], errors='ignore', downcast='float')
+            converted[name] = df
+        return converted
+
     def query(self) -> dict:
         """Queries the hardware and creates a dataframe from it.
         """
@@ -88,7 +106,7 @@ class HardwareQuery:
             output, error = process.communicate()
             if error:
                 raise FileNotFoundError(error)
-            dfs = self.parse_query_result(output.decode())
+            dfs = self.convert_to_numeric(self.parse_query_result(output.decode()))
             message = 'Successfully performed'
         except FileNotFoundError as e:
             message = 'Error performing'

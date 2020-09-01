@@ -1,17 +1,3 @@
-alias(
-    name = "app",
-    actual = "//src/frontend:app",
-)
-
-alias(
-    name = "ui_tests",
-    actual = "//tests/frontend:ui_tests",
-)
-
-alias(
-    name = "search_ui_tests",
-    actual = "//tests/frontend:search_ui_tests",
-)
 
 alias(
     name = "launch_config",
