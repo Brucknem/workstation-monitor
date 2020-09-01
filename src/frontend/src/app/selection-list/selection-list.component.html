@@ -1,9 +1,14 @@
-<mat-selection-list
-  #selectionList
-  [(ngModel)]="selectedOptions"
-  (ngModelChange)="onSelectDevices(selectionList.selectedOptions.selected)"
+<mat-radio-group
+  class="example-radio-group"
+  #selectionGroup
+  [(ngModel)]="selectedOption"
+  (change)="onSelectDevices(selectionGroup)"
 >
-  <mat-list-option *ngFor="let value of values" [value]="value">
+  <mat-radio-button
+    class="example-radio-button"
+    *ngFor="let value of values"
+    [value]="value"
+  >
     {{ value }}
-  </mat-list-option>
-</mat-selection-list>
+  </mat-radio-button>
+</mat-radio-group>

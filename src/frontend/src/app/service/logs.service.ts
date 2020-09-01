@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { MOCK_LOG } from './mock-logs';
 import { Observable, of } from 'rxjs';
 import { group } from '@angular/animations';
+import { timestamp } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -27,24 +28,21 @@ export class LogsService {
   /**
    * Calculates all groups of indices within the given column
    * @param column The name of the column to group by
+   * @param filter
    */
-  groupBy(column: string): any[][] {
-    const value = this.getRawLog()[column];
-    let currentValue = -1;
-    const groups = [];
-    let currentGroup = [];
-    for (const i in value) {
-      const timestamp = value[i];
-      if (timestamp !== currentValue) {
-        currentValue = timestamp;
-        groups.push(currentGroup);
-        currentGroup = [i];
+  groupBy(column: string, filter: string[] = null): { [p: string]: number[] } {
+    const values = this.getRawLog()[column];
+    const groups = {};
+    for (const key in values) {
+      const value = values[key];
+      if (filter && filter.indexOf(value) < 0) {
         continue;
       }
-      currentGroup.push(i);
+      if (!(value in groups)) {
+        groups[value] = [];
+      }
+      groups[value].push(key);
     }
-    groups.splice(0, 1);
-    groups.push(currentGroup);
     return groups;
   }
 
@@ -79,15 +77,16 @@ export class LogsService {
   calculateUniqueColumns(): string[] {
     const groups = this.groupBy('timestamp');
     const uniqueColumns = [];
-    if (groups.length === this.columns.length) {
-      return [];
-    }
+    // if (groups.length[0] === this.columns.length) {
+    //   return [];
+    // }
 
     for (const column of this.columns) {
       const values = this.getRawLog()[column];
       let indices = null;
       let validIndex = true;
-      for (const group of groups) {
+      for (const name in groups) {
+        const group = groups[name];
         const groupValues = [];
         for (const index of group) {
           groupValues.push(values[index]);
@@ -122,5 +121,40 @@ export class LogsService {
 
   getIndices(): Observable<{ [column: string]: any[] }> {
     return of(this.indices);
+  }
+
+  getValues(deviceType: string, devices: string[], valueColumn: string) {
+    const example = [
+      {
+        name: 'USA',
+        series: [
+          {
+            name: '2010',
+            value: 7870000,
+          },
+          {
+            name: '2011',
+            value: 8270000,
+          },
+        ],
+      },
+    ];
+    const values = [];
+    const groups = this.groupBy(deviceType, devices);
+    for (const groupName in groups) {
+      const currentValues = { name: groupName, series: [] };
+      const timestamps = this.getRawLog()['timestamp'];
+      const series = this.getRawLog()[valueColumn];
+      const indices = groups[groupName];
+      for (const index of indices) {
+        currentValues['series'].push({
+          name: timestamps[index],
+          value: series[index],
+        });
+      }
+      values.push(currentValues);
+    }
+
+    return values;
   }
 }

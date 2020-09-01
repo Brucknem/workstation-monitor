@@ -29,6 +29,7 @@ import { IndexDropdownComponent } from './index-dropdown/index-dropdown.componen
 import { MatExpansionModule } from '@angular/material/expansion';
 import { LineGraphComponent } from './line-graph/line-graph.component';
 import { BaseViewComponent } from './base-view/base-view.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { BaseViewComponent } from './base-view/base-view.component';
     MatCheckboxModule,
     MatListModule,
     MatExpansionModule,
+    NgxChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

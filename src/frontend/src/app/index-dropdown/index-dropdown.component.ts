@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { LogsService } from '../service/logs.service';
 
 @Component({
   selector: 'app-index-dropdown',

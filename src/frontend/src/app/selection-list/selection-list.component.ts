@@ -7,19 +7,19 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class SelectionListComponent implements OnInit {
   @Input()
-  selectedOptions: string[];
+  selectedOption: string;
 
   @Input()
   values: string[];
 
   @Output()
-  selectValueColumns = new EventEmitter<string[]>();
+  selectValueColumns = new EventEmitter<string>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
   onSelectDevices($event: any): void {
-    this.selectValueColumns.emit(this.selectedOptions);
+    this.selectValueColumns.emit(this.selectedOption);
   }
 }

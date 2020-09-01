@@ -16,16 +16,16 @@ export class TopBarComponent implements OnInit {
   @ViewChild('myFilePicker')
   private filePicker: FilePickerDirective;
 
-  onReadStart(fileCount: number) {
+  onReadStart(fileCount: number): void {
     this.status = `Reading ${fileCount} file(s)...`;
   }
 
-  onFilePicked(file: ReadFile) {
+  onFilePicked(file: ReadFile): void {
     this.picked = file;
     console.log(this.picked);
   }
 
-  onReadEnd(fileCount: number) {
+  onReadEnd(fileCount: number): void {
     this.status = `Read ${fileCount} file(s) on ${new Date().toLocaleTimeString()}.`;
     this.filePicker.reset();
   }

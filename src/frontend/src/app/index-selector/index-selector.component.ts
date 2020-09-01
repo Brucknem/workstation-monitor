@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LogsService } from '../service/logs.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { RouteStateService } from '../service/route-state.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class IndexSelectorComponent implements OnInit {
 
   selectedDeviceType: string;
   selectedDevices: string[];
-  selectedValueColumns: string[];
+  selectedValueColumn: string;
 
   constructor(
     private logService: LogsService,
@@ -31,7 +31,7 @@ export class IndexSelectorComponent implements OnInit {
       }
       this.onSelectDeviceType(pathParams['deviceType'] as string);
       this.selectedDevices = pathParams['devices'] as string[];
-      this.selectedValueColumns = pathParams['values'] as string[];
+      this.selectedValueColumn = pathParams['value'] as string;
     });
     this.getLogs();
     this.getColumns();
@@ -69,8 +69,8 @@ export class IndexSelectorComponent implements OnInit {
     this.navigate();
   }
 
-  onSelectValueColumns($event: string[]): void {
-    this.selectedValueColumns = $event;
+  onSelectValueColumns($event: string): void {
+    this.selectedValueColumn = $event;
     this.navigate();
   }
 
@@ -83,10 +83,10 @@ export class IndexSelectorComponent implements OnInit {
       uri += this.selectedDevices;
     }
     uri += '/';
-    if (this.selectedValueColumns.length <= 0) {
+    if (!this.selectedValueColumn) {
       uri += '-';
     } else {
-      uri += this.selectedValueColumns;
+      uri += this.selectedValueColumn;
     }
     uri = encodeURI(uri);
     this.router.navigateByUrl(uri).then();
