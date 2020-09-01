@@ -24,22 +24,14 @@ export class IndexSelectorComponent implements OnInit {
     private routeStateService: RouteStateService
   ) {}
 
-  arraysEqual(a, b): boolean {
-    for (let i = 0; i < a.length; ++i) {
-      if (i >= b.length) {
-        break;
-      }
-      if (a[i] !== b[i]) {
-        return false;
-      }
-    }
-    return true;
+  hasSubArray(master, sub): boolean {
+    return sub.every(((i) => (v) => (i = master.indexOf(v, i) + 1))(0));
   }
 
   devicesValid(selectedDevices: any[]): boolean {
     const deviceGroups = Object.values(this.indices);
     for (const deviceGroup of deviceGroups) {
-      if (this.arraysEqual(deviceGroup, selectedDevices)) {
+      if (this.hasSubArray(deviceGroup, selectedDevices)) {
         return true;
       }
     }
