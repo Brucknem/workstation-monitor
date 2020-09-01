@@ -15,8 +15,8 @@ export class IndexSelectorComponent implements OnInit {
   indices: { [p: string]: any[] };
 
   selectedDeviceType: string;
-  selectedDevices: string[];
-  selectedValueColumn: string;
+  selectedDevices: string[] = [];
+  selectedValueColumns: string[] = [];
 
   constructor(
     private logService: LogsService,
@@ -31,7 +31,7 @@ export class IndexSelectorComponent implements OnInit {
       }
       this.onSelectDeviceType(pathParams['deviceType'] as string);
       this.selectedDevices = pathParams['devices'] as string[];
-      this.selectedValueColumn = pathParams['value'] as string;
+      this.selectedValueColumns = pathParams['values'] as string[];
     });
     this.getLogs();
     this.getColumns();
@@ -61,7 +61,6 @@ export class IndexSelectorComponent implements OnInit {
     if (index > -1) {
       this.valueColumns.splice(index, 1);
     }
-    console.log(this.selectedDeviceType);
   }
 
   onSelectDevices($event: string[]): void {
@@ -69,8 +68,8 @@ export class IndexSelectorComponent implements OnInit {
     this.navigate();
   }
 
-  onSelectValueColumns($event: string): void {
-    this.selectedValueColumn = $event;
+  onSelectValueColumns($event: string[]): void {
+    this.selectedValueColumns = $event;
     this.navigate();
   }
 
@@ -83,10 +82,10 @@ export class IndexSelectorComponent implements OnInit {
       uri += this.selectedDevices;
     }
     uri += '/';
-    if (!this.selectedValueColumn) {
+    if (this.selectedValueColumns.length <= 0) {
       uri += '-';
     } else {
-      uri += this.selectedValueColumn;
+      uri += this.selectedValueColumns;
     }
     uri = encodeURI(uri);
     this.router.navigateByUrl(uri).then();

@@ -123,37 +123,28 @@ export class LogsService {
     return of(this.indices);
   }
 
-  getValues(deviceType: string, devices: string[], valueColumn: string) {
-    const example = [
-      {
-        name: 'USA',
-        series: [
-          {
-            name: '2010',
-            value: 7870000,
-          },
-          {
-            name: '2011',
-            value: 8270000,
-          },
-        ],
-      },
-    ];
+  getValues(deviceType: string, devices: string[], valueColumn: string[]) {
     const values = [];
-    const groups = this.groupBy(deviceType, devices);
-    for (const groupName in groups) {
-      const currentValues = { name: groupName, series: [] };
-      const timestamps = this.getRawLog()['timestamp'];
-      const series = this.getRawLog()[valueColumn];
-      const indices = groups[groupName];
-      for (const index of indices) {
-        currentValues['series'].push({
-          name: timestamps[index],
-          value: series[index],
-        });
-      }
-      values.push(currentValues);
-    }
+    // if (devices.length === 0 || valueColumn === '') {
+    //   return values;
+    // }
+    //
+    // const groups = this.groupBy(deviceType, devices);
+    // for (const groupName in groups) {
+    //   const currentValues = { name: groupName, series: [] };
+    //   const timestamps = this.getRawLog()['timestamp'];
+    //   const series = this.getRawLog()[valueColumn];
+    //   const indices = groups[groupName];
+    //   for (const index of indices) {
+    //     const name = new Date(timestamps[index]);
+    //     const value = series[index];
+    //     currentValues['series'].push({
+    //       name,
+    //       value,
+    //     });
+    //   }
+    //   values.push(currentValues);
+    // }
 
     return values;
   }

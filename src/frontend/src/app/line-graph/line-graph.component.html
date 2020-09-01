@@ -1,22 +1,18 @@
-<h1 class="mat-h1">{{ deviceType }}</h1>
-<h1 class="mat-h1">{{ devices }}</h1>
-<h1 class="mat-h1">{{ values }}</h1>
-
-<!--<div>-->
-<!--  <ngx-charts-line-chart-->
-<!--    [view]="view"-->
-<!--    [scheme]="colorScheme"-->
-<!--    [results]="multi"-->
-<!--    [gradient]="gradient"-->
-<!--    [xAxis]="showXAxis"-->
-<!--    [yAxis]="showYAxis"-->
-<!--    [legend]="showLegend"-->
-<!--    [showXAxisLabel]="showXAxisLabel"-->
-<!--    [showYAxisLabel]="showYAxisLabel"-->
-<!--    [xAxisLabel]="xAxisLabel"-->
-<!--    [yAxisLabel]="yAxisLabel"-->
-<!--    [autoScale]="autoScale"-->
-<!--    (select)="onSelect($event)"-->
-<!--  >-->
-<!--  </ngx-charts-line-chart>-->
-<!--</div>-->
+<div>
+  <ngx-charts-line-chart
+    [view]="view"
+    [results]="data"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [autoScale]="autoScale"
+    (select)="onSelect($event)"
+    [xAxisTickFormatting]="dateTickFormatting"
+  >
+  </ngx-charts-line-chart>
+</div>

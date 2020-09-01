@@ -16,10 +16,10 @@ export class IndexDropdownComponent implements OnInit {
   devicesSelectionChanged = new EventEmitter<string[]>();
 
   @Input()
-  selectedDeviceType;
+  selectedDeviceType: string;
 
   @Input()
-  selectedDevices;
+  selectedDevices: string[];
 
   ngOnInit(): void {}
 }

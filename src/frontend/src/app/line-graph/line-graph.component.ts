@@ -11,10 +11,9 @@ import { LogsService } from '../service/logs.service';
 export class LineGraphComponent implements OnInit {
   deviceType: string;
   devices: string[];
-  values: string;
+  values: string[];
 
-  multi = {};
-  view: any[] = [700, 400];
+  view = [0, 0];
 
   // options
   showXAxis = true;
@@ -22,24 +21,25 @@ export class LineGraphComponent implements OnInit {
   gradient = true;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'X Axis Label';
   showYAxisLabel = true;
-  yAxisLabel = 'Population';
-
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
-  };
+  yAxisLabel = 'Y Axis Label';
 
   // line, area
   autoScale = true;
 
-  result;
+  /**
+   * The data that is displayes as a line graph
+   */
+  data;
 
   constructor(
     private logsService: LogsService,
     private route: ActivatedRoute,
     private routeStateService: RouteStateService
-  ) {}
+  ) {
+    console.log('constructor');
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -49,23 +49,30 @@ export class LineGraphComponent implements OnInit {
         devices = [];
       }
       finalParams['devices'] = devices;
-      let value = params.get('values');
-      if (value === '-') {
-        value = '';
+      let values = params.get('values').split(',');
+      if (values[0] === '-') {
+        values = [];
       }
-      finalParams['value'] = value;
+      finalParams['values'] = values;
       this.routeStateService.updatePathParamState(finalParams);
     });
     this.routeStateService.pathParam.subscribe((pathParams) => {
       this.deviceType = pathParams['deviceType'] as string;
       this.devices = pathParams['devices'] as string[];
-      this.values = pathParams['value'] as string;
+      this.values = pathParams['values'] as string[];
+
+      this.data = this.logsService.getValues(
+        this.deviceType,
+        this.devices,
+        this.values
+      );
     });
-    this.result = this.logsService.getValues(
-      this.deviceType,
-      this.devices,
-      this.values
-    );
+  }
+
+  dateTickFormatting(val: any): string {
+    if (val instanceof Date) {
+      return (<Date>val).toLocaleString('de-DE');
+    }
   }
 
   onSelect(event) {
