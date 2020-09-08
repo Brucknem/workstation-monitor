@@ -30,6 +30,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { LineGraphComponent } from './line-graph/line-graph.component';
 import { BaseViewComponent } from './base-view/base-view.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AddCardComponent } from './dashboard-cards/add-card/add-card.component';
+import { AddDialogComponent } from './dashboard-cards/add-dialog/add-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     IndexDropdownComponent,
     LineGraphComponent,
     BaseViewComponent,
+    AddCardComponent,
+    AddDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +70,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatListModule,
     MatExpansionModule,
     NgxChartsModule,
+    FlexLayoutModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

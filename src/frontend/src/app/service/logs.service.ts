@@ -17,11 +17,12 @@ export class LogsService {
     if (timestampIndex > -1) {
       this.columns.splice(timestampIndex, 1);
     }
-    this.uniqueColumns = this.calculateUniqueColumns();
-    this.calculateIndices();
+    // this.uniqueColumns = this.calculateUniqueColumns();
+    // this.calculateIndices();
   }
 
-  getRawLog = () => MOCK_LOG;
+  getLogNames = () => of(Object.keys(MOCK_LOG));
+  getRawLog = (name: string = 'cpu') => MOCK_LOG[name];
 
   /**
    * Calculates all groups of indices within the given column

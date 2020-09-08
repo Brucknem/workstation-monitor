@@ -1,13 +1,10 @@
 <app-top-bar></app-top-bar>
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side" opened>
-    <app-index-selector></app-index-selector>
-  </mat-drawer>
-
-  <button type="button" mat-button (click)="drawer.toggle()">
-    <mat-icon *ngIf="!drawer.opened">arrow_forward_icon</mat-icon>
-    <mat-icon *ngIf="drawer.opened">arrow_backward_icon</mat-icon>
-  </button>
-
-  <router-outlet></router-outlet>
-</mat-drawer-container>
+<div class="content" fxLayout="row wrap" fxLayoutGap="1em grid">
+  <app-add-card
+    fxFlex="25%"
+    fxFlex.xs="100%"
+    fxFlex.sm="50%"
+    fxFlex.md="33%"
+    *ngFor="let num of [1, 2, 3, 4, 5, 6, 7]"
+  ></app-add-card>
+</div>
