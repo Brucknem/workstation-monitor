@@ -117,7 +117,7 @@ class HardwareQuery:
 
         return dfs
 
-    def query_and_update(self, output_path, file_type='h5') -> list:
+    def query_and_update(self, output_path, file_type='json') -> list:
         """Queries the hardware, loads previous logs and appends the new values.
         """
         dataframes = self.query()
