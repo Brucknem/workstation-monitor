@@ -1,0 +1,13 @@
+<div class="app-mat-drawer-content" fxLayout="row wrap" fxLayoutGap="1em grid">
+  <ul>
+    <li
+      *ngFor="let card of dashboardCardsService.getCards() | async"
+      fxFlex="25%"
+      fxFlex.xs="100%"
+      fxFlex.sm="50%"
+      fxFlex.md="33%"
+    >
+      {{ card.name }}
+    </li>
+  </ul>
+</div>

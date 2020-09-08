@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DashboardCardService } from './dashboard-card.service';
+import { DashboardCardsService } from './dashboard-cards.service';
 
 describe('DashboardCardService', () => {
-  let service: DashboardCardService;
+  let service: DashboardCardsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DashboardCardService);
+    service = TestBed.inject(DashboardCardsService);
   });
 
   it('should be created', () => {

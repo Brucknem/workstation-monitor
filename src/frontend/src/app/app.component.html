@@ -7,19 +7,6 @@
     <button id="drawerToggle" mat-raised-button (click)="drawer.toggle()">
       Toggle drawer
     </button>
-
-    <div
-      class="app-mat-drawer-content"
-      fxLayout="row wrap"
-      fxLayoutGap="1em grid"
-    >
-      <app-add-card
-        fxFlex="25%"
-        fxFlex.xs="100%"
-        fxFlex.sm="50%"
-        fxFlex.md="33%"
-        *ngFor="let num of [1, 2, 3, 4, 5, 6, 7]"
-      ></app-add-card>
-    </div>
+    <app-content></app-content>
   </mat-drawer-content>
 </mat-drawer-container>

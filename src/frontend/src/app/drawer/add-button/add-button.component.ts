@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AddDialogComponent } from './add-dialog/add-dialog.component';
 
 @Component({
   selector: 'app-add-button',
   templateUrl: './add-button.component.html',
-  styleUrls: ['./add-button.component.css']
+  styleUrls: ['./add-button.component.css'],
 })
 export class AddButtonComponent implements OnInit {
+  constructor(public dialog: MatDialog) {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  addNewCard(): void {
+    this.dialog.open(AddDialogComponent);
   }
-
 }

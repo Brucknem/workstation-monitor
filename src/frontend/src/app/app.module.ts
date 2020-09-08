@@ -31,14 +31,14 @@ import { LineGraphComponent } from './line-graph/line-graph.component';
 import { BaseViewComponent } from './base-view/base-view.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { AddCardComponent } from './dashboard-cards/add-card/add-card.component';
-import { AddDialogComponent } from './dashboard-cards/add-dialog/add-dialog.component';
+import { AddDialogComponent } from './drawer/add-button/add-dialog/add-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DrawerComponent } from './drawer/drawer.component';
 import { LogsListComponent } from './drawer/logs-list/logs-list.component';
 import { AddButtonComponent } from './drawer/add-button/add-button.component';
 import { ErrorDialogComponent } from './drawer/logs-list/error-dialog/error-dialog.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ContentComponent } from './content/content.component';
 
 @NgModule({
   declarations: [
@@ -49,12 +49,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     IndexDropdownComponent,
     LineGraphComponent,
     BaseViewComponent,
-    AddCardComponent,
     AddDialogComponent,
     DrawerComponent,
     LogsListComponent,
     AddButtonComponent,
     ErrorDialogComponent,
+    ContentComponent,
   ],
   imports: [
     BrowserModule,
