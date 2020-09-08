@@ -124,7 +124,6 @@ class GPUQuery(HardwareQuery):
     def parse_query_result(self, result) -> pd.DataFrame:
         """inherited
         """
-        print(result)
         lines = result.splitlines()
         lines = np.array([np.array(line.split(', ')) for line in lines])
         lines = lines.transpose()
