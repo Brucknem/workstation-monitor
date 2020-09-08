@@ -1,31 +1,19 @@
-.example-container {
+mat-drawer-container {
   width: auto;
-  min-height: -webkit-calc(100vh - 65px);
+  min-height: 100vh;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-.example-sidenav-content {
-  display: flex;
-  min-height: 100%;
-  align-items: center;
-  justify-content: center;
-}
-
-.example-sidenav {
+mat-drawer {
   padding: 20px;
 }
 
-#drawerToggle {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-}
-
-router-outlet {
+mat-drawer-content {
   height: 100%;
-  width: 100%;
+  padding: 16px;
 }
 
-.content {
-  padding: 16px;
+#drawerToggle {
+  /*position: absolute;*/
+  margin: 10px;
 }

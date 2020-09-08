@@ -34,6 +34,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AddCardComponent } from './dashboard-cards/add-card/add-card.component';
 import { AddDialogComponent } from './dashboard-cards/add-dialog/add-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DrawerComponent } from './drawer/drawer.component';
+import { LogsListComponent } from './drawer/logs-list/logs-list.component';
+import { AddButtonComponent } from './drawer/add-button/add-button.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     BaseViewComponent,
     AddCardComponent,
     AddDialogComponent,
+    DrawerComponent,
+    LogsListComponent,
+    AddButtonComponent,
   ],
   imports: [
     BrowserModule,
