@@ -37,6 +37,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DrawerComponent } from './drawer/drawer.component';
 import { LogsListComponent } from './drawer/logs-list/logs-list.component';
 import { AddButtonComponent } from './drawer/add-button/add-button.component';
+import { ErrorDialogComponent } from './drawer/logs-list/error-dialog/error-dialog.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { AddButtonComponent } from './drawer/add-button/add-button.component';
     DrawerComponent,
     LogsListComponent,
     AddButtonComponent,
+    ErrorDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +81,7 @@ import { AddButtonComponent } from './drawer/add-button/add-button.component';
     NgxChartsModule,
     FlexLayoutModule,
     MatDialogModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

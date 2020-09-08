@@ -11,6 +11,7 @@ export class LogsService {
   private columns = Object.keys(MOCK_LOG);
   private readonly uniqueColumns;
   private indices: { [column: string]: any[] } = {};
+  private logs = MOCK_LOG;
 
   constructor() {
     const timestampIndex = this.columns.indexOf('timestamp', 0);
@@ -21,8 +22,8 @@ export class LogsService {
     // this.calculateIndices();
   }
 
-  getLogNames = () => of(Object.keys(MOCK_LOG));
-  getRawLog = (name: string = 'cpu') => MOCK_LOG[name];
+  getLogNames = () => of(Object.keys(this.logs).sort());
+  getRawLog = (name: string = 'cpu') => this.logs[name];
 
   /**
    * Calculates all groups of indices within the given column
@@ -163,5 +164,13 @@ export class LogsService {
     }
 
     return values;
+  }
+
+  deleteLog(name: string): void {
+    delete this.logs[name];
+  }
+
+  addLog(name: string, content: any): void {
+    this.logs[name] = { yeet: 'Yeet' };
   }
 }
