@@ -2,5 +2,5 @@ autopep8
 pandas
 systemd
 tables
-flask8
+flake8
 pytest
