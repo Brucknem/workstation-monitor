@@ -8,7 +8,6 @@ These scripts monitor the most common sensor interfaces of a **Ubuntu** system.
 ***
 
 # Requirements
-- [Bazel](https://docs.bazel.build/versions/master/install.html)
 - python3 - Has to be accessible as `python`
 - pip3 - Has to be accessible as `pip`
 - [virtualenv](https://wiki.ubuntuusers.de/virtualenv/)
