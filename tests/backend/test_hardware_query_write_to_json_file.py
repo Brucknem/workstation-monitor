@@ -6,7 +6,7 @@ from tests.backend.hardware_query_write_to_file_tests_base import \
     HardwareQueryWriteToFileTestsBase
 
 
-class HardwareQueryWriteToJsonFileTests(HardwareQueryWriteToFileTestsBase):
+class TestHardwareQueryWriteToJsonFile(HardwareQueryWriteToFileTestsBase):
     """Test cases for the query GPU functions.
     """
 

@@ -15,7 +15,7 @@ class HardwareQueryWriteToFileTestsBase(unittest.TestCase):
     def tearDown(self):
         """Teardown
         """
-        self.output_path = 'tests/backend/logs'
+        self.output_path = 'logs'
         shutil.rmtree(self.output_path, ignore_errors=True)
 
         Path(self.output_path).mkdir(parents=True, exist_ok=True)
@@ -43,7 +43,3 @@ class HardwareQueryWriteToFileTestsBase(unittest.TestCase):
         """Sanity checks that the GPU query produces a dataframe.
         """
         self.query = SensorsQuery()
-
-
-if __name__ == "__main__":
-    unittest.main()

@@ -98,6 +98,7 @@ class HardwareQuery:
     def query(self) -> dict:
         """Queries the hardware and creates a dataframe from it.
         """
+        dfs = {}
         self.timestamp = self.get_timestamp()
         try:
             self.logger.info(f'Preforming a {self.subclass_name}')

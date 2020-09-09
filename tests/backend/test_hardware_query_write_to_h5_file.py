@@ -2,17 +2,17 @@ import unittest
 
 import pandas as pd
 
-from tests.backend.hardware_query_write_to_file_tests_base import \
-    HardwareQueryWriteToFileTestsBase
+from tests.backend import HardwareQueryWriteToFileTestsBase
 
 
-class HardwareQueryWriteToH5FileTests(HardwareQueryWriteToFileTestsBase):
+class TestHardwareQueryWriteToH5File(HardwareQueryWriteToFileTestsBase):
     """Test cases for the query GPU functions.
     """
 
     def assert_files(self):
         for _ in range(10):
-            filenames = self.query.query_and_update(self.output_path)
+            filenames = self.query.query_and_update(self.output_path,
+                                                    file_type='h5')
 
         for file in filenames:
             df = pd.read_hdf(file, key='df')

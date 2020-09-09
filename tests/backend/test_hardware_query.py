@@ -5,7 +5,7 @@ import pandas as pd
 from src.backend import SensorsQuery, CPUQuery, GPUQuery, RAMQuery, MockQuery
 
 
-class HardwareQueryTests(unittest.TestCase):
+class TestHardwareQuery(unittest.TestCase):
     """Test cases for the query GPU functions.
     """
 
