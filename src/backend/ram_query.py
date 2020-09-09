@@ -1,6 +1,7 @@
-from src.backend.hardware_query import HardwareQuery
-import pandas as pd
 import numpy as np
+import pandas as pd
+
+from src.backend.hardware_query import HardwareQuery
 
 
 class RAMQuery(HardwareQuery):
@@ -21,13 +22,16 @@ class RAMQuery(HardwareQuery):
         """inherited
         """
         lines = result.splitlines()
-        lines = [np.array(line.split(), dtype=np.dtype(object)) for line in lines]
+        lines = [np.array(line.split(), dtype=np.dtype(object)) for line in
+                 lines]
         lines[0] = np.insert(lines[0], 0, 'type')
-        lines[-1] = np.append(lines[-1], [str(np.NaN)] * (len(lines[0]) - len(lines[-1])))
+        lines[-1] = np.append(lines[-1],
+                              [str(np.NaN)] * (len(lines[0]) - len(lines[-1])))
         lines = np.transpose(np.array(lines))
 
         data = {line[0]: line[1:] for line in lines}
-        data['timestamp'] = [self.timestamp for _ in range(len(data[list(data.keys())[0]]))]
+        data['timestamp'] = [self.timestamp for _ in
+                             range(len(data[list(data.keys())[0]]))]
         df = pd.DataFrame(data=data)
 
         return {'ram': df}

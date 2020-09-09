@@ -1,7 +1,7 @@
-from src.backend.hardware_query import HardwareQuery
 import pandas as pd
-import numpy as np
-from datetime import datetime
+
+from src.backend.hardware_query import HardwareQuery
+
 
 class MockQuery(HardwareQuery):
     """Mock query.
@@ -16,16 +16,10 @@ class MockQuery(HardwareQuery):
         """Queries the hardware and creates a dataframe from it.
         """
         timestamp = self.get_timestamp()
-        data = {
-            'timestamp': [timestamp for i in range(10)],
-            'test': [i for i in range(10)],
-            'values': [f'{i}' for i in range(10)]
-        }
+        data = {'timestamp': [timestamp for i in range(10)],
+                'test': [i for i in range(10)],
+                'values': [f'{i}' for i in range(10)]}
         df = pd.DataFrame(data=data)
 
-        dfs = { 'mock': df}
+        dfs = {'mock': df}
         return dfs
-
-
-if __name__ == "__main__":
-    CPUQuery().query()

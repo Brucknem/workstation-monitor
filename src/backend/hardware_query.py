@@ -1,13 +1,12 @@
-import re
+import logging
 import os
+import re
 import shlex
 import subprocess
-import numpy as np
-import pandas as pd
-import logging
-from time import sleep
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+
+import pandas as pd
 from systemd.journal import JournaldLogHandler
 
 timestamp_format = f'%Y/%m/%d %H:%M:%S.%f'
@@ -27,15 +26,13 @@ class HardwareQuery:
         if logger:
             self.logger = logger
             return
-            
+
         self.logger = logging.getLogger('workstation-monitor')
         journald_handler = JournaldLogHandler()
-        journald_handler.setFormatter(logging.Formatter(
-            '[%(levelname)s] %(message)s'
-        ))
+        journald_handler.setFormatter(
+            logging.Formatter('[%(levelname)s] %(message)s'))
         self.logger.setLevel(logging.DEBUG)
         self.logger.addHandler(journald_handler)
-
 
     def get_timestamp(self):
         """Get the current timestamp.
@@ -79,7 +76,8 @@ class HardwareQuery:
 
     def convert_to_numeric(self, dfs):
         """
-        Converts the columns of the given dataframes to have as many numeric values as possible.
+        Converts the columns of the given dataframes to have as many numeric
+        values as possible.
 
         :param dfs:
         :return:
@@ -89,8 +87,11 @@ class HardwareQuery:
             for column in df.columns:
                 if column == 'timestamp':
                     continue
-                df[column] = df[column].apply(lambda x: str(x).replace(',', '.') if bool(re.search(r'[-+]?\d*\,\d+|\d+', x)) else x)
-                df[column] = pd.to_numeric(df[column], errors='ignore', downcast='float')
+                df[column] = df[column].apply(
+                    lambda x: str(x).replace(',', '.') if bool(
+                        re.search(r'[-+]?\d*\,\d+|\d+', x)) else x)
+                df[column] = pd.to_numeric(df[column], errors='ignore',
+                                           downcast='float')
             converted[name] = df
         return converted
 
@@ -100,20 +101,21 @@ class HardwareQuery:
         self.timestamp = self.get_timestamp()
         try:
             self.logger.info(f'Preforming a {self.subclass_name}')
-            process = subprocess.Popen(
-                shlex.split(self.get_bash_command()),
-                stdout=subprocess.PIPE)
+            process = subprocess.Popen(shlex.split(self.get_bash_command()),
+                                       stdout=subprocess.PIPE)
             output, error = process.communicate()
             if error:
                 raise FileNotFoundError(error)
-            dfs = self.convert_to_numeric(self.parse_query_result(output.decode()))
+            dfs = self.convert_to_numeric(
+                self.parse_query_result(output.decode()))
             message = 'Successfully performed'
-        except FileNotFoundError as e:
+        except FileNotFoundError:
             message = 'Error performing'
-        except subprocess.CalledProcessError as e:
+        except subprocess.CalledProcessError:
             message = 'Error performing'
 
-        self.log(f'{message} a {self.subclass_name}', self.timestamp, self.get_timestamp())
+        self.log(f'{message} a {self.subclass_name}', self.timestamp,
+                 self.get_timestamp())
 
         return dfs
 
@@ -124,7 +126,7 @@ class HardwareQuery:
         start = self.get_timestamp()
         filenames = []
         for name, df in dataframes.items():
-            Path(str(output_path)).mkdir(parents=True, exist_ok=True) 
+            Path(str(output_path)).mkdir(parents=True, exist_ok=True)
             full_path = os.path.join(str(output_path), name + '.' + file_type)
             filenames.append(full_path)
 
@@ -160,4 +162,3 @@ class HardwareQuery:
             final_data.index = pd.RangeIndex(len(final_data.index))
 
         final_data.to_json(full_path)
-

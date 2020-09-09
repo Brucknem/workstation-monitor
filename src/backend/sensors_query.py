@@ -1,7 +1,8 @@
-from src.backend.hardware_query import HardwareQuery
-import pandas as pd
-import numpy as np
 import re
+
+import pandas as pd
+
+from src.backend.hardware_query import HardwareQuery
 
 
 class SensorsQuery(HardwareQuery):
@@ -37,7 +38,8 @@ class SensorsQuery(HardwareQuery):
         return values
 
     def clean_numeric_values(self, values: dict):
-        """Extracts the numeric value from the given values and appends the unit to the key.
+        """Extracts the numeric value from the given values and appends the
+        unit to the key.
         """
         cleaned_values = {}
         for key, value in values.items():
@@ -48,7 +50,6 @@ class SensorsQuery(HardwareQuery):
             cleaned_value = re.findall(r'[-]?\d*\.\d+|\d+', value)[0]
             cleaned_key = f"{key} [{value.split(cleaned_value)[-1].strip()}]"
             cleaned_values[cleaned_key] = cleaned_value
-        
         return cleaned_values
 
     def parse_query_result(self, result) -> pd.DataFrame:

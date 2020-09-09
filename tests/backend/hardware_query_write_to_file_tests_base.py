@@ -1,10 +1,9 @@
-import os
 import shutil
 import unittest
-import pandas as pd
 from pathlib import Path
-from src.backend import SensorsQuery, CPUQuery, GPUQuery, RAMQuery, MockQuery
-from datetime import datetime
+
+from src.backend import SensorsQuery, CPUQuery, GPUQuery, RAMQuery
+
 
 class HardwareQueryWriteToFileTestsBase(unittest.TestCase):
     """Test cases for the query GPU functions.
@@ -44,6 +43,7 @@ class HardwareQueryWriteToFileTestsBase(unittest.TestCase):
         """Sanity checks that the GPU query produces a dataframe.
         """
         self.query = SensorsQuery()
+
 
 if __name__ == "__main__":
     unittest.main()
