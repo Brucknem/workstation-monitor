@@ -13,6 +13,7 @@ class TestHardwareQueryWriteToJsonFile(HardwareQueryWriteToFileTestsBase):
         if not self.query:
             return
 
+        filenames = []
         for _ in range(10):
             filenames = self.query.query_and_update(self.output_path, 'json')
 
