@@ -1,5 +1,5 @@
-![flake8](https://github.com/Brucknem/workstation-monitor/workflows/flake8/badge.svg)
-![backend](https://github.com/Brucknem/workstation-monitor/workflows/backend/badge.svg)
+![flake8 (Backend)](https://github.com/Brucknem/workstation-monitor/workflows/flake8%20(Backend)/badge.svg)
+![pytest (Backend)](https://github.com/Brucknem/workstation-monitor/workflows/pytest%20(Backend)/badge.svg)
 ![Docker Image](https://github.com/Brucknem/workstation-monitor/workflows/Docker%20Image/badge.svg)
 
 # workstation-monitor

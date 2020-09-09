@@ -10,8 +10,6 @@ from typing import Dict
 import pandas as pd
 from systemd.journal import JournaldLogHandler
 
-timestamp_format = f'%Y/%m/%d %H:%M:%S.%f'
-
 
 def update_json(df: pd.DataFrame, full_path) -> None:
     """

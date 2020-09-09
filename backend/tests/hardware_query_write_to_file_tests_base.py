@@ -31,6 +31,8 @@ class HardwareQueryWriteToFileTestsBase(unittest.TestCase):
 
         if has_gpu():
             self.query = GPUQuery()
+        else:
+            self.query = None
 
     def test_query_cpu(self):
         """Sanity checks that the CPU query produces a dataframe.
