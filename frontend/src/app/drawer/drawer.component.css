@@ -1,0 +1,8 @@
+#drawerToggle {
+  position: fixed;
+  bottom: 1em;
+}
+
+mat-icon {
+  width: 100%;
+}

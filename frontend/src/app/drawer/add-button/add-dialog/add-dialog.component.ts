@@ -16,7 +16,6 @@ export class AddDialogComponent implements OnInit {
   ngOnInit(): void {}
 
   addCard($event: MouseEvent): void {
-    console.log($event);
     this.dashboardCardsService.addCard('test');
     this.dialogRef.close();
   }

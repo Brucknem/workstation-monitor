@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-drawer',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./drawer.component.css'],
 })
 export class DrawerComponent implements OnInit {
+  expanded = true;
+
   constructor() {}
 
   ngOnInit(): void {}

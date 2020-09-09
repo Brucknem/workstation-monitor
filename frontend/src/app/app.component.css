@@ -4,16 +4,21 @@ mat-drawer-container {
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-mat-drawer {
-  padding: 20px;
+mat-sidenav {
+  padding: 1em;
 }
 
-mat-drawer-content {
-  height: 100%;
-  padding: 16px;
+mat-sidenav-content {
+  width: auto;
+  min-height: 100vh;
+  padding: 1em;
 }
 
-#drawerToggle {
-  /*position: absolute;*/
-  margin: 10px;
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #eee;
 }

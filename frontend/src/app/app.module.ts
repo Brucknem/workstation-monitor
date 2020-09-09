@@ -39,6 +39,7 @@ import { AddButtonComponent } from './drawer/add-button/add-button.component';
 import { ErrorDialogComponent } from './drawer/logs-list/error-dialog/error-dialog.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ContentComponent } from './content/content.component';
+import { TableCardComponent } from './content/dashboard-cards/table-card/table-card.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ContentComponent } from './content/content.component';
     AddButtonComponent,
     ErrorDialogComponent,
     ContentComponent,
+    TableCardComponent,
   ],
   imports: [
     BrowserModule,

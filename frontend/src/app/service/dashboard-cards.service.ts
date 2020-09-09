@@ -13,7 +13,7 @@ export class DashboardCardsService {
   private cards: IDashboardCard[] = [];
 
   constructor() {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       this.addCard('test-card: ' + i);
     }
   }

@@ -1,7 +1,18 @@
-<h1 class="mat-h1">Workstation Monitor</h1>
-<span class="hide-small">Workstation Monitor</span>
+<h1 *ngIf="expanded" class="mat-h1">Workstation Monitor</h1>
 
+<hr *ngIf="expanded" />
+<app-logs-list [expanded]="expanded"></app-logs-list>
 <hr />
-<app-logs-list></app-logs-list>
-<hr />
-<app-add-button></app-add-button>
+<app-add-button [expanded]="expanded"></app-add-button>
+
+<br />
+
+<button
+  mat-mini-fab
+  id="drawerToggle"
+  color="primary"
+  (click)="expanded = !expanded"
+>
+  <mat-icon *ngIf="expanded">arrow_back</mat-icon>
+  <mat-icon *ngIf="!expanded">arrow_forward</mat-icon>
+</button>

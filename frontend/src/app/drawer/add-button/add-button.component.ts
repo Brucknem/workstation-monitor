@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
 
@@ -8,6 +8,9 @@ import { AddDialogComponent } from './add-dialog/add-dialog.component';
   styleUrls: ['./add-button.component.css'],
 })
 export class AddButtonComponent implements OnInit {
+  @Input()
+  expanded: boolean;
+
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {}

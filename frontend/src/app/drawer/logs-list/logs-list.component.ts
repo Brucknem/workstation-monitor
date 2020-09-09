@@ -1,12 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { LogsService } from '../../service/logs.service';
-import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
-
-interface HTMLInputEvent extends Event {
-  target: HTMLInputElement & EventTarget;
-}
 
 @Component({
   selector: 'app-logs-list',
@@ -14,6 +9,9 @@ interface HTMLInputEvent extends Event {
   styleUrls: ['./logs-list.component.css'],
 })
 export class LogsListComponent implements OnInit {
+  @Input()
+  expanded: boolean;
+
   constructor(public logsService: LogsService, public dialog: MatDialog) {}
 
   ngOnInit(): void {}

@@ -1,12 +1,8 @@
-<mat-drawer-container [hasBackdrop]="false">
-  <mat-drawer #drawer mode="side" opened="true">
+<mat-sidenav-container class="example-container" autosize>
+  <mat-sidenav #drawer mode="side" opened>
     <app-drawer></app-drawer>
-  </mat-drawer>
-
-  <mat-drawer-content>
-    <button id="drawerToggle" mat-raised-button (click)="drawer.toggle()">
-      Toggle drawer
-    </button>
+  </mat-sidenav>
+  <mat-sidenav-content>
     <app-content></app-content>
-  </mat-drawer-content>
-</mat-drawer-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>

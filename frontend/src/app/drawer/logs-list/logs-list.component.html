@@ -1,27 +1,28 @@
-<mat-list role="list">
-  <mat-list-item *ngFor="let log of logsService.getLogNames() | async">
+<ng-container *ngIf="expanded">
+  <div *ngFor="let log of logsService.getLogNames() | async">
     <button
       mat-button
       (click)="deleteLog(log)"
       matTooltip="The previously loaded {{
         log
       }} log. Click to remove from cache."
+      style="display: flex"
     >
       <mat-icon matListIcon>folder</mat-icon>
       <span>{{ log }}</span>
     </button>
-  </mat-list-item>
+  </div>
+</ng-container>
 
-  <mat-list-item>
-    <input
-      style="display: none"
-      type="file"
-      (change)="onFileChanged($event)"
-      #fileInput
-    />
-    <button mat-button (click)="fileInput.click()">
-      <mat-icon matListIcon>note_add</mat-icon>
-      <span>Add Log File (JSON)</span>
-    </button>
-  </mat-list-item>
-</mat-list>
+<div>
+  <input
+    style="display: none"
+    type="file"
+    (change)="onFileChanged($event)"
+    #fileInput
+  />
+  <button mat-button (click)="fileInput.click()" style="display: flex">
+    <mat-icon matListIcon>note_add</mat-icon>
+    <span *ngIf="expanded">Add Log File (JSON)</span>
+  </button>
+</div>
