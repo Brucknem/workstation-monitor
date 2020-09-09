@@ -124,6 +124,8 @@ class HardwareQuery:
         """Queries the hardware, loads previous logs and appends the new values.
         """
         dataframes = self.query()
+        if not dataframes:
+            return
         start = self.get_timestamp()
         filenames = []
         for name, df in dataframes.items():
