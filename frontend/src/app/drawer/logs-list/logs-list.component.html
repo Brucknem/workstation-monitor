@@ -8,12 +8,12 @@
       }} log. Click to remove from cache."
       style="display: flex"
     >
-      <mat-icon matListIcon>folder</mat-icon>
+      <mat-icon matListIcon>description</mat-icon>
       <span>{{ log }}</span>
     </button>
   </div>
 </ng-container>
-
+<br *ngIf="expanded && (logsService.getLogNames() | async).length > 0" />
 <div>
   <input
     style="display: none"
@@ -21,7 +21,7 @@
     (change)="onFileChanged($event)"
     #fileInput
   />
-  <button mat-button (click)="fileInput.click()" style="display: flex">
+  <button mat-button (click)="fileInput.click()">
     <mat-icon matListIcon>note_add</mat-icon>
     <span *ngIf="expanded">Add Log File (JSON)</span>
   </button>

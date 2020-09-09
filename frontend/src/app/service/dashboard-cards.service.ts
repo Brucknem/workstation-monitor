@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { v4 } from 'uuid';
 
 export interface IDashboardCard {
+  uuid: string;
   name: string;
 }
 
@@ -12,17 +13,20 @@ export interface IDashboardCard {
 export class DashboardCardsService {
   private cards: IDashboardCard[] = [];
 
-  constructor() {
-    for (let i = 0; i < 10; i++) {
-      this.addCard('test-card: ' + i);
-    }
-  }
-
   public getCards(): Observable<IDashboardCard[]> {
     return of(this.cards);
   }
 
   addCard(name: string): void {
-    this.cards.push({ name });
+    const uuid = v4();
+
+    this.cards.push({ name, uuid });
+  }
+
+  deleteCard(uuid: string): void {
+    const index = this.cards.findIndex((card) => card.uuid === uuid);
+    if (index >= 0 && index < this.cards.length) {
+      this.cards.splice(index, 1);
+    }
   }
 }

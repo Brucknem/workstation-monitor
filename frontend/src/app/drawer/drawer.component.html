@@ -1,6 +1,9 @@
-<h1 *ngIf="expanded" class="mat-h1">Workstation Monitor</h1>
+<div class="centering">
+  <mat-icon *ngIf="!expanded" color="primary">queue_play_next</mat-icon>
+  <span *ngIf="expanded">Workstation Monitor</span>
+</div>
 
-<hr *ngIf="expanded" />
+<hr />
 <app-logs-list [expanded]="expanded"></app-logs-list>
 <hr />
 <app-add-button [expanded]="expanded"></app-add-button>

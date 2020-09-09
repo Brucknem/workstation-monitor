@@ -6,6 +6,7 @@
 >
   <app-table-card
     *ngFor="let card of dashboardCardsService.getCards() | async"
+    [card]="card"
     class="example-card"
     fxFlex="25%"
     fxFlex.xs="100%"

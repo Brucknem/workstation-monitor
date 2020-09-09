@@ -1,8 +1,14 @@
 #drawerToggle {
   position: fixed;
   bottom: 1em;
+  left: 2em;
 }
 
-mat-icon {
+.centering {
   width: 100%;
+  text-align: center;
+}
+
+.centering span {
+  font-size: xx-large;
 }
