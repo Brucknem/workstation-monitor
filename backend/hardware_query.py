@@ -5,11 +5,55 @@ import shlex
 import subprocess
 from datetime import datetime
 from pathlib import Path
+from typing import Dict
 
 import pandas as pd
 from systemd.journal import JournaldLogHandler
 
-timestamp_format = f'%Y/%m/%d %H:%M:%S.%f'
+
+def update_json(df: pd.DataFrame, full_path) -> None:
+    """
+    Reads and updates the json file at the given path
+
+    :param df:
+    :param full_path:
+    :return:
+    """
+    final_data = df
+    if os.path.exists(full_path):
+        previous_data = pd.read_json(full_path)
+        final_data = pd.concat([previous_data, final_data])
+        final_data.index = pd.RangeIndex(len(final_data.index))
+
+    final_data.to_json(full_path)
+
+
+def get_timestamp():
+    """Get the current timestamp.
+    """
+    return datetime.now()
+
+
+def convert_to_numeric(dfs):
+    """
+    Converts the columns of the given dataframes to have as many numeric
+    values as possible.
+
+    :param dfs:
+    :return:
+    """
+    converted = {}
+    for name, df in dfs.items():
+        for column in df.columns:
+            if column == 'timestamp':
+                continue
+            df[column] = df[column].apply(
+                lambda x: str(x).replace(',', '.') if bool(
+                    re.search(r'[-+]?\d*\,\d+|\d+', x)) else x)
+            df[column] = pd.to_numeric(df[column], errors='ignore',
+                                       downcast='float')
+        converted[name] = df
+    return converted
 
 
 class HardwareQuery:
@@ -19,7 +63,7 @@ class HardwareQuery:
     def __init__(self, logger: logging.Logger = None):
         """Constructor
         """
-        self.timestamp = self.get_timestamp()
+        self.timestamp = get_timestamp()
         self.subclass_name = self.__class__.__name__
         self.index_series = pd.Series(self.get_index())
 
@@ -33,11 +77,6 @@ class HardwareQuery:
             logging.Formatter('[%(levelname)s] %(message)s'))
         self.logger.setLevel(logging.DEBUG)
         self.logger.addHandler(journald_handler)
-
-    def get_timestamp(self):
-        """Get the current timestamp.
-        """
-        return datetime.now()
 
     def get_bash_command(self) -> str:
         """The bash command used to query the hardware.
@@ -74,32 +113,11 @@ class HardwareQuery:
         microseconds = delta.microseconds
         self.logger.info(f'{message} [{seconds}.{microseconds}s]')
 
-    def convert_to_numeric(self, dfs):
-        """
-        Converts the columns of the given dataframes to have as many numeric
-        values as possible.
-
-        :param dfs:
-        :return:
-        """
-        converted = {}
-        for name, df in dfs.items():
-            for column in df.columns:
-                if column == 'timestamp':
-                    continue
-                df[column] = df[column].apply(
-                    lambda x: str(x).replace(',', '.') if bool(
-                        re.search(r'[-+]?\d*\,\d+|\d+', x)) else x)
-                df[column] = pd.to_numeric(df[column], errors='ignore',
-                                           downcast='float')
-            converted[name] = df
-        return converted
-
-    def query(self) -> dict:
+    def query(self) -> Dict[str, pd.DataFrame]:
         """Queries the hardware and creates a dataframe from it.
         """
+        self.timestamp = get_timestamp()
         dfs = {}
-        self.timestamp = self.get_timestamp()
         try:
             self.logger.info(f'Preforming a {self.subclass_name}')
             process = subprocess.Popen(shlex.split(self.get_bash_command()),
@@ -107,8 +125,7 @@ class HardwareQuery:
             output, error = process.communicate()
             if error:
                 raise FileNotFoundError(error)
-            dfs = self.convert_to_numeric(
-                self.parse_query_result(output.decode()))
+            dfs = convert_to_numeric(self.parse_query_result(output.decode()))
             message = 'Successfully performed'
         except FileNotFoundError:
             message = 'Error performing'
@@ -116,7 +133,7 @@ class HardwareQuery:
             message = 'Error performing'
 
         self.log(f'{message} a {self.subclass_name}', self.timestamp,
-                 self.get_timestamp())
+                 get_timestamp())
 
         return dfs
 
@@ -124,9 +141,7 @@ class HardwareQuery:
         """Queries the hardware, loads previous logs and appends the new values.
         """
         dataframes = self.query()
-        if not dataframes:
-            return
-        start = self.get_timestamp()
+        start = get_timestamp()
         filenames = []
         for name, df in dataframes.items():
             Path(str(output_path)).mkdir(parents=True, exist_ok=True)
@@ -136,14 +151,21 @@ class HardwareQuery:
             if file_type == 'h5':
                 self.update_h5(df, full_path)
             else:
-                self.update_json(df, full_path)
+                update_json(df, full_path)
 
         message = ", ".join(filenames)
-        self.log(f'Written to {message}', start, self.get_timestamp())
+        self.log(f'Written to {message}', start, get_timestamp())
 
         return filenames
 
     def update_h5(self, df: pd.DataFrame, full_path: str) -> None:
+        """
+        Reads and updates the h5 file at the given path
+
+        :param df:
+        :param full_path:
+        :return:
+        """
         if os.path.exists(full_path):
             with pd.HDFStore(full_path) as store:
                 store.append('df', df)
@@ -156,12 +178,3 @@ class HardwareQuery:
             columns.remove(index)
         columns = pd.Series(columns)
         columns.to_hdf(full_path, key='val')
-
-    def update_json(self, df: pd.DataFrame, full_path) -> None:
-        final_data = df
-        if os.path.exists(full_path):
-            previous_data = pd.read_json(full_path)
-            final_data = pd.concat([previous_data, final_data])
-            final_data.index = pd.RangeIndex(len(final_data.index))
-
-        final_data.to_json(full_path)

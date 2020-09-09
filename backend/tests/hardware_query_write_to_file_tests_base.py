@@ -3,6 +3,7 @@ import unittest
 from pathlib import Path
 
 from backend import SensorsQuery, CPUQuery, GPUQuery, RAMQuery
+from backend.gpu_query import has_gpu
 
 
 class HardwareQueryWriteToFileTestsBase(unittest.TestCase):
@@ -27,7 +28,11 @@ class HardwareQueryWriteToFileTestsBase(unittest.TestCase):
     def test_query_gpu(self):
         """Sanity checks that the GPU query produces a dataframe.
         """
-        self.query = GPUQuery()
+
+        if has_gpu():
+            self.query = GPUQuery()
+        else:
+            self.query = None
 
     def test_query_cpu(self):
         """Sanity checks that the CPU query produces a dataframe.

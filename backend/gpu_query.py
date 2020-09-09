@@ -1,3 +1,7 @@
+import shlex
+import subprocess
+from typing import Dict
+
 import numpy as np
 import pandas as pd
 
@@ -63,12 +67,27 @@ flags = ["timestamp", "driver_version", "count", "name" or "gpu_name",
          "clocks.current.video" or "clocks.video",
          "clocks.applications.graphics" or "clocks.applications.gr",
          "clocks.applications.memory" or "clocks.applications.mem",
-         "clocks.default_applications.graphics" or "clocks.default_applications.gr",
-         "clocks.default_applications.memory" or "clocks.default_applications.mem",
+         "clocks.default_applications.graphics",
+         "clocks.default_applications.memory",
          "clocks.max.graphics" or "clocks.max.gr",
          "clocks.max.sm" or "clocks.max.sm",
          "clocks.max.memory" or "clocks.max.mem"]
 joined_flags = ','.join(flags)
+
+
+def has_gpu():
+    """
+    Checks whether a GPU is accessible.
+    :return:
+    """
+    try:
+        process = subprocess.Popen(shlex.split(
+            "nvidia-smi --format=csv,nounits --query-gpu=timestamp"),
+            stdout=subprocess.PIPE)
+        output, error = process.communicate()
+        return not error
+    except Exception:
+        return False
 
 
 class GPUQuery(HardwareQuery):
@@ -85,7 +104,7 @@ class GPUQuery(HardwareQuery):
         """
         return ['name', 'count']
 
-    def parse_query_result(self, result) -> pd.DataFrame:
+    def parse_query_result(self, result) -> Dict[str, pd.DataFrame]:
         """inherited
         """
         lines = result.splitlines()

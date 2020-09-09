@@ -1,8 +1,44 @@
 import re
+from typing import Dict
 
 import pandas as pd
 
 from backend import HardwareQuery
+
+
+def clean_numeric_values(values: dict):
+    """Extracts the numeric value from the given values and appends the
+    unit to the key.
+    """
+    cleaned_values = {}
+    for key, value in values.items():
+        value_is_numeric = bool(re.search(r'[-+]?\d*\.\d+|\d+', value))
+        if not value_is_numeric:
+            cleaned_values[key] = value
+            continue
+        cleaned_value = re.findall(r'[-]?\d*\.\d+|\d+', value)[0]
+        cleaned_key = f"{key} [{value.split(cleaned_value)[-1].strip()}]"
+        cleaned_values[cleaned_key] = cleaned_value
+    return cleaned_values
+
+
+def parse_values(raw_key, raw_value) -> dict:
+    """Parses the value from the sensor reading.
+    """
+    if '(' not in raw_value:
+        return {raw_key.strip(): raw_value.strip()}
+
+    values = raw_value.split('(')
+    original = values[0].strip()
+    others = values[-1].replace(')', '').split(',')
+
+    values = {raw_key: original}
+
+    for other in others:
+        key, value = other.split('=')
+        values[raw_key + ' (' + key.strip() + ')'] = value.strip()
+
+    return values
 
 
 class SensorsQuery(HardwareQuery):
@@ -19,40 +55,7 @@ class SensorsQuery(HardwareQuery):
         """
         return ['Adapter']
 
-    def parse_values(self, raw_key, raw_value) -> dict:
-        """Parses the value from the sensor reading.
-        """
-        if '(' not in raw_value:
-            return {raw_key.strip(): raw_value.strip()}
-
-        values = raw_value.split('(')
-        original = values[0].strip()
-        others = values[-1].replace(')', '').split(',')
-
-        values = {raw_key: original}
-
-        for other in others:
-            key, value = other.split('=')
-            values[raw_key + ' (' + key.strip() + ')'] = value.strip()
-
-        return values
-
-    def clean_numeric_values(self, values: dict):
-        """Extracts the numeric value from the given values and appends the
-        unit to the key.
-        """
-        cleaned_values = {}
-        for key, value in values.items():
-            value_is_numeric = bool(re.search(r'[-+]?\d*\.\d+|\d+', value))
-            if not value_is_numeric:
-                cleaned_values[key] = value
-                continue
-            cleaned_value = re.findall(r'[-]?\d*\.\d+|\d+', value)[0]
-            cleaned_key = f"{key} [{value.split(cleaned_value)[-1].strip()}]"
-            cleaned_values[cleaned_key] = cleaned_value
-        return cleaned_values
-
-    def parse_query_result(self, result) -> pd.DataFrame:
+    def parse_query_result(self, result) -> Dict[str, pd.DataFrame]:
         """inherited
         """
         lines = result.splitlines()
@@ -66,8 +69,8 @@ class SensorsQuery(HardwareQuery):
                 continue
             key, value = line.split(':')
 
-            values = self.parse_values(key, value)
-            cleaned_values = self.clean_numeric_values(values)
+            values = parse_values(key, value)
+            cleaned_values = clean_numeric_values(values)
             for key, value in cleaned_values.items():
                 adapters[name][key] = [value]
 
