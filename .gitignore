@@ -131,7 +131,7 @@ dmypy.json
 # Files
 **.xml
 **.csv
-!tests/frontend/logs/**
+!backend/tests/frontend/logs/**
 
 # Bazel
 bazel-**

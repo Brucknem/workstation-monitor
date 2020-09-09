@@ -1,4 +1,5 @@
-![Bazel](https://github.com/Brucknem/workstation-monitor/workflows/Bazel/badge.svg)
+![flake8](https://github.com/Brucknem/workstation-monitor/workflows/flake8/badge.svg)
+![backend](https://github.com/Brucknem/workstation-monitor/workflows/backend/badge.svg)
 ![Docker Image](https://github.com/Brucknem/workstation-monitor/workflows/Docker%20Image/badge.svg)
 
 # workstation-monitor
@@ -7,7 +8,6 @@ These scripts monitor the most common sensor interfaces of a **Ubuntu** system.
 ***
 
 # Requirements
-- [Bazel](https://docs.bazel.build/versions/master/install.html)
 - python3 - Has to be accessible as `python`
 - pip3 - Has to be accessible as `pip`
 - [virtualenv](https://wiki.ubuntuusers.de/virtualenv/)

@@ -1,0 +1,6 @@
+autopep8
+pandas
+systemd
+tables
+flake8
+pytest
