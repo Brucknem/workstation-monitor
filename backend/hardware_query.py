@@ -119,7 +119,7 @@ class HardwareQuery:
         """Queries the hardware and creates a dataframe from it.
         """
         self.timestamp = get_timestamp()
-        dfs = {'error': self.get_default_dataframe()}
+        dfs = {}
         try:
             self.logger.info(f'Preforming a {self.subclass_name}')
             process = subprocess.Popen(shlex.split(self.get_bash_command()),
@@ -180,14 +180,3 @@ class HardwareQuery:
             columns.remove(index)
         columns = pd.Series(columns)
         columns.to_hdf(full_path, key='val')
-
-    def get_default_dataframe(self):
-        """
-        Return a default dataframe for the case something goes wrong during
-        query.
-        :return:
-        """
-        data = {'timestamp': [self.timestamp]}
-        for index in self.get_custom_index():
-            data[index] = [-1]
-        return pd.DataFrame(data=data)
