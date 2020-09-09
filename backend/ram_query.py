@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from src.backend.hardware_query import HardwareQuery
+from backend import HardwareQuery
 
 
 class RAMQuery(HardwareQuery):

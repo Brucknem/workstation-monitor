@@ -6,7 +6,7 @@ from time import sleep
 
 from systemd.journal import JournaldLogHandler
 
-from src.backend import SensorsQuery, CPUQuery, GPUQuery, RAMQuery
+from backend import SensorsQuery, CPUQuery, GPUQuery, RAMQuery
 
 # Initiate the parser
 parser = argparse.ArgumentParser()

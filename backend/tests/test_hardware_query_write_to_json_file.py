@@ -2,8 +2,7 @@ import unittest
 
 import pandas as pd
 
-from tests.backend.hardware_query_write_to_file_tests_base import \
-    HardwareQueryWriteToFileTestsBase
+from backend.tests import HardwareQueryWriteToFileTestsBase
 
 
 class TestHardwareQueryWriteToJsonFile(HardwareQueryWriteToFileTestsBase):

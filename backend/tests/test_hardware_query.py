@@ -2,7 +2,7 @@ import unittest
 
 import pandas as pd
 
-from src.backend import SensorsQuery, CPUQuery, GPUQuery, RAMQuery, MockQuery
+from backend import SensorsQuery, CPUQuery, GPUQuery, RAMQuery, MockQuery
 
 
 class TestHardwareQuery(unittest.TestCase):

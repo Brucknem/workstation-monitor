@@ -6,7 +6,7 @@ After=syslog.target
 User=brucknem
 PIDFile=/run/wsmon.pid
 ExecStartPre=/bin/rm -f /run/wsmon.pid
-ExecStart=/bin/bash /home/brucknem/Repositories/workstation-monitor/src/backend/workstation-monitor-service.sh
+ExecStart=/bin/bash /home/brucknem/Repositories/workstation-monitor/backend/workstation-monitor-service.sh
 Restart=on-abort
 
 [Install]

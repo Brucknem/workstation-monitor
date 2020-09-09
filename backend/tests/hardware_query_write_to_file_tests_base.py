@@ -2,7 +2,7 @@ import shutil
 import unittest
 from pathlib import Path
 
-from src.backend import SensorsQuery, CPUQuery, GPUQuery, RAMQuery
+from backend import SensorsQuery, CPUQuery, GPUQuery, RAMQuery
 
 
 class HardwareQueryWriteToFileTestsBase(unittest.TestCase):

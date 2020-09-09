@@ -1,6 +1,7 @@
-from src.backend.hardware_query import HardwareQuery
-import pandas as pd
 import numpy as np
+import pandas as pd
+
+from backend.hardware_query import HardwareQuery
 
 
 class CPUQuery(HardwareQuery):

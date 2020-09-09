@@ -2,7 +2,7 @@ import unittest
 
 import pandas as pd
 
-from tests.backend import HardwareQueryWriteToFileTestsBase
+from backend.tests import HardwareQueryWriteToFileTestsBase
 
 
 class TestHardwareQueryWriteToH5File(HardwareQueryWriteToFileTestsBase):
