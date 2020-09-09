@@ -1,9 +1,6 @@
-autopep8==1.5.4
-Flask==1.1.2
-pandas==1.1.0
-selenium==3.141.0
-urllib3==1.25.10
-watchdog==0.10.3
-bokeh==2.1.1
-systemd==0.16.1
-tables==3.6.1
+autopep8
+pandas
+systemd
+tables
+flask8
+pytest
