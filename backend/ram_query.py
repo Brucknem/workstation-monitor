@@ -1,3 +1,5 @@
+from typing import Dict
+
 import numpy as np
 import pandas as pd
 
@@ -18,7 +20,7 @@ class RAMQuery(HardwareQuery):
         """
         return ['type']
 
-    def parse_query_result(self, result) -> dict:
+    def parse_query_result(self, result) -> Dict[str, pd.DataFrame]:
         """inherited
         """
         lines = result.splitlines()

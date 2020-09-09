@@ -1,3 +1,5 @@
+from typing import Dict
+
 import numpy as np
 import pandas as pd
 
@@ -71,6 +73,14 @@ flags = ["timestamp", "driver_version", "count", "name" or "gpu_name",
 joined_flags = ','.join(flags)
 
 
+def has_gpu():
+    """
+    Checks whether a GPU is accessible.
+    :return:
+    """
+    return 'error' not in GPUQuery().query()
+
+
 class GPUQuery(HardwareQuery):
     """Query for the GPU.
     """
@@ -85,7 +95,7 @@ class GPUQuery(HardwareQuery):
         """
         return ['name', 'count']
 
-    def parse_query_result(self, result) -> pd.DataFrame:
+    def parse_query_result(self, result) -> Dict[str, pd.DataFrame]:
         """inherited
         """
         lines = result.splitlines()

@@ -7,8 +7,9 @@ from time import sleep
 from systemd.journal import JournaldLogHandler
 
 from backend import SensorsQuery, CPUQuery, GPUQuery, RAMQuery
-
 # Initiate the parser
+from backend.gpu_query import has_gpu
+
 parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--output_dir",
                     help="The output dir to write the csvs to.")
@@ -23,9 +24,13 @@ journald_handler.setFormatter(logging.Formatter('[%(levelname)s] %(message)s'))
 logger.setLevel(logging.DEBUG)
 logger.addHandler(journald_handler)
 
-queries = [SensorsQuery(logger), GPUQuery(logger), RAMQuery(logger),
-           CPUQuery(logger)]
+queries = [SensorsQuery(logger), RAMQuery(logger), CPUQuery(logger)]
 
+if has_gpu():
+    queries.append(GPUQuery(logger))
+else:
+    fdsadfsd
+    
 while True:
     try:
         for query in queries:

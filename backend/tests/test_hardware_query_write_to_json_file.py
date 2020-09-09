@@ -10,6 +10,9 @@ class TestHardwareQueryWriteToJsonFile(HardwareQueryWriteToFileTestsBase):
     """
 
     def assert_files(self):
+        if not self.query:
+            return
+        
         for _ in range(10):
             filenames = self.query.query_and_update(self.output_path, 'json')
 
