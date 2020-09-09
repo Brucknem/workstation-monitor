@@ -6,7 +6,7 @@
 ![pytest](https://github.com/Brucknem/workstation-monitor/workflows/pytest%20(Backend)/badge.svg)
 
 # workstation-monitor
-These scripts monitor the most common sensor interfaces of a **Ubuntu** system.
+These scripts monitor the most common sensor interfaces of a **Debian based** system.
 
 ***
 
