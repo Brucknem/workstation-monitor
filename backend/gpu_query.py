@@ -1,3 +1,5 @@
+import shlex
+import subprocess
 from typing import Dict
 
 import numpy as np
@@ -78,7 +80,14 @@ def has_gpu():
     Checks whether a GPU is accessible.
     :return:
     """
-    return 'error' not in GPUQuery().query()
+    try:
+        process = subprocess.Popen(shlex.split(
+            "nvidia-smi --format=csv,nounits --query-gpu=timestamp"),
+            stdout=subprocess.PIPE)
+        output, error = process.communicate()
+        return not error
+    except Exception:
+        return False
 
 
 class GPUQuery(HardwareQuery):

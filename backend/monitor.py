@@ -28,9 +28,7 @@ queries = [SensorsQuery(logger), RAMQuery(logger), CPUQuery(logger)]
 
 if has_gpu():
     queries.append(GPUQuery(logger))
-else:
-    fdsadfsd
-    
+
 while True:
     try:
         for query in queries:
