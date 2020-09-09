@@ -1,6 +1,9 @@
 #!/bin/bash
 source venv/bin/activate
 
+workspace_root="${BASH_SOURCE%/*}/../backend"
+cd "$workspace_root" || exit
+
 flake8 . --count --show-source --statistics --exclude=venv
 
 verbose=false
