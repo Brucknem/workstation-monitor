@@ -1,0 +1,24 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Select log file</mat-card-title>
+    <mat-card-subtitle>
+      Select the log file from which to display data.
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-selection-list
+      #selectionList
+      [multiple]="false"
+      (selectionChange)="
+        selectLogFile.emit(selectionList.selectedOptions.selected[0]?.value)
+      "
+    >
+      <mat-list-option
+        *ngFor="let logFileName of logsService.getLogNames() | async"
+        [value]="logFileName"
+      >
+        {{ logFileName }}
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-card-content>
+</mat-card>

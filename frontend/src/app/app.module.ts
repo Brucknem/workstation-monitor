@@ -17,7 +17,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 import { NgxFileHelpersModule } from 'ngx-file-helpers';
-import { IndexSelectorComponent } from './index-selector/index-selector.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
@@ -25,7 +24,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
 import { SelectionListComponent } from './selection-list/selection-list.component';
-import { IndexDropdownComponent } from './index-dropdown/index-dropdown.component';
+import { SelectIndexComponent } from './drawer/add-button/add-dialog/select-index/select-index.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { LineGraphComponent } from './line-graph/line-graph.component';
 import { BaseViewComponent } from './base-view/base-view.component';
@@ -40,14 +39,15 @@ import { ErrorDialogComponent } from './drawer/logs-list/error-dialog/error-dial
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ContentComponent } from './content/content.component';
 import { TableCardComponent } from './content/dashboard-cards/table-card/table-card.component';
+import { SelectLogFileComponent } from './drawer/add-button/add-dialog/select-log-file/select-log-file.component';
+import { SelectColumnsComponent } from './drawer/add-button/add-dialog/select-columns/select-columns.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
-    IndexSelectorComponent,
     SelectionListComponent,
-    IndexDropdownComponent,
+    SelectIndexComponent,
     LineGraphComponent,
     BaseViewComponent,
     AddDialogComponent,
@@ -57,6 +57,8 @@ import { TableCardComponent } from './content/dashboard-cards/table-card/table-c
     ErrorDialogComponent,
     ContentComponent,
     TableCardComponent,
+    SelectLogFileComponent,
+    SelectColumnsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,33 @@
 <h1 mat-dialog-title>Add a new card</h1>
-<div mat-dialog-content></div>
+<div
+  class="app-mat-drawer-content"
+  fxLayout="row wrap"
+  fxLayoutGap="1em grid"
+  mat-dialog-content
+>
+  <app-select-log-file
+    fxFlex="33%"
+    fxFlex.xs="100%"
+    fxFlex.sm="100%"
+    fxFlex.md="33%"
+    (selectLogFile)="selectLogFile($event)"
+  ></app-select-log-file>
+  <app-select-index
+    fxFlex="33%"
+    fxFlex.xs="100%"
+    fxFlex.sm="100%"
+    fxFlex.md="33%"
+    [indices]="indices | async"
+  ></app-select-index>
+  <app-select-columns
+    fxFlex="33%"
+    fxFlex.xs="100%"
+    fxFlex.sm="100%"
+    fxFlex.md="33%"
+    [columns]="columns | async"
+  ></app-select-columns>
+</div>
 <div mat-dialog-actions>
-  <button mat-button (click)="addCard($event)" cdkFocusInitial>Add</button>
+  <button mat-button (click)="addCard()" [mat-dialog-close]="true">Add</button>
   <button mat-button [mat-dialog-close]="true">Cancel</button>
 </div>

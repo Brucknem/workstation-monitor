@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
 import { DashboardCardsService } from '../../../service/dashboard-cards.service';
+import { Index, LogsService } from '../../../service/logs.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-dialog',
@@ -8,15 +9,22 @@ import { DashboardCardsService } from '../../../service/dashboard-cards.service'
   styleUrls: ['./add-dialog.component.css'],
 })
 export class AddDialogComponent implements OnInit {
-  constructor(
-    public dialogRef: MatDialogRef<AddDialogComponent>,
-    public dashboardCardsService: DashboardCardsService
-  ) {}
+  indices?: Observable<Index>;
+  columns?: Observable<string[]>;
 
   ngOnInit(): void {}
 
-  addCard($event: MouseEvent): void {
+  constructor(
+    public logsService: LogsService,
+    public dashboardCardsService: DashboardCardsService
+  ) {}
+
+  addCard(): void {
     this.dashboardCardsService.addCard('test');
-    this.dialogRef.close();
+  }
+
+  selectLogFile(selectedLogFile: string): void {
+    this.indices = this.logsService.getIndices(selectedLogFile);
+    this.columns = this.logsService.getColumns(selectedLogFile);
   }
 }

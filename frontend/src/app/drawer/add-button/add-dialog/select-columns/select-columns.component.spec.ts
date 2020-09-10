@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IndexDropdownComponent } from './index-dropdown.component';
+import { SelectColumnsComponent } from './select-columns.component';
 
-describe('IndexDropdownComponent', () => {
-  let component: IndexDropdownComponent;
-  let fixture: ComponentFixture<IndexDropdownComponent>;
+describe('SelectColumnsComponent', () => {
+  let component: SelectColumnsComponent;
+  let fixture: ComponentFixture<SelectColumnsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IndexDropdownComponent ]
+      declarations: [ SelectColumnsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IndexDropdownComponent);
+    fixture = TestBed.createComponent(SelectColumnsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

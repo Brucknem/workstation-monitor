@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IndexSelectorComponent } from './index-selector.component';
+import { SelectLogFileComponent } from './select-log-file.component';
 
-describe('IndexSelectorComponent', () => {
-  let component: IndexSelectorComponent;
-  let fixture: ComponentFixture<IndexSelectorComponent>;
+describe('SelectLogFileComponent', () => {
+  let component: SelectLogFileComponent;
+  let fixture: ComponentFixture<SelectLogFileComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IndexSelectorComponent ]
+      declarations: [ SelectLogFileComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IndexSelectorComponent);
+    fixture = TestBed.createComponent(SelectLogFileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
