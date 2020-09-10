@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TopBarComponent } from './top-bar/top-bar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,11 +22,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
-import { SelectionListComponent } from './selection-list/selection-list.component';
 import { SelectIndexComponent } from './drawer/add-button/add-dialog/select-index/select-index.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { LineGraphComponent } from './line-graph/line-graph.component';
-import { BaseViewComponent } from './base-view/base-view.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AddDialogComponent } from './drawer/add-button/add-dialog/add-dialog.component';
@@ -45,11 +42,7 @@ import { SelectColumnsComponent } from './drawer/add-button/add-dialog/select-co
 @NgModule({
   declarations: [
     AppComponent,
-    TopBarComponent,
-    SelectionListComponent,
-    SelectIndexComponent,
     LineGraphComponent,
-    BaseViewComponent,
     AddDialogComponent,
     DrawerComponent,
     LogsListComponent,
@@ -57,6 +50,7 @@ import { SelectColumnsComponent } from './drawer/add-button/add-dialog/select-co
     ErrorDialogComponent,
     ContentComponent,
     TableCardComponent,
+    SelectIndexComponent,
     SelectLogFileComponent,
     SelectColumnsComponent,
   ],
