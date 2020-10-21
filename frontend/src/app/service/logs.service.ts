@@ -11,6 +11,18 @@ export class Index {
 })
 export class LogsService {
   /**
+   * @constructor
+   */
+  constructor() {
+    for (const [name, log] of Object.entries(this.logs)) {
+      this.analyseLog(name, log);
+
+      // console.log(this.columns[name]);
+      // console.log(this.uniqueColumns[name]);
+      // console.log(this.indices[name]);
+    }
+  }
+  /**
    * The logs from which data can be displayed.
    * @private
    */
@@ -26,24 +38,6 @@ export class LogsService {
   private indices: { [log: string]: Index } = {};
 
   /**
-   * @constructor
-   */
-  constructor() {
-    for (const [name, log] of Object.entries(this.logs)) {
-      this.columns[name] = LogsService.getColumns(log);
-      this.uniqueColumns[name] = this.calculateUniqueColumns(
-        log,
-        this.columns[name]
-      );
-      this.indices[name] = this.calculateIndices(log, this.uniqueColumns[name]);
-
-      // console.log(this.columns[name]);
-      // console.log(this.uniqueColumns[name]);
-      // console.log(this.indices[name]);
-    }
-  }
-
-  /**
    * Extracts the columns of the given log and removes the timestamp column if present.
    * @param log The log to extract the columns from.
    * @private
@@ -55,6 +49,15 @@ export class LogsService {
       columns.splice(timestampIndex, 1);
     }
     return columns;
+  }
+
+  private analyseLog(name: string, log: object): void {
+    this.columns[name] = LogsService.getColumns(log);
+    this.uniqueColumns[name] = this.calculateUniqueColumns(
+      log,
+      this.columns[name]
+    );
+    this.indices[name] = this.calculateIndices(log, this.uniqueColumns[name]);
   }
 
   getLogNames = () => of(Object.keys(this.logs).sort());
@@ -213,11 +216,21 @@ export class LogsService {
     return [];
   }
 
+  /**
+   * CRUD delete
+   * @param name
+   */
   deleteLog(name: string): void {
     delete this.logs[name];
   }
 
-  addLog(name: string, content: any): void {
-    this.logs[name] = { yeet: 'Yeet' };
+  /**
+   * CRUD update
+   * @param name
+   * @param log
+   */
+  addLog(name: string, log: object): void {
+    this.logs[name] = log;
+    this.analyseLog(name, log);
   }
 }

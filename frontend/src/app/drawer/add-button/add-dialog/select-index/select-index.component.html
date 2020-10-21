@@ -8,30 +8,31 @@
   <mat-card-content>
     <ng-container *ngIf="indices">
       <div>
-        <mat-form-field appearance="fill">
-          <mat-label>Devices</mat-label>
-          <mat-select
-            #deviceSelect
-            (selectionChange)="deviceTypeSelectionChanged.emit($event.value)"
+        <mat-selection-list #deviceSelect [multiple]="false">
+          <mat-list-option
+            *ngFor="let value of indices | keyvalue"
+            [value]="value.key"
           >
-            <mat-option
-              *ngFor="let value of indices | keyvalue"
-              value="{{ value.key }}"
-            >
-              {{ value.key }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+            {{ value.key }}
+          </mat-list-option>
+        </mat-selection-list>
       </div>
-      <div *ngIf="deviceSelect.value">
+      <div *ngIf="deviceSelect.selectedOptions.selected[0]">
+        <hr />
         <mat-form-field appearance="fill">
-          <mat-label>{{ deviceSelect.value }}</mat-label>
+          <mat-label>{{
+            deviceSelect.selectedOptions.selected[0]?.value
+          }}</mat-label>
           <mat-select
             multiple
             (selectionChange)="devicesSelectionChanged.emit($event.value)"
           >
             <mat-option
-              *ngFor="let name of indices[deviceSelect.value]"
+              *ngFor="
+                let name of indices[
+                  deviceSelect.selectedOptions.selected[0]?.value
+                ]
+              "
               [value]="name"
             >
               {{ name }}

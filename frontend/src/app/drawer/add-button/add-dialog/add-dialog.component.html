@@ -6,24 +6,31 @@
   mat-dialog-content
 >
   <app-select-log-file
-    fxFlex="33%"
+    fxFlex="25%"
     fxFlex.xs="100%"
     fxFlex.sm="100%"
-    fxFlex.md="33%"
+    fxFlex.md="25%"
     (selectLogFile)="selectLogFile($event)"
   ></app-select-log-file>
   <app-select-index
-    fxFlex="33%"
+    fxFlex="25%"
     fxFlex.xs="100%"
     fxFlex.sm="100%"
-    fxFlex.md="33%"
+    fxFlex.md="25%"
+    [indices]="indices | async"
+  ></app-select-index>
+  <app-select-index
+    fxFlex="25%"
+    fxFlex.xs="100%"
+    fxFlex.sm="100%"
+    fxFlex.md="25%"
     [indices]="indices | async"
   ></app-select-index>
   <app-select-columns
-    fxFlex="33%"
+    fxFlex="25%"
     fxFlex.xs="100%"
     fxFlex.sm="100%"
-    fxFlex.md="33%"
+    fxFlex.md="25%"
     [columns]="columns | async"
   ></app-select-columns>
 </div>
